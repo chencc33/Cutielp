@@ -12,7 +12,7 @@ names = [
 'Kinship',
 'Pita Pan',
 'Sears Fine Food',
-'The Bear & The Monarch',
+'The Bear and The Monarch',
 'The Marine Room',
 'The Patio',
 'The Smoking Goat',
@@ -132,21 +132,21 @@ descriptions = [
 ]
 
 def seed_businesses():
-    for idx in range(18):
+    for idx in range(17):
         business = Business(
-            owner_id = randint(1,10),
+            owner_id = randint(1,9),
             name=names[idx],
-            email=f'{names[idx].replace(" ", "")}@gmail.com',
-            website=f'www.{names[idx].replace(" ", "")}.com',
-            open=f'{randint(8,11)}am',
-            close=f'{randint(8,11)}pm',
+            email=names[idx].replace(" ", "") + str(idx) + '@gmail.com',
+            website='www.' + names[idx].replace(" ", "") + '.com',
+            open=str(randint(8,11))+'am',
+            close=str(randint(8,11))+'pm',
             phone=phone_numbers[idx],
             address=addresses[idx],
             city=cities[idx],
             state=states[idx],
             zipcode=zipcodes[idx],
-            description=descriptions[randint(1,6)],
-            price_range=f'{randint(1,3)}'
+            description=descriptions[randint(0,6)],
+            price_range=randint(1,3)
         )
         db.session.add(business)
     db.session.commit()
