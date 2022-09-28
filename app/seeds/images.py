@@ -36,10 +36,10 @@ urls = [
 ]
 
 def seed_images():
-    for idx in range(32):
+    for idx in range(30):
         image = Image(
             url=urls[idx],
-            user_id=randint(1,10),
+            user_id=randint(1,9),
             business_id=randint(1,17),
             review_id=randint(1,30)
         )
