@@ -44,10 +44,11 @@ export const getBusinessesByUser = () => async dispatch => {
         return businesses
     }
 }
-export const getBusinessesById = (businessId) => async dispatch => {
+export const getBusinessById = (businessId) => async dispatch => {
     const response = await fetch(`/api/businesses/${businessId}`)
     if (response.ok) {
         const business = await response.json()
+        console.log('************thunk', business)
         dispatch(loadOne(business))
         return business
     }
