@@ -2,6 +2,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import BusinessForm from './Businesses/BusinessForm';
 
 const NavBar = () => {
   return (
@@ -31,6 +32,9 @@ const NavBar = () => {
           <LogoutButton />
         </li>
       </ul>
+      <div>
+        <BusinessForm />
+      </div>
     </nav>
   );
 }

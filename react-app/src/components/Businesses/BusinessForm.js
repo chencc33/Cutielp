@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom';
-import { getBusinessById, createBusiness, updateBusiness } from '../../store/business';
+import { useHistory } from 'react-router-dom';
+import { getBusinessById, createBusiness, updateBusiness, deleteBusiness } from '../../store/business';
 
 const BusinessForm = ({ businessId }) => {
     const dispatch = useDispatch();
+    const history = useHistory()
+
     const user = useSelector((state) => state.session.user)
     const userId = user.id
-    console.log('***********userId', userId)
 
     const [business, setBusiness] = useState(null)
 
@@ -28,7 +29,7 @@ const BusinessForm = ({ businessId }) => {
     useEffect(async () => {
         if (businessId) {
             const foundBusiness = await dispatch(getBusinessById(businessId))
-            console.log('***********foundBusiness', foundBusiness)
+
             setBusiness(foundBusiness)
 
             setName(foundBusiness.name)
@@ -63,12 +64,9 @@ const BusinessForm = ({ businessId }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('************ownerId', ownerId)
-        console.log('************priceRange', priceRange)
         let formData = {
             name, email, website, open, close, phone, address, city, state, zipcode, description, priceRange, ownerId
         }
-        console.log('************formData', formData)
         if (!business) {
             await dispatch(createBusiness(formData))
         } else {
@@ -128,6 +126,10 @@ const BusinessForm = ({ businessId }) => {
                     <input type='number' value={priceRange} onChange={e => setPriceRange(e.target.value)}></input>
                 </div>
                 <button type='submit'>Submit</button>
+                <button onClick={async () => {
+                    await dispatch(deleteBusiness(businessId))
+                    history.push('/businesses')
+                }}>Delete</button>
             </form>
         </>
     )
