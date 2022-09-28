@@ -23,7 +23,7 @@ const BusinessesList = () => {
                         <div className="business-name">{business.name}</div>
                         <div className="business-rating">
                             <div className="stars"></div>
-                            <div className="review-num"></div>
+                            <div className="review-num">d</div>
                         </div>
                         <div className="open-close">{business.close}</div>
                     </div>
