@@ -35,7 +35,7 @@ reviews = [
 ]
 
 def seed_reviews():
-    for idx in range(31):
+    for idx in range(30):
         review = Review(
             review=reviews[idx],
             stars=randint(4,6),
