@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom";
 
+import BusinessForm from "./BusinessForm";
+
 const BusinessDetail = () => {
     const businessId = useParams().businessId
     const dispatch = useDispatch()
@@ -28,9 +30,9 @@ const BusinessDetail = () => {
             <div className="business-detail">
                 <div className="open-close"></div>
                 <div className="contact-info">
-                    <div className="website"></div>
-                    <div className="phone"></div>
-                    <div className="address"></div>
+                    <div className="website">{business.website}</div>
+                    <div className="phone">{business.phone}</div>
+                    <div className="address">{business.address}</div>
                 </div>
             </div>
             <div className="review-container">
@@ -42,7 +44,7 @@ const BusinessDetail = () => {
                     <div className="create-review-container">
                         <div className="stars"></div>
                         <div className="start-reivew-instruction"></div>
-                        <div className="create-review-button">Write a review</div>
+                        <button className="create-review-button">Write a review</button>
                     </div>
                 </div>
                 <div className="review-info-container">
@@ -58,6 +60,7 @@ const BusinessDetail = () => {
                     <div className="review-content"></div>
                 </div>
             </div>
+            <BusinessForm businessId={businessId} />
         </>
     )
 

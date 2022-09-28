@@ -48,11 +48,50 @@ export const getBusinessById = (businessId) => async dispatch => {
     const response = await fetch(`/api/businesses/${businessId}`)
     if (response.ok) {
         const business = await response.json()
-        console.log('************thunk', business)
         dispatch(loadOne(business))
         return business
     }
 }
+export const createBusiness = formData => async dispatch => {
+    const response = await fetch(`/api/businesses`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    })
+    const data = await response.json()
+    if (response.ok) {
+        dispatch(add(data))
+        return null
+    }
+    if (data.error.length) {
+        return data.errors
+    }
+}
+export const updateBusiness = (data, businessId) => async dispatch => {
+    const response = await fetch(`/api/businesses/${businessId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    const resBody = await response.json()
+    if (response.ok) {
+        dispatch(update(resBody))
+        return null
+    }
+    if (resBody.errors.length) {
+        return resBody.errors
+    }
+}
+export const deleteBusiness = businessId => async dispatch => {
+    const response = await fetch(`/api/businesses/${businessId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    if (response.ok) {
+        dispatch(remove(businessId))
+    }
+}
+
 
 // reducer
 const initialState = {}
@@ -63,6 +102,14 @@ const businessesReducer = (state = initialState, action) => {
             newState = { ...action.businesses }
             return newState
         case LOAD_BUSINESS:
+            newState = { ...state }
+            newState[action.business.id] = action.business
+            return newState
+        case ADD_BUSINESS:
+            newState = { ...state }
+            newState[action.business.id] = action.business
+            return newState
+        case UPDATE_BUSINESS:
             newState = { ...state }
             newState[action.business.id] = action.business
             return newState
