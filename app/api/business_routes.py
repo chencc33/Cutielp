@@ -52,9 +52,40 @@ def create_business():
             state=new_form.data['state'],
             zipcode=new_form.data['zipcode'],
             description=new_form.data['description'],
-            price_range=new_form.data['priceRange'],
+            price_range=new_form.data['priceRange']
         )
         db.session.add(new_business)
         db.session.commit()
         return new_business.to_dict()
     return {'errors': validation_errors_to_error_messages(new_form.errors)}, 401
+
+# edit a business
+@business_routes.route('/<int:businessId>', methods=['PUT'])
+@login_required
+def update_business(businessId):
+    business = Business.query.get(businessId)
+    if business is None:
+        return {"message":"Business couldn't be found", "statusCode":404}
+    business_form = BusinessForm()
+    business_form['csrf_token'].data = request.cookies['csrf_token']
+
+    if business_form.validate_on_submit():
+        data = business_form.data
+
+        business.owner_id=data['ownerId']
+        business.name=data['name']
+        business.email=data['email']
+        business.website=data['website']
+        business.open=data['open']
+        business.close=data['close']
+        business.phone=data['phone']
+        business.address=data['address']
+        business.city=data['city']
+        business.state=data['state']
+        business.zipcode=data['zipcode']
+        business.description=data['description']
+        business.price_range=data['priceRange']
+
+        db.session.commit()
+        return business.to_dict()
+    return {"errors": validation_errors_to_error_messages(business_form.errors)}, 401
