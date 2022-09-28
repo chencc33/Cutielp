@@ -89,3 +89,14 @@ def update_business(businessId):
         db.session.commit()
         return business.to_dict()
     return {"errors": validation_errors_to_error_messages(business_form.errors)}, 401
+
+# delete a business
+@business_routes.route('/<int:businessId>', methods=['DELETE'])
+@login_required
+def delete_task(businessId):
+    business = Business.query.get(businessId)
+    if business is None:
+        return {"message":"Business couldn't be found", "statusCode":404}
+    db.session.delete(business)
+    db.session.commit()
+    return {"message": "Successfully deleted", "statusCode": 200}
