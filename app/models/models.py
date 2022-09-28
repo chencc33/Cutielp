@@ -35,6 +35,7 @@ class Business(db.Model):
     def to_dict(self):
         return {
         "id": self.id,
+        "ownerId":self.owner_id,
         "name": self.name,
         "email": self.email,
         "website": self.website,
@@ -67,7 +68,9 @@ class Review(db.Model):
         return {
         "id": self.id,
         "review": self.review,
-        "stars": self.stars
+        "stars": self.stars,
+        "userId": self.user_id,
+        "businessId": self.business_id
       }
 
 class Image(db.Model):
@@ -87,5 +90,8 @@ class Image(db.Model):
     def to_dict(self):
         return {
         "id": self.id,
-        "review": self.url
+        "url": self.url,
+        "userId": self.user_id,
+        "businessId": self.business_id,
+        "reviewId": self.review_id
       }
