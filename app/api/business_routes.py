@@ -30,7 +30,7 @@ def get_business_by_id(businessId):
     business = Business.query.get(businessId)
     return business.to_dict()
 
-# # create a business
+### create a business
 # @business_routes.route('')
 # @login_required
 # def create_business():
