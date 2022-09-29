@@ -5,11 +5,12 @@ import './Navigation.css';
 import Logo from '../Images/Logo.png'
 import LoginForm from '../auth/LoginForm';
 import { useSelector } from 'react-redux';
+import User from '../User';
 
 const NavBar = () => {
   const history = useHistory()
   const currentUser = useSelector(state => state.session.user);
-  const [showLogin, setShowLogin] = useState(false)
+  console.log('************current', currentUser)
 
   return (
     <>
@@ -28,34 +29,9 @@ const NavBar = () => {
             </div>
           )}
           {currentUser && (
-            <div className='dropdown-container'>
-              <div className='dropdown-button'>
-                Click Me
-              </div>
-              <div className='dropdown-content'>
-                <ul>
-                  <li>
-                    <NavLink to='/' exact={true} activeClassName='active'>
-                      Home
-                    </NavLink>
-                  </li>
-                  <li>
-                  </li>
-                  <li>
-                    <NavLink to='/sign-up' exact={true} activeClassName='active'>
-                      Sign Up
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to='/users' exact={true} activeClassName='active'>
-                      Users
-                    </NavLink>
-                  </li>
-                  <li>
-                    <LogoutButton />
-                  </li>
-                </ul>
-              </div>
+            <div className='profile-button'
+              onClick={() => { history.push(`/users/${currentUser.id}`) }}>
+              <img src="https://img.icons8.com/carbon-copy/100/000000/test-account.png" height={30} width={30} />
             </div>
           )}
         </div>

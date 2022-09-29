@@ -57,117 +57,15 @@
     border-radius: 5px;
 }
 
-.dropdown-button {
+.profile-button {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border: 1px solid grey;
-    border-radius: 10px;
-    width: 80px;
-    height: 40px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-    transition: box-shadow 0.3s ease-in-out;
-}
-
-
-.dropdown-button:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.575);
-}
-
-
-
-.fa-house {
-    color: black;
-    margin-right: 20px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
-    transition: box-shadow 0.3s ease-in-out;
-}
-
-.fa-house:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.575);
-}
-
-.fa-bars {
-    font-size: 30px;
-    color: black;
-}
-
-.fa-circle-user {
-    font-size: 30px;
-    color: black;
-}
-
-
-.dropdown-container {
-    /* border: 1px black solid; */
-    /* border-radius: 10px; */
-    font-size: 30px;
-    position: relative;
-    margin-right: 30%;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    font-size: 25px;
-    right: 0;
-    left: auto;
-}
-
-.dropdown-container:hover .dropdown-content {
-    display: block;
-    margin: auto;
-    text-align: center;
-    width: fit-content;
-}
-
-.dropdown-myspot {
-    font-size: 18px;
-    color: black;
-    text-decoration: none;
-}
-
-.dropdown-myspot:hover {
-    background-color: rgba(128, 128, 128, 0.076);
-}
-
-.dropdown-myreviews {
-    font-size: 18px;
-    color: black;
-    text-decoration: none;
-}
-
-.dropdown-myspot:hover {
-    background-color: rgba(128, 128, 128, 0.076);
-}
-
-.dropdown-signup {
-    font-size: 18px;
-    color: black;
-    text-decoration: none;
-    width: max-content;
-}
-
-.dropdown-signup:hover {
-    background-color: rgba(128, 128, 128, 0.179);
-}
-
-.dropdown-logout {
     cursor: pointer;
-    padding: 3px;
+    align-items: center;
 }
 
-.dropdown-logout:hover {
-    background-color: rgba(128, 128, 128, 0.132);
-}
-
-.profile-dropdown {
-    font-size: 18px;
-}
-
-.user-dropdown {
-    display: flex;
+.profile-button img {
+    background-color: aliceblue;
+    border-radius: 50%;
 }
 
 .logo-container {
@@ -183,9 +81,4 @@
 
 .logo-container:hover {
     cursor: pointer;
-}
-
-.fa-heart {
-    margin-right: 10px;
-    align-items: center;
 }

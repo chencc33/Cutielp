@@ -9,8 +9,15 @@ import { useEffect, useState } from 'react'
 
 function SplashPage() {
     const imagesArr = [splash1, splash2, splash3, splash4]
+    const quotesArr = [
+        'Food tastes better when you eat it with your family',
+        'Meal memories are made here',
+        'You cannot tell a hungry child that you gave him food yesterday',
+        'Happiness is kids eathing their food no matter what.'
+    ]
 
     const [splashIdx, setSplashIdx] = useState(0)
+    const [quoteIdx, setQuoteIdx] = useState(0)
 
     useEffect(() => {
         const backgroundInterval = setInterval(() => {
@@ -18,6 +25,15 @@ function SplashPage() {
         }, 5000)
         return () => {
             clearInterval(backgroundInterval)
+        }
+    }, [])
+
+    useEffect(() => {
+        const quoteInterval = setInterval(() => {
+            setQuoteIdx((pre) => ++pre % quotesArr.length)
+        }, 5000)
+        return () => {
+            clearInterval(quoteInterval)
         }
     }, [])
 
@@ -35,7 +51,13 @@ function SplashPage() {
                     <NavBar />
                 </div>
                 <div className='splash-content'>
-                    <div className='splash-text'></div>
+                    <p className='splash-text'
+                        style={{
+                            color: 'whitesmoke',
+                            fontFamily: 'Comic Sans MS, Comic Sans, cursive',
+                            fontSize: '30px'
+                        }}>
+                        {quotesArr[quoteIdx]}</p>
                     <button className='direct-business'>Explore</button>
                 </div>
             </div>
