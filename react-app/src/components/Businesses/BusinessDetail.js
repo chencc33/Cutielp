@@ -11,24 +11,30 @@ const BusinessDetail = () => {
     const businesses = useSelector((state) => state.businesses)
     const business = businesses[businessId]
 
+    const [showForm, setShowForm] = useState(false)
+
     useEffect(() => {
         dispatch(getBusinessById(businessId))
     }, [dispatch])
+    if (business) console.log(business)
 
     if (!business) return null
     return (
         <>
             <div className="business-top-background">
                 <div className="business-image">
+                    {business.Images?.map((image) => (
+                        <img src={image.url} alt='Business Image' height={200} width={200} />
+                    ))}
                     <div className="business-name">{business.name}</div>
                     <div className="business-rating">
-                        <div className="stars"></div>
-                        <div className="review-num"></div>
+                        <div className="stars">Stars: {business.avgStar}</div>
+                        <div className="review-num">Reviews: {business.numReview}</div>
                     </div>
                 </div>
             </div>
             <div className="business-detail">
-                <div className="open-close"></div>
+                <div className="open-close">Open until {business.close}</div>
                 <div className="contact-info">
                     <div className="website">{business.website}</div>
                     <div className="phone">{business.phone}</div>
@@ -60,7 +66,10 @@ const BusinessDetail = () => {
                     <div className="review-content"></div>
                 </div>
             </div>
-            <BusinessForm businessId={businessId} />
+            <button onClick={() => {
+                setShowForm(true)
+            }}>Edit this business</button>
+            {showForm && (<BusinessForm businessId={businessId} />)}
         </>
     )
 
