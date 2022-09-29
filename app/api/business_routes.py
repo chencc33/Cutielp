@@ -1,5 +1,7 @@
+import re
 from flask import Blueprint, request
 from flask_login import login_required, current_user
+from sqlalchemy.sql import func
 
 from ..forms.business_form import BusinessForm
 
@@ -15,6 +17,17 @@ business_routes = Blueprint('business', __name__)
 def get_all_business():
     businesses = Business.query.all()
     response = {business.id:business.to_dict() for business in businesses}
+    for id in response:
+        business = response[id]
+        images = Image.query.filter(Image.business_id == id)
+        business['Images'] = [image.to_dict() for image in images]
+        reviews = Review.query.filter(Review.business_id == id)
+        if reviews:
+            business['Reviews'] = [review.to_dict() for review in reviews]
+            numReview = len(business['Reviews'])
+            avgStar = sum([review['stars'] for review in business['Reviews']])
+            business['numReview'] = numReview
+            business['avgStar'] = round(avgStar/numReview, 1) if numReview else 0
     return response
 
 # get all business of current user
@@ -24,13 +37,34 @@ def get_business_currentuser():
     user_id = current_user.id
     businesses = Business.query.filter(Business.owner_id == user_id)
     response = {business.id:business.to_dict() for business in businesses}
+    for id in response:
+        business = response[id]
+        images = Image.query.filter(Image.business_id == id)
+        business['Images'] = [image.to_dict() for image in images]
+        reviews = Review.query.filter(Review.business_id == id)
+        if reviews:
+            business['Reviews'] = [review.to_dict() for review in reviews]
+            numReview = len(business['Reviews'])
+            avgStar = sum([review['stars'] for review in business['Reviews']])
+            business['numReview'] = numReview
+            business['avgStar'] = round(avgStar/numReview, 1) if numReview else 0
     return response
 
 #get business detail by id
 @business_routes.route('/<int:businessId>')
 def get_business_by_id(businessId):
-    business = Business.query.get(businessId)
-    return business.to_dict()
+    businessQuery = Business.query.get(businessId)
+    business = businessQuery.to_dict()
+    images = Image.query.filter(Image.business_id == businessId)
+    business['Images'] = [image.to_dict() for image in images]
+    reviews = Review.query.filter(Review.business_id == businessId)
+    if reviews:
+        business['Reviews'] = [review.to_dict() for review in reviews]
+        numReview = len(business['Reviews'])
+        avgStar = sum([review['stars'] for review in business['Reviews']])
+        business['numReview'] = numReview
+        business['avgStar'] = round(avgStar/numReview, 1) if numReview else 0
+    return business
 
 
 # create a business
@@ -101,4 +135,3 @@ def delete_task(businessId):
     db.session.delete(business)
     db.session.commit()
     return {"message": "Successfully deleted", "statusCode": 200}
-
