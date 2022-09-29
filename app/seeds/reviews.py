@@ -39,8 +39,8 @@ def seed_reviews():
         review = Review(
             review=reviews[idx],
             stars=randint(3,5),
-            user_id=randint(1,10),
-            business_id=randint(1,18)
+            user_id=randint(1,9),
+            business_id=randint(1,17)
         )
         db.session.add(review)
     db.session.commit()
