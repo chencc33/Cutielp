@@ -20,9 +20,9 @@ class User(db.Model, UserMixin):
     profile_image = db.Column(db.String(long_str), nullable=True)
 
     # Relationship
-    businesses = db.relationship('Business', back_populates='owner', cascade="all, delete")
-    reviews = db.relationship('Review', back_populates='users', cascade="all, delete")
-    images = db.relationship('Image', back_populates='users', cascade="all, delete")
+    businesses = db.relationship('Business', back_populates='user', cascade="all, delete")
+    reviews = db.relationship('Review', back_populates='user', cascade="all, delete")
+    images = db.relationship('Image', back_populates='user', cascade="all, delete")
 
     @property
     def password(self):
