@@ -8,7 +8,7 @@ const BusinessForm = ({ businessId }) => {
     const history = useHistory()
 
     const user = useSelector((state) => state.session.user)
-    const userId = user.id
+    const userId = user?.id
 
     const [business, setBusiness] = useState(null)
 
