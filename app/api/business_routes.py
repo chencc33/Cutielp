@@ -32,6 +32,7 @@ def get_business_by_id(businessId):
     business = Business.query.get(businessId)
     return business.to_dict()
 
+
 # create a business
 @business_routes.route('', methods=["POST"])
 @login_required
@@ -100,3 +101,4 @@ def delete_task(businessId):
     db.session.delete(business)
     db.session.commit()
     return {"message": "Successfully deleted", "statusCode": 200}
+
