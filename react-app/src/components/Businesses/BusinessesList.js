@@ -21,6 +21,7 @@ const BusinessesList = () => {
     return (
         <>
             <button onClick={() => (setShowForm(true))}>Create a Business</button>
+            <div className="horizontal-separator" />
             {businessesArr.map((business) => (
                 <div className="business-container"
                     key={business.id}
