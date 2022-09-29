@@ -146,6 +146,10 @@
     margin-left: 10%;
 }
 
+.logo-content {
+    font-family: Comic Sans MS, Comic Sans, cursive;
+}
+
 .logo-container:hover {
     cursor: pointer;
 }
