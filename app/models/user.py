@@ -21,8 +21,8 @@ class User(db.Model, UserMixin):
 
     # Relationship
     businesses = db.relationship('Business', back_populates='owner', cascade="all, delete")
-    reviews = db.relationship('Review', back_populates='review_user', cascade="all, delete")
-    images = db.relationship('Image', back_populates='user_image', cascade="all, delete")
+    reviews = db.relationship('Review', back_populates='users', cascade="all, delete")
+    images = db.relationship('Image', back_populates='users', cascade="all, delete")
 
     @property
     def password(self):

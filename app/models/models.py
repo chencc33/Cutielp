@@ -28,8 +28,8 @@ class Business(db.Model):
 
     #Relationship
     owner = db.relationship('User', back_populates='businesses')
-    images = db.relationship('Image', back_populates='business_image', cascade="all, delete")
-    reviews = db.relationship('Review', back_populates='business_review', cascade="all, delete")
+    images = db.relationship('Image', back_populates='businesses', cascade="all, delete")
+    reviews = db.relationship('Review', back_populates='businesses', cascade="all, delete")
 
 
     def to_dict(self):
@@ -60,9 +60,9 @@ class Review(db.Model):
     business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'))
 
     #Relationship
-    review_user = db.relationship('User', back_populates='reviews')
-    images = db.relationship('Image', back_populates='review_image', cascade="all, delete")
-    business_review = db.relationship('Business', back_populates='reviews')
+    users = db.relationship('User', back_populates='reviews')
+    images = db.relationship('Image', back_populates='reviews', cascade="all, delete")
+    businesses = db.relationship('Business', back_populates='reviews')
 
     def to_dict(self):
         return {
@@ -83,9 +83,9 @@ class Image(db.Model):
     review_id = db.Column(db.Integer, db.ForeignKey('reviews.id'))
 
     # Relationship
-    user_image = db.relationship('User', back_populates='images')
-    business_image = db.relationship('Business', back_populates='images')
-    review_image = db.relationship('Review', back_populates='images')
+    users = db.relationship('User', back_populates='images')
+    businesses = db.relationship('Business', back_populates='images')
+    reviews = db.relationship('Review', back_populates='images')
 
     def to_dict(self):
         return {
