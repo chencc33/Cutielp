@@ -7,14 +7,16 @@ import LoginForm from '../auth/LoginForm';
 import { useSelector } from 'react-redux';
 import User from '../User';
 
-const NavBar = () => {
+const NavBar = ({ isSplash }) => {
   const history = useHistory()
   const currentUser = useSelector(state => state.session.user);
-  console.log('************current', currentUser)
+  // console.log('************current', currentUser)
 
   return (
     <>
-      <div className='nav-bar'>
+      <div className='nav-bar' style={{
+        backgroundColor: isSplash ? 'none' : '#c41200'
+      }}>
         <div className='logo-container'
           onClick={() => { history.push('/') }}>
           <img src={Logo} alt='Logo' height={50} width={50} />
@@ -29,9 +31,15 @@ const NavBar = () => {
             </div>
           )}
           {currentUser && (
-            <div className='profile-button'
-              onClick={() => { history.push(`/users/${currentUser.id}`) }}>
-              <img src="https://img.icons8.com/carbon-copy/100/000000/test-account.png" height={30} width={30} />
+            <div className='dropdown-container'>
+              <div className='profile-button'
+                onClick={() => { history.push(`/users/${currentUser.id}`) }}>
+                <img className='profile-button' src="https://img.icons8.com/carbon-copy/100/000000/test-account.png" height={30} width={30} />
+              </div>
+              <div className='dropdown-content'>
+                <div className='dropdown-me'>About Me</div>
+                <div className='dropdown-logout'><LogoutButton /></div>
+              </div>
             </div>
           )}
         </div>
