@@ -1,0 +1,14 @@
+.businesslist-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.business-card-container {
+    display: flex;
+    border: 3px solid red;
+    width: 60%;
+}
+
+.business-image {
+    display: flex;
+}
