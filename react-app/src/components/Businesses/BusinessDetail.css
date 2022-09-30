@@ -1,0 +1,56 @@
+.business-detail-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.business-top-background {
+    width: 100vw;
+    display: flex;
+    height: 30vh
+}
+
+.business-image {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    /* position: fixed; */
+    width: 100vw;
+    height: 300px;
+}
+
+.detail-image {
+    opacity: 0.5;
+    width: 100%;
+    position: relative
+}
+
+
+.business-detail-name {
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    font-size: 50px;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.business-detail-rating {
+    position: absolute;
+    left: 20%;
+    top: 40%;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: whitesmoke;
+}
+
+.open-close-detail {
+    /* position: absolute; */
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: whitesmoke;
+}
+
+.business-bottom {
+    overflow: auto;
+    position: absolute;
+    bottom: 0;
+}
