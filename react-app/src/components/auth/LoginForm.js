@@ -39,7 +39,7 @@ const LoginForm = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <TopBar />
-      <div className='login-main'>
+      <div className='login-signup-main'>
         <form className='login-signup-form' onSubmit={onLogin}>
           <div className='form-title'>Log in to Cutielp</div>
           <p style={{ fontSize: '10px' }}>New to Cutielp? {
@@ -72,8 +72,8 @@ const LoginForm = () => {
             <button type='submit' className='form-submit-button'>Login</button>
           </div>
         </form>
-        <div className='login-image-container'>
-          <img className='login-image' src={Login} alt='Login Image' />
+        <div className='loginSignup-image-container'>
+          <img className='loginSignup-image' src={Login} alt='Login Image' />
         </div>
       </div>
     </div>
