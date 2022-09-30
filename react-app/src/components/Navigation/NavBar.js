@@ -3,9 +3,9 @@ import { NavLink, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import './Navigation.css';
 import Logo from '../Images/Logo.png'
-import LoginForm from '../auth/LoginForm';
 import { useSelector } from 'react-redux';
-import User from '../User';
+// import User from '../User';
+import BusinessForm from '../Businesses/BusinessForm';
 
 const NavBar = ({ isSplash }) => {
   const history = useHistory()
@@ -23,7 +23,9 @@ const NavBar = ({ isSplash }) => {
           <p className='logo-content'>Cutielp</p>
         </div>
         <div className='nav-bar-right'>
-          <div className='hostButton'>Create a Business</div>
+          <div className='hostButton'
+            onClick={() => (history.push('/businesses/create'))}
+          >Create a Business</div>
           {!currentUser && (
             <div className='login-signup'>
               <span className='splash-login' onClick={() => { history.push('/login') }}>Log In</span>
