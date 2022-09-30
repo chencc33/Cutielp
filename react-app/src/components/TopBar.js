@@ -1,7 +1,9 @@
 import Logo from './Images/Logo.png'
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 const TopBar = () => {
+    const history = useHistory()
     return (
         <div className="top-bar-container"
             style={{
@@ -12,8 +14,18 @@ const TopBar = () => {
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
-            <img src={Logo} alt='Logo' height={50} width={50} />
-            <div>Cutielp</div>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    cursor: 'pointer'
+                }}
+                onClick={() => { history.push('/') }}
+            >
+                <img src={Logo} alt='Logo' height={50} width={50} />
+                <div>Cutielp</div>
+            </div>
         </div>
     )
 }
