@@ -48,7 +48,7 @@ function SplashPage() {
             }} >
             <div className='splash'>
                 <div className='splash-nav'>
-                    <NavBar />
+                    <NavBar isSplash={true} />
                 </div>
                 <div className='splash-content'>
                     <p className='splash-text'

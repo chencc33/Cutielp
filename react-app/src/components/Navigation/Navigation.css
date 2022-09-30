@@ -57,6 +57,13 @@
     border-radius: 5px;
 }
 
+.dropdown-container {
+    font-size: 30px;
+    position: relative;
+    display: inline-block;
+    align-self: center;
+}
+
 .profile-button {
     display: flex;
     cursor: pointer;
@@ -66,6 +73,22 @@
 .profile-button img {
     background-color: aliceblue;
     border-radius: 50%;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: whitesmoke;
+    width: 100px;
+    border-radius: 5px;
+    z-index: 1;
+    color: black;
+    font-size: small;
+}
+
+.dropdown-container:hover .dropdown-content {
+    display: block;
 }
 
 .logo-container {
