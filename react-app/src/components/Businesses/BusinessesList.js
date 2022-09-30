@@ -12,6 +12,7 @@ const BusinessesList = () => {
     const history = useHistory()
     const businesses = useSelector((state) => state.businesses)
     const businessesArr = Object.values(businesses)
+    console.log('**********', businessesArr[0]['Images'])
 
     const [showForm, setShowForm] = useState(false)
 
@@ -23,17 +24,18 @@ const BusinessesList = () => {
     return (
         <>
             <NavBar />
-            <button onClick={() => (setShowForm(true))}>Create a Business</button>
+            {/* <button onClick={() => (setShowForm(true))}>Create a Business</button> */}
             <div className="horizontal-separator" />
             <div className="businesslist-main">
                 {businessesArr.map((business) => (
                     <div className="business-card-container"
                         key={business.id}
                         onClick={() => { history.push(`/businesses/${business.id}`) }}>
-                        <div className="business-image">
-                            {business['Images']?.map((image) => (
+                        <div className="business-image-container">
+                            <img src={business['Images'][0]?.url} alt='Business Image' height={150} width={150} />
+                            {/* {business['Images']?.map((image) => (
                                 <img src={image.url} alt='Business Image' height={200} width={200} />
-                            ))}
+                            ))} */}
                         </div>
                         <div className="business-intro-container">
                             <div className="business-name">{business.name}</div>
@@ -46,7 +48,7 @@ const BusinessesList = () => {
                     </div>
                 ))}
             </div>
-            {showForm && (<BusinessForm />)}
+            {/* {showForm && (<BusinessForm />)} */}
         </>
     )
 }
