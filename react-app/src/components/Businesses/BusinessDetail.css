@@ -1,0 +1,38 @@
+.business-detail-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.business-top-background {
+    width: 100vw;
+    display: flex;
+}
+
+.business-image {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+}
+
+.detail-image {
+    opacity: 0.5;
+}
+
+
+.business-detail-name {
+    position: fixed;
+    top: 30%;
+    left: 20%;
+    font-size: 50px;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.business-detail-rating {
+    position: fixed;
+    left: 20%;
+    top: 40%;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: whitesmoke;
+}

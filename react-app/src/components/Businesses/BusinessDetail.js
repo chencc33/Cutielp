@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom";
 
 import BusinessForm from "./BusinessForm";
+import NavBar from "../Navigation/NavBar";
+
+import './BusinessDetail.css'
 
 const BusinessDetail = () => {
     const businessId = useParams().businessId
@@ -13,6 +16,13 @@ const BusinessDetail = () => {
 
     const [showForm, setShowForm] = useState(false)
 
+    const roundStar = (num) => {
+        if (num % 1 == 0) return num
+        else if ((num - Math.floor(num)) >= 0.5) num = Math.ceil(num)
+        else num = Math.floor(num) + 0.5
+        return num
+    }
+
     useEffect(() => {
         dispatch(getBusinessById(businessId))
     }, [dispatch])
@@ -20,16 +30,21 @@ const BusinessDetail = () => {
 
     if (!business) return null
     return (
-        <>
+        <div className="business-detail-page">
+            <NavBar />
             <div className="business-top-background">
                 <div className="business-image">
+                    {/* <img src={business.Images[0]?.url} alt='Business Image' height={250} width={350} /> */}
                     {business.Images?.map((image) => (
-                        <img src={image.url} alt='Business Image' height={200} width={200} />
+                        <img className='detail-image' src={image.url} alt='Business Image' height={300} width={350} />
                     ))}
-                    <div className="business-name">{business.name}</div>
-                    <div className="business-rating">
-                        <div className="stars">Stars: {business.avgStar}</div>
-                        <div className="review-num">Reviews: {business.numReview}</div>
+                    <div className="business-detail-name">{business.name}</div>
+                    <div className="business-detail-rating">
+                        <div className="stars">
+                            {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
+                                <i className="fa-regular fa-star"></i>
+                            ))} <span className="review-detail-nums">{business.numReview} reviews</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -70,7 +85,7 @@ const BusinessDetail = () => {
                 setShowForm(true)
             }}>Edit this business</button>
             {showForm && (<BusinessForm businessId={businessId} />)}
-        </>
+        </div>
     )
 
 }
