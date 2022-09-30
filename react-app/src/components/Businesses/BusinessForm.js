@@ -134,12 +134,12 @@ const BusinessForm = ({ businessId }) => {
                     </div>
                     <button type='submit' className='form-submit-button'
                         style={{ width: '60%' }}>Submit</button>
-                    <button className='form-submit-button'
+                    {businessId && (<button className='form-submit-button'
                         style={{ width: '60%' }}
                         onClick={async () => {
                             await dispatch(deleteBusiness(businessId))
                             history.push('/businesses')
-                        }}>Delete</button>
+                        }}>Delete</button>)}
                 </form>
                 <div className='businessForm-image-container' style={{ width: "40%" }}>
                     <img className='businessForm-image' src={newBusiness} alt='Business Image' height={600} />
