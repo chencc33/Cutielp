@@ -51,6 +51,7 @@
 
 .business-bottom {
     overflow: auto;
-    position: absolute;
-    bottom: 0;
+    margin-top: 100px;
+    /* position: absolute;
+    bottom: 0; */
 }

@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from sqlalchemy.sql import func
 
 from ..forms.business_form import BusinessForm
+from ..forms.review_form import ReviewForm
 
 from ..models import Business, Review, Image
 from ..models.db import db
@@ -135,3 +136,52 @@ def delete_task(businessId):
     db.session.delete(business)
     db.session.commit()
     return {"message": "Successfully deleted", "statusCode": 200}
+
+# get all reviews of a business id
+@business_routes.route('/<int:businessId>/reviews')
+def get_all_reviews_business(businessId):
+    reviews = Review.query.filter(Review.business_id == businessId)
+    response = {review.id: review.to_dict() for review in reviews}
+    return response
+
+# create a review for a business
+@business_routes.route('/<int:businessId>/reviews', methods=['POST'])
+@login_required
+def create_review(businessId):
+    new_form = ReviewForm()
+    userId = current_user.id
+    new_form['csrf_token'].data = request.cookies['csrf_token']
+    if new_form.validate_on_submit():
+        new_review = Review(
+            review=new_form.data['review'],
+            stars=new_form.data['stars'],
+            user_id=userId,
+            business_id=businessId
+        )
+        db.session.add(new_review)
+        db.session.commit()
+        return new_review.to_dict()
+    return {'errors': validation_errors_to_error_messages(new_form.errors)}, 401
+
+# edit a review
+@business_routes.route('/<int:businessId>/reviews/<int:reviewId>', methods=['PUT'])
+@login_required
+def update_review(businessId, reviewId):
+    userId = current_user.id
+    target_review = Review.query.get(reviewId)
+    if target_review is None:
+        return {"message":"Review couldn't be found", "statusCode":404}
+    review_form = ReviewForm()
+    review_form['csrf_token'].data = request.cookies['csrf_token']
+
+    if review_form.validate_on_submit():
+        data = review_form.data
+
+        target_review.review=data['review']
+        target_review.stars=data['stars']
+        target_review.user_id=userId
+        target_review.business_id=businessId
+
+        db.session.commit()
+        return target_review.to_dict()
+    return {"errors": validation_errors_to_error_messages(review_form.errors)}, 401
