@@ -50,7 +50,7 @@ const BusinessDetail = () => {
                     </div>
                 </div>
             </div>
-            <div className="business-bottom-main">
+            <div className="business-bottom">
                 <button onClick={() => {
                     history.push(`/businesses/${businessId}/edit`)
                 }}>Edit this business</button>

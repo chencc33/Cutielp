@@ -49,6 +49,8 @@
     color: whitesmoke;
 }
 
-.business-bottom-main {
+.business-bottom {
     overflow: auto;
+    position: absolute;
+    bottom: 0;
 }
