@@ -132,11 +132,14 @@ const BusinessForm = ({ businessId }) => {
                         <label className='form-labels'>Price Range</label>
                         <input type='number' value={priceRange} onChange={e => setPriceRange(e.target.value)}></input>
                     </div>
-                    <button type='submit' className='form-submit-button' style={{ width: '60%' }}>Submit</button>
-                    {/* <button onClick={async () => {
-                        await dispatch(deleteBusiness(businessId))
-                        history.push('/businesses')
-                    }}>Delete</button> */}
+                    <button type='submit' className='form-submit-button'
+                        style={{ width: '60%' }}>Submit</button>
+                    <button className='form-submit-button'
+                        style={{ width: '60%' }}
+                        onClick={async () => {
+                            await dispatch(deleteBusiness(businessId))
+                            history.push('/businesses')
+                        }}>Delete</button>
                 </form>
                 <div className='businessForm-image-container' style={{ width: "40%" }}>
                     <img className='businessForm-image' src={newBusiness} alt='Business Image' height={600} />
