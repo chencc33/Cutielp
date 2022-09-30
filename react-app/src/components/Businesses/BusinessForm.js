@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import { getBusinessById, createBusiness, updateBusiness, deleteBusiness } from '../../store/business';
+import NavBar from '../Navigation/NavBar';
+import newBusiness from '../Images/newBusiness.jpg'
+import './BusinessForm.css'
 
 const BusinessForm = ({ businessId }) => {
     const dispatch = useDispatch();
@@ -75,63 +78,74 @@ const BusinessForm = ({ businessId }) => {
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>Name</label>
-                    <input type='text' value={name} onChange={e => setName(e.target.value)}></input>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <NavBar />
+            <div className='create-business-main'>
+                <form className='business-form' style={{ width: '60%' }} onSubmit={handleSubmit} >
+                    <div className='form-title'>Hello! Let's start!</div>
+                    <p style={{ fontSize: '10px' }}>We'll use these information to help you claim your Cutielp page</p>
+                    <div className='form-fields'>
+                        <label className='form-labels'>Name</label>
+                        <input type='text' value={name} onChange={e => setName(e.target.value)}></input>
+                    </div>
+                    <div className='form-fields'>
+                        <label className='form-labels'>Email</label>
+                        <input type='text' value={email} onChange={e => setEmail(e.target.value)}></input>
+                    </div>
+                    <div className='form-fields'>
+                        <label className='form-labels'>Website</label>
+                        <input type='text' value={website} onChange={e => setWebsite(e.target.value)}></input>
+                    </div>
+                    <div className='form-fields'>
+                        <label className='form-labels'>Open</label>
+                        <input type='text' value={open} onChange={e => setOpen(e.target.value)}></input>
+                    </div>
+                    <div className='form-fields'>
+                        <label className='form-labels'>Close</label>
+                        <input type='text' value={close} onChange={e => setClose(e.target.value)}></input>
+                    </div>
+                    <div className='form-fields'>
+                        <label className='form-labels'>Phone</label>
+                        <input type='text' value={phone} onChange={e => setPhone(e.target.value)}></input>
+                    </div>
+                    <div className='form-fields'>
+                        <label className='form-labels'>Address</label>
+                        <input type='text' value={address} onChange={e => setAddress(e.target.value)}></input>
+                    </div>
+                    <div className='form-fields'>
+                        <label className='form-labels'>City</label>
+                        <input type='text' value={city} onChange={e => setCity(e.target.value)}></input>
+                    </div>
+                    <div className='form-fields'>
+                        <label className='form-labels'>State</label>
+                        <input type='text' value={state} onChange={e => setState(e.target.value)}></input>
+                    </div>
+                    <div className='form-fields'>
+                        <label className='form-labels'>Zipcode</label>
+                        <input type='text' value={zipcode} onChange={e => setZipcode(e.target.value)}></input>
+                    </div>
+                    <div className='form-fields'>
+                        <label className='form-labels'>Description</label>
+                        <input type='text' value={description} onChange={e => setDescription(e.target.value)}></input>
+                    </div>
+                    <div className='form-fields'>
+                        <label className='form-labels'>Price Range</label>
+                        <input type='number' value={priceRange} onChange={e => setPriceRange(e.target.value)}></input>
+                    </div>
+                    <button type='submit' className='form-submit-button'
+                        style={{ width: '60%' }}>Submit</button>
+                    <button className='form-submit-button'
+                        style={{ width: '60%' }}
+                        onClick={async () => {
+                            await dispatch(deleteBusiness(businessId))
+                            history.push('/businesses')
+                        }}>Delete</button>
+                </form>
+                <div className='businessForm-image-container' style={{ width: "40%" }}>
+                    <img className='businessForm-image' src={newBusiness} alt='Business Image' height={600} />
                 </div>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>Email</label>
-                    <input type='text' value={email} onChange={e => setEmail(e.target.value)}></input>
-                </div>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>Website</label>
-                    <input type='text' value={website} onChange={e => setWebsite(e.target.value)}></input>
-                </div>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>Open</label>
-                    <input type='text' value={open} onChange={e => setOpen(e.target.value)}></input>
-                </div>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>Close</label>
-                    <input type='text' value={close} onChange={e => setClose(e.target.value)}></input>
-                </div>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>Phone</label>
-                    <input type='text' value={phone} onChange={e => setPhone(e.target.value)}></input>
-                </div>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>Address</label>
-                    <input type='text' value={address} onChange={e => setAddress(e.target.value)}></input>
-                </div>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>City</label>
-                    <input type='text' value={city} onChange={e => setCity(e.target.value)}></input>
-                </div>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>State</label>
-                    <input type='text' value={state} onChange={e => setState(e.target.value)}></input>
-                </div>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>Zipcode</label>
-                    <input type='text' value={zipcode} onChange={e => setZipcode(e.target.value)}></input>
-                </div>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>Description</label>
-                    <input type='text' value={description} onChange={e => setDescription(e.target.value)}></input>
-                </div>
-                <div className='business-input-container'>
-                    <label className='business-input-label'>Price Range</label>
-                    <input type='number' value={priceRange} onChange={e => setPriceRange(e.target.value)}></input>
-                </div>
-                <button type='submit'>Submit</button>
-                <button onClick={async () => {
-                    await dispatch(deleteBusiness(businessId))
-                    history.push('/businesses')
-                }}>Delete</button>
-            </form>
-        </>
+            </div>
+        </div>
     )
 }
 

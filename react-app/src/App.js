@@ -12,6 +12,7 @@ import { authenticate } from './store/session';
 import BusinessesList from './components/Businesses/BusinessesList'
 import BusinessDetail from './components/Businesses/BusinessDetail';
 import SplashPage from './components/Splash/Splash';
+import BusinessForm from './components/Businesses/BusinessForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -61,6 +62,9 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
+        <Route exact path='/businesses/create'>
+          <BusinessForm />
+        </Route>
         <Route exact path='/businesses/:businessId'>
           <BusinessDetail />
         </Route>
