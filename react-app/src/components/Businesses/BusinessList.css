@@ -3,12 +3,77 @@
     flex-direction: column;
 }
 
-.business-card-container {
+.main-bottom {
     display: flex;
-    border: 3px solid red;
-    width: 60%;
+    flex-direction: row;
 }
 
-.business-image {
+.category-main {
+    width: 20vw;
+}
+
+.businesslist-container {
     display: flex;
+    flex-direction: column;
+    width: 40vw;
+    justify-content: center;
+}
+
+.map-main {
+    display: flex;
+    width: 30vw;
+}
+
+.business-card-container {
+    display: flex;
+    width: 80%;
+    /* justify-content: center; */
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.business-card-container:hover {
+    border: 1px solid rgba(128, 128, 128, 0.391);
+}
+
+
+.business-image-container {
+    display: flex;
+    padding: 10px;
+}
+
+.business-image-container img {
+    border-radius: 8px;
+}
+
+.business-intro-container {
+    padding: 10px;
+}
+
+.business-intro-container div {
+    padding: 3px;
+}
+
+.business-name {
+    font-size: large;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+}
+
+.fa-star {
+    color: yellow;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: orange;
+}
+
+.review-nums {
+    font-size: smaller;
+    color: gray;
+}
+
+.open-close {
+    font-size: smaller;
+    color: gray;
 }
