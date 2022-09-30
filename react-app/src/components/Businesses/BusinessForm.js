@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { getBusinessById, createBusiness, updateBusiness, deleteBusiness } from '../../store/business';
 import NavBar from '../Navigation/NavBar';
 import newBusiness from '../Images/newBusiness.jpg'
 import './BusinessForm.css'
 
-const BusinessForm = ({ businessId }) => {
+const BusinessForm = () => {
     const dispatch = useDispatch();
-    const history = useHistory()
+    const history = useHistory();
+
+    const businessId = useParams().businessId
 
     const user = useSelector((state) => state.session.user)
     const userId = user?.id
