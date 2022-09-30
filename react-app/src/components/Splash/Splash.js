@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import NavBar from '../Navigation/NavBar'
 import splash1 from '../Images/splash1.jpg'
 import splash2 from '../Images/splash2.jpg'
@@ -16,6 +16,7 @@ function SplashPage() {
         'Happiness is kids eathing their food no matter what.'
     ]
 
+    const history = useHistory()
     const [splashIdx, setSplashIdx] = useState(0)
     const [quoteIdx, setQuoteIdx] = useState(0)
 
@@ -50,15 +51,36 @@ function SplashPage() {
                 <div className='splash-nav'>
                     <NavBar isSplash={true} />
                 </div>
-                <div className='splash-content'>
+                <div className='splash-content'
+                    style={{
+                        position: 'fixed',
+                        top: '30%',
+                        left: '10%',
+                        width: '50vw'
+                    }}>
                     <p className='splash-text'
                         style={{
                             color: 'whitesmoke',
                             fontFamily: 'Comic Sans MS, Comic Sans, cursive',
-                            fontSize: '30px'
+                            fontSize: '30px',
+                            fontWeight: 'bold'
                         }}>
                         {quotesArr[quoteIdx]}</p>
-                    <button className='direct-business'>Explore</button>
+                    <button className='redirect-business'
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            backgroundColor: '#c41200',
+                            border: 'none',
+                            borderRadius: '5px',
+                            color: 'whitesmoke',
+                            cursor: 'pointer',
+                            fontSize: 'smaller'
+                        }}
+                        onClick={() => { history.push('/businesses') }}>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <p>Explore Restaurants</p>
+                    </button>
                 </div>
             </div>
         </ div>
