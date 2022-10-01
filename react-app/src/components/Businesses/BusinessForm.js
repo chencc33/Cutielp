@@ -77,7 +77,7 @@ const BusinessForm = () => {
             // history.push(`/businesses/${businessId}`)
         } else {
             await dispatch(updateBusiness(formData, businessId))
-            // history.push(`/businesses/${businessId}`)
+            history.push(`/businesses/${business.id}`)
         }
     }
 
