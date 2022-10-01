@@ -9,6 +9,8 @@ import NavBar from "../Navigation/NavBar";
 import './BusinessDetail.css'
 import ReviewList from "../Reviews/ReviewList";
 
+import { Modal } from "../context/Modal"
+
 const BusinessDetail = () => {
     const businessId = useParams().businessId
     const dispatch = useDispatch()
@@ -17,6 +19,7 @@ const BusinessDetail = () => {
     const business = businesses[businessId]
 
     const [showForm, setShowForm] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
     const roundStar = (num) => {
         if (num % 1 == 0) return num
@@ -24,7 +27,7 @@ const BusinessDetail = () => {
         else num = Math.floor(num) + 0.5
         return num
     }
-
+    // console.log('**********modal', Modal)
     useEffect(() => {
         dispatch(getBusinessById(businessId))
     }, [dispatch])
@@ -59,7 +62,7 @@ const BusinessDetail = () => {
                     <i className="fa-solid fa-pen-to-square" />Edit this business
                 </button>
                 <button className="form-button"
-                    onClick={() => { setShowForm(true) }}>
+                    onClick={() => { setShowModal(true) }}>
                     <i className="fa-regular fa-star" />Write a review
                 </button>
                 <div className="business-detail">
@@ -98,8 +101,11 @@ const BusinessDetail = () => {
                 </div> */}
             </div>
             <div className="review-list-main">
-                {showForm && (<ReviewForm />)}
             </div>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <ReviewForm setShowModal={setShowModal} />
+                </Modal>)}
         </div>
     )
 

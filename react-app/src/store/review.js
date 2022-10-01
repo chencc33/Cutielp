@@ -66,7 +66,7 @@ export const createReview = formData => async dispatch => {
         dispatch(add(data))
         return null
     }
-    if (data.error.length) {
+    if (data.errors.length) {
         return data.errors
     }
 }
@@ -82,7 +82,7 @@ export const updateReview = (data, businessId, reviewId) => async dispatch => {
         dispatch(update(resBody))
         return null
     }
-    if (data.error.length) {
+    if (data.errors.length) {
         return data.errors
     }
 }

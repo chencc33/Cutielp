@@ -15,6 +15,7 @@ import SplashPage from './components/Splash/Splash';
 import BusinessForm from './components/Businesses/BusinessForm';
 import ReviewList from './components/Reviews/ReviewList';
 
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();

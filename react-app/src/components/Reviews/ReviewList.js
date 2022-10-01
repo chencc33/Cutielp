@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getReviewsByBusinessId } from "../../store/review"
 import ReviewForm from "./ReviewForm"
+import { Modal } from "../context/Modal"
 
 import './ReviewList.css'
 
@@ -11,9 +12,9 @@ const ReviewList = () => {
     const businessId = useParams()
     const reviews = useSelector((state) => state.reviews)
     const reviewsArr = Object.values(reviews)
-    console.log('*********review', reviewsArr)
+    // console.log('*********review', reviewsArr)
 
-    const [showForm, setShowForm] = useState(false)
+    const [showModal, setShowModal] = useState(false)
     const [onClickId, setOnClickId] = useState(null)
 
     useEffect(() => {
@@ -36,13 +37,17 @@ const ReviewList = () => {
                     <div className="reivew-stars">Stars{review.stars}</div>
                     <button
                         onClick={() => {
-                            setShowForm(true)
+                            setShowModal(true)
                             setOnClickId(review.id)
                         }}
                     >Edit </button>
                 </div>
             ))}
-            {showForm && (<ReviewForm reviewId={onClickId} />)}
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <ReviewForm reviewId={onClickId} setShowModal={setShowModal} />
+                </Modal>
+            )}
         </div>
     )
 }
