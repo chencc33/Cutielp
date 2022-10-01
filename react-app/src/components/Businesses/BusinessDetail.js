@@ -31,7 +31,7 @@ const BusinessDetail = () => {
     useEffect(() => {
         dispatch(getBusinessById(businessId))
     }, [dispatch])
-    if (business) console.log(business)
+    // if (business) console.log(business)
 
     if (!business) return null
     return (

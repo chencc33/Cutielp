@@ -9,10 +9,11 @@ import './ReviewList.css'
 
 const ReviewList = () => {
     const dispatch = useDispatch()
-    const businessId = useParams()
+    const businessId = useParams().businessId
     const reviews = useSelector((state) => state.reviews)
+    const user = useSelector((state) => state.session.user)
     const reviewsArr = Object.values(reviews)
-    // console.log('*********review', reviewsArr)
+    // console.log('*********user', businessId)
 
     const [showModal, setShowModal] = useState(false)
     const [onClickId, setOnClickId] = useState(null)
@@ -35,12 +36,14 @@ const ReviewList = () => {
                     </div>
                     <div className="review-content">{review.review}</div>
                     <div className="reivew-stars">Stars{review.stars}</div>
-                    <button
-                        onClick={() => {
-                            setShowModal(true)
-                            setOnClickId(review.id)
-                        }}
-                    >Edit </button>
+                    {user?.id == review.userId && (
+                        <button
+                            onClick={() => {
+                                setShowModal(true)
+                                setOnClickId(review.id)
+                            }}
+                        >Edit </button>
+                    )}
                 </div>
             ))}
             {showModal && (

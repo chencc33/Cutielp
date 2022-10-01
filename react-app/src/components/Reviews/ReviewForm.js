@@ -58,16 +58,6 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
                     <label className='form-labels'>Review</label>
                     <input type='text' value={review} onChange={e => setReview(e.target.value)}></input>
                 </div>
-                {/* <StarsRating
-                    onChange={ratingChanged}
-                    ratingValue={stars}
-                    count={5}
-                    size={20}
-                    transition
-                    fillColor="gold"
-                    allowHover={false}
-                    emptyColor="gray"
-                /> */}
                 <div className='form-fields'>
                     <label className='form-labels'>Stars</label>
                     <input type='number' value={stars} onChange={e => setStars(e.target.value)}></input>
