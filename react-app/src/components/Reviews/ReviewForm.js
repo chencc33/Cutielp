@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
-import { createReview, getReviewById, updateReview } from "../../store/review"
+import { useHistory, useParams } from "react-router-dom"
+import { createReview, deleteReview, getReviewById, updateReview } from "../../store/review"
 
 const ReviewForm = ({ reviewId }) => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const businessId = useParams().businessId
     const [targetReview, setTargetReview] = useState(null)
     const [review, setReview] = useState('')
@@ -53,7 +54,11 @@ const ReviewForm = ({ reviewId }) => {
                     <input type='number' value={stars} onChange={e => setStars(e.target.value)}></input>
                 </div>
                 <button className='form-submit-button' type='submit'>Submit</button>
-                <button className='form-submit-button'>Delete</button>
+                <button className='form-submit-button'
+                    onClick={async () => {
+                        await dispatch(deleteReview(reviewId))
+                        history.push(`/businesses/${businessId}`)
+                    }}>Delete</button>
             </form>
         </div>
     )
