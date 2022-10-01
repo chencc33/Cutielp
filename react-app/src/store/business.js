@@ -113,6 +113,10 @@ const businessesReducer = (state = initialState, action) => {
             newState = { ...state }
             newState[action.business.id] = action.business
             return newState
+        case DELETE_BUSINESS:
+            newState = { ...state }
+            delete newState[action.businessId]
+            return newState
         default:
             return state
     }

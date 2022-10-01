@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from "react-router-dom";
 
-import BusinessForm from "./BusinessForm";
+import ReviewForm from "../Reviews/ReviewForm";
 import NavBar from "../Navigation/NavBar";
 
 import './BusinessDetail.css'
@@ -73,7 +73,9 @@ const BusinessDetail = () => {
                         <div className="create-review-container">
                             <div className="stars"></div>
                             <div className="start-reivew-instruction"></div>
-                            <button className="create-review-button">Write a review</button>
+                            <button className="create-review-button"
+                                onClick={() => { setShowForm(true) }}
+                            >Write a review</button>
                         </div>
                     </div>
                     <div className="review-info-container">
@@ -90,7 +92,7 @@ const BusinessDetail = () => {
                     </div>
                 </div>
             </div>
-            {/* {showForm && (<BusinessForm businessId={businessId} />)} */}
+            {showForm && (<ReviewForm />)}
         </div>
     )
 

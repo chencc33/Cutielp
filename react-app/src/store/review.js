@@ -50,9 +50,40 @@ export const getReviewsByBusinessId = (businessId) => async dispatch => {
     const response = await fetch(`/api/businesses/${businessId.businessId}/reviews`)
     if (response.ok) {
         const reviews = await response.json()
-        console.log('**********thunk', reviews)
         dispatch(loadALL(reviews))
         return reviews
+    }
+}
+
+export const createReview = formData => async dispatch => {
+    const response = await fetch(`/api/businesses/${formData.businessId}/reviews`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    })
+    const data = await response.json()
+    if (response.ok) {
+        dispatch(add(data))
+        return null
+    }
+    if (data.error.length) {
+        return data.errors
+    }
+}
+
+export const updateReview = (data, businessId, reviewId) => async dispatch => {
+    const response = await fetch(`/api/businesses/${businessId}/reviews/${reviewId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    const resBody = await response.json()
+    if (response.ok) {
+        dispatch(update(resBody))
+        return null
+    }
+    if (data.error.length) {
+        return data.errors
     }
 }
 
@@ -67,6 +98,18 @@ const reviewsReducer = (state = initialState, action) => {
         case LOAD_REVIEW:
             newState = { ...state }
             newState[action.review.id] = action.review
+            return newState
+        case ADD_REVIEW:
+            newState = { ...state }
+            newState[action.review.id] = action.review
+            return newState
+        case UPDATE_REVIEW:
+            newState = { ...state }
+            newState[action.review.id] = action.review
+            return newState
+        case DELETE_REVIEW:
+            newState = { ...state }
+            delete newState[action.reviewID]
             return newState
         default:
             return state
