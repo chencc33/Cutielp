@@ -70,7 +70,9 @@ class Review(db.Model):
         "review": self.review,
         "stars": self.stars,
         "userId": self.user_id,
-        "businessId": self.business_id
+        "businessId": self.business_id,
+        'images':[image.to_dict() for image in self.images],
+        "user": self.user.to_dict()
       }
 
 class Image(db.Model):
