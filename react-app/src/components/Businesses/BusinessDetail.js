@@ -7,6 +7,7 @@ import BusinessForm from "./BusinessForm";
 import NavBar from "../Navigation/NavBar";
 
 import './BusinessDetail.css'
+import ReviewList from "../Reviews/ReviewList";
 
 const BusinessDetail = () => {
     const businessId = useParams().businessId
@@ -63,6 +64,7 @@ const BusinessDetail = () => {
                     </div>
                 </div>
                 <div className="review-container">
+                    <ReviewList businessId={businessId} />
                     <div className="review-profile">
                         <div className="profile-container">
                             <div className="profile-image"></div>
