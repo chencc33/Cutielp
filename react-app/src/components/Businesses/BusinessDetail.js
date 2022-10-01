@@ -52,9 +52,16 @@ const BusinessDetail = () => {
                 </div>
             </div>
             <div className="business-bottom">
-                <button onClick={() => {
-                    history.push(`/businesses/${businessId}/edit`)
-                }}>Edit this business</button>
+                <button className='form-button'
+                    onClick={() => {
+                        history.push(`/businesses/${businessId}/edit`)
+                    }}>
+                    <i className="fa-solid fa-pen-to-square" />Edit this business
+                </button>
+                <button className="form-button"
+                    onClick={() => { setShowForm(true) }}>
+                    <i className="fa-regular fa-star" />Write a review
+                </button>
                 <div className="business-detail">
                     {/* <div className="open-close">Close until {business.close}</div> */}
                     <div className="contact-info">
@@ -63,36 +70,36 @@ const BusinessDetail = () => {
                         <div className="address">{business.address}</div>
                     </div>
                 </div>
-                <div className="review-container">
-                    <ReviewList businessId={businessId} />
-                    <div className="review-profile">
-                        <div className="profile-container">
-                            <div className="profile-image"></div>
-                            <div className="name"></div>
-                        </div>
-                        <div className="create-review-container">
-                            <div className="stars"></div>
-                            <div className="start-reivew-instruction"></div>
-                            <button className="create-review-button"
-                                onClick={() => { setShowForm(true) }}
-                            >Write a review</button>
-                        </div>
+            </div>
+            <div className="review-container">
+                <ReviewList businessId={businessId} />
+                <div className="review-profile">
+                    <div className="profile-container">
+                        <div className="profile-image"></div>
+                        <div className="name"></div>
                     </div>
-                    <div className="review-info-container">
-                        <div className="stars-container"></div>
-                        <div className="bars-container"></div>
-                    </div>
-                    <div className="review-card-container">
-                        <div className="user-profile-container">
-                            <div className="profile-image"></div>
-                            <div className="name"></div>
-                        </div>
+                    <div className="create-review-container">
                         <div className="stars"></div>
-                        <div className="review-content"></div>
+                        <div className="start-reivew-instruction"></div>
                     </div>
                 </div>
+                {/* <div className="horizontal-separator"></div>
+                <div className="review-info-container">
+                    <div className="stars-container"></div>
+                    <div className="bars-container"></div>
+                </div>
+                <div className="review-card-container">
+                    <div className="user-profile-container">
+                        <div className="profile-image"></div>
+                        <div className="name"></div>
+                    </div>
+                    <div className="stars"></div>
+                    <div className="review-content"></div>
+                </div> */}
             </div>
-            {showForm && (<ReviewForm />)}
+            <div className="review-list-main">
+                {showForm && (<ReviewForm />)}
+            </div>
         </div>
     )
 

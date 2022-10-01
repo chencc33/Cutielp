@@ -55,3 +55,20 @@
     /* position: absolute;
     bottom: 0; */
 }
+
+.form-button {
+    background-color: #c41200;
+    color: whitesmoke;
+    border-radius: 7px;
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+    margin: 15px;
+    cursor: pointer;
+}
+
+.review-list-main {
+    /* display: flex;
+    flex-direction: column; */
+    width: 60%;
+}
