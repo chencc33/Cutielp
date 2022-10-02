@@ -1,5 +1,5 @@
 .business-detail-page {
-    display: flex;
+    display: grid;
     flex-direction: column;
 }
 
@@ -62,13 +62,16 @@
 }
 
 .business-bottom {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(5, 1fr);
     overflow: auto;
     margin-top: 150px;
-    /* position: absolute;
-    bottom: 0; */
 }
 
 .form-button {
+    display: grid;
+    grid-row-start: 1;
     background-color: #c41200;
     color: whitesmoke;
     border-radius: 7px;

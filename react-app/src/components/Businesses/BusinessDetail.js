@@ -82,21 +82,19 @@ const BusinessDetail = () => {
                         <div className="address">{business.address}</div>
                     </div>
                 </div>
-            </div>
-            <div className="review-container">
-                <ReviewList businessId={business.id} />
-                <div className="review-profile">
-                    <div className="profile-container">
-                        <div className="profile-image"></div>
-                        <div className="name"></div>
-                    </div>
-                    <div className="create-review-container">
-                        <div className="stars"></div>
-                        <div className="start-reivew-instruction"></div>
+                <div className="review-container">
+                    <ReviewList businessId={business.id} />
+                    <div className="review-profile">
+                        <div className="profile-container">
+                            <div className="profile-image"></div>
+                            <div className="name"></div>
+                        </div>
+                        <div className="create-review-container">
+                            <div className="stars"></div>
+                            <div className="start-reivew-instruction"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="review-list-main">
             </div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
