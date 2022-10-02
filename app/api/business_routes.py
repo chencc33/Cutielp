@@ -78,8 +78,6 @@ def create_business():
         new_business = Business(
             owner_id=current_user.id,
             name=new_form.data['name'],
-            # email=new_form.data['email'],
-            website=new_form.data['website'],
             open=new_form.data['open'],
             close=new_form.data['close'],
             phone=new_form.data['phone'],
@@ -111,7 +109,6 @@ def update_business(businessId):
 
         business.owner_id=current_user.id
         business.name=data['name']
-        business.website=data['website']
         business.open=data['open']
         business.close=data['close']
         business.phone=data['phone']

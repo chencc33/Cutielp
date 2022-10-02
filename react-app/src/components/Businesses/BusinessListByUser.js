@@ -37,7 +37,7 @@ const BusinessesListByUser = () => {
                             key={business.id}
                             onClick={() => { history.push(`/businesses/${business.id}`) }}>
                             <div className="business-image-container">
-                                <img src={business['Images'][0]?.url} alt='Business Image' height={150} width={150} />
+                                <img src={business.previewImage} alt='Business Image' height={150} width={150} />
                                 {/* {business['Images']?.map((image) => (
                                 <img src={image.url} alt='Business Image' height={200} width={200} />
                             ))} */}

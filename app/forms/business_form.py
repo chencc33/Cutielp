@@ -8,7 +8,6 @@ long_str = 2000
 
 class BusinessForm(FlaskForm):
     name = StringField("Name")
-    website = StringField("Website")
     open = StringField("Open", validators=[DataRequired(message="Open time is required"), Length(max=small_str, message='Open time must be less than 15 characters.')])
     close = StringField("Close", validators=[DataRequired(message="Close time is required"), Length(max=small_str, message='Close time must be less than 15 characters.')])
     phone = StringField("Phone", validators=[DataRequired(message="Phone number is required"), Length(max=small_str, message='Phone number must be less than 15 characters.')])

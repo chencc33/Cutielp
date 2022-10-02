@@ -89,6 +89,11 @@
 
 .dropdown-me {
     padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-me:hover {
+    background-color: rgba(128, 128, 128, 0.211);
 }
 
 .dropdown-container:hover .dropdown-content {

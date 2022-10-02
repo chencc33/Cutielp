@@ -14,6 +14,7 @@ import BusinessDetail from './components/Businesses/BusinessDetail';
 import SplashPage from './components/Splash/Splash';
 import BusinessForm from './components/Businesses/BusinessForm';
 import ReviewList from './components/Reviews/ReviewList';
+import BusinessesListByUser from './components/Businesses/BusinessListByUser';
 
 
 function App() {
@@ -66,6 +67,9 @@ function App() {
         </ProtectedRoute>
         <Route exact path='/businesses/create'>
           <BusinessForm />
+        </Route>
+        <Route exact path='/businesses/current'>
+          <BusinessesListByUser />
         </Route>
         <Route exact path='/businesses/:businessId/edit'>
           <BusinessForm />

@@ -14,8 +14,6 @@ class Business(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(med_str), nullable=False)
-    # email = db.Column(db.String(med_str), nullable=False, unique=True)
-    website = db.Column(db.String(med_str))
     open = db.Column(db.String(small_str), nullable=False)
     close = db.Column(db.String(small_str), nullable=False)
     phone = db.Column(db.String(small_str), nullable=False)
@@ -38,7 +36,6 @@ class Business(db.Model):
         "id": self.id,
         "ownerId":self.owner_id,
         "name": self.name,
-        "website": self.website,
         "open": self.open,
         "close": self.close,
         "phone": self.phone,

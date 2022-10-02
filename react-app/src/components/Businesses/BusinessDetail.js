@@ -37,10 +37,10 @@ const BusinessDetail = () => {
             <NavBar />
             <div className="business-top-background">
                 <div className="business-image">
-                    {/* <img className='detail-image' src={business.Images[0]?.url} alt='Business Image' /> */}
-                    {business.Images?.map((image) => (
+                    <img className='detail-image' src={business.previewImage} alt='Business Image' />
+                    {/* {business.Images?.map((image) => (
                         <img className='detail-image' src={image.url} alt='Business Image' />
-                    ))}
+                    ))} */}
                     <div className="business-detail-name">{business.name}</div>
                     <div className="business-detail-rating">
                         <div className="stars">
