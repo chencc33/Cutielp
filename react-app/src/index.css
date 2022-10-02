@@ -2,7 +2,7 @@
 :root {
     --text-color: #2D2E2E;
     --text-color-unfocused: #6a696a;
-    --border-color: #f7f7fc;
+    --border-color: #6a696a;
     --border-color-hover: #8f8e8f;
     --border-color-active: #a2a0a2;
 }
@@ -36,4 +36,8 @@ div.horizontal-separator {
     font-family: 'Montserrat', sans-serif;
     color: red;
     font-size: 14px;
+}
+
+.fa-solid {
+    margin-right: 5px;
 }

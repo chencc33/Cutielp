@@ -7,6 +7,7 @@ import ReviewForm from "../Reviews/ReviewForm";
 import NavBar from "../Navigation/NavBar";
 
 import './BusinessDetail.css'
+import './BusinessList.css'
 import ReviewList from "../Reviews/ReviewList";
 
 import { Modal } from "../context/Modal"
@@ -41,14 +42,26 @@ const BusinessDetail = () => {
                     {/* {business.Images?.map((image) => (
                         <img className='detail-image' src={image.url} alt='Business Image' />
                     ))} */}
-                    <div className="business-detail-name">{business.name}</div>
+                    <div className="business-detail-name">
+                        {business.name}
+                    </div>
                     <div className="business-detail-rating">
-                        <div className="stars">
+                        <div className="stars-container">
                             {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
+                                <i className="fa-solid fa-star"></i>
+                            ))}
+                            {Array.apply(null, { length: Math.floor(5 - business.avgStar) }).map((e, i) => (
                                 <i className="fa-regular fa-star"></i>
-                            ))} <span className="review-detail-nums">{business.numReview} reviews</span>
+                            ))}
+                            <span className="review-detail-nums">{business.numReview} reviews</span>
                         </div>
-                        <div className="open-close-detail">Open {business.open} - {business.close}</div>
+                        <div className="open-close-detail">
+                            {Array.apply(null, { length: Math.floor(business.priceRange) }).map((e, i) => (
+                                <span className="priceRange-detail">$</span>
+                            ))}
+                            <span>Open: </span>
+                            <span>{business.open} - {business.close}</span>
+                        </div>
                     </div>
                 </div>
             </div>
