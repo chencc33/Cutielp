@@ -25,7 +25,7 @@ class Business(db.Model):
     zipcode = db.Column(db.String(small_str), nullable=False)
     description = db.Column(db.String(long_str), nullable=False)
     price_range = db.Column(db.Integer, nullable=False)
-    # preview_image = db.Column(db.String(long_str))
+    preview_image = db.Column(db.String(long_str))
 
     #Relationship
     user = db.relationship('User', back_populates='businesses')
@@ -38,7 +38,6 @@ class Business(db.Model):
         "id": self.id,
         "ownerId":self.owner_id,
         "name": self.name,
-        # "email": self.email,
         "website": self.website,
         "open": self.open,
         "close": self.close,
@@ -48,8 +47,8 @@ class Business(db.Model):
         "state": self.state,
         "zipcode": self.zipcode,
         "description": self.description,
-        "priceRange": self.price_range
-        # "previewImage":self.preview_image
+        "priceRange": self.price_range,
+        "previewImage":self.preview_image
       }
 
 class Review(db.Model):

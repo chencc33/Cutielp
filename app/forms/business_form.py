@@ -7,9 +7,7 @@ med_str = 255
 long_str = 2000
 
 class BusinessForm(FlaskForm):
-    # ownerId = IntegerField('Owner', validators=[DataRequired()])
     name = StringField("Name")
-    # email = StringField("Email", validators=[DataRequired(message="Email is required"), Length(max=med_str, message='Email must be less than 255 characters.')])
     website = StringField("Website")
     open = StringField("Open", validators=[DataRequired(message="Open time is required"), Length(max=small_str, message='Open time must be less than 15 characters.')])
     close = StringField("Close", validators=[DataRequired(message="Close time is required"), Length(max=small_str, message='Close time must be less than 15 characters.')])
@@ -20,4 +18,4 @@ class BusinessForm(FlaskForm):
     zipcode = StringField("Zipcode", validators=[DataRequired(message="zipcode is required"), Length(max=small_str, message='Zipcode must be less than 15 characters.')])
     description = StringField("Description", validators=[DataRequired(message="Description is required"), Length(max=long_str, message='Description must be less than 2000 characters.')])
     priceRange = IntegerField("Price Range", validators=[DataRequired(message="Price Range is required"), NumberRange(min=1, max=5, message='Price range must in range 1 to 5.')])
-    # previewImage = StringField("Preview Image")
+    previewImage = StringField("Preview Image")

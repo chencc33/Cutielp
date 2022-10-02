@@ -37,7 +37,7 @@ const BusinessesList = () => {
                             key={business.id}
                             onClick={() => { history.push(`/businesses/${business.id}`) }}>
                             <div className="business-image-container">
-                                {/* <img src={business['Images'][0]?.url} alt='Business Image' height={150} width={150} /> */}
+                                <img src={business['Images'][0]?.url} alt='Business Image' height={150} width={150} />
                                 {/* {business['Images'] ?
                                     <img src={business['Images'][0].url} alt='Business Image' height={200} width={200} /> :
                                     <img src="https://www.creativefabrica.com/wp-content/uploads/2020/03/09/Simple-Fork-Plate-Icon-Restaurant-Logo-Graphics-3446203-1-580x348.jpg" alt='Business Image' height={200} width={200} />
