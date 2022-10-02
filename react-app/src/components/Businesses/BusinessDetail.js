@@ -12,13 +12,13 @@ import ReviewList from "../Reviews/ReviewList";
 import { Modal } from "../context/Modal"
 
 const BusinessDetail = () => {
-    const businessId = useParams().businessId
+    const businessId = +useParams().businessId
     const dispatch = useDispatch()
     const history = useHistory()
     const businesses = useSelector((state) => state.businesses)
     const user = useSelector((state) => state.session.user)
     const business = businesses[businessId]
-    // console.log('**********business', user.id)
+    // console.log('**********business', business)
     const [showModal, setShowModal] = useState(false)
 
     const roundStar = (num) => {
@@ -61,10 +61,6 @@ const BusinessDetail = () => {
                         <i className="fa-solid fa-pen-to-square" />Edit this business
                     </button>
                 )}
-                <button className="form-button"
-                    onClick={() => { setShowModal(true) }}>
-                    <i className="fa-regular fa-star" />Write a review
-                </button>
                 <div className="business-detail">
                     {/* <div className="open-close">Close until {business.close}</div> */}
                     <div className="contact-info">
@@ -75,7 +71,7 @@ const BusinessDetail = () => {
                 </div>
             </div>
             <div className="review-container">
-                <ReviewList businessId={businessId} />
+                <ReviewList businessId={business.id} />
                 <div className="review-profile">
                     <div className="profile-container">
                         <div className="profile-image"></div>

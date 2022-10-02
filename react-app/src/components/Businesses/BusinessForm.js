@@ -16,6 +16,8 @@ const BusinessForm = () => {
     const userId = user?.id
 
     const [business, setBusiness] = useState(null)
+    const [errors, setErrors] = useState([])
+    const [hasSubmitted, setHasSubmitted] = useState(false)
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -67,17 +69,36 @@ const BusinessForm = () => {
         }
     }, [dispatch, businessId])
 
+    useEffect(() => {
+
+
+    })
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setHasSubmitted(true)
+
         let formData = {
             name, email, website, open, close, phone, address, city, state, zipcode, description, priceRange, ownerId
         }
-        if (!business) {
-            await dispatch(createBusiness(formData))
-            // history.push(`/businesses/${businessId}`)
-        } else {
-            await dispatch(updateBusiness(formData, businessId))
-            history.push(`/businesses/${business.id}`)
+        // create a business
+        if (!business && !errors.length) {
+            let data = await dispatch(createBusiness(formData))
+            if (Array.isArray(data)) {
+                setErrors(data)
+            } else {
+                await dispatch(createBusiness(formData))
+                history.push('/businesses')
+            }
+        }
+        if (!errors.length && business) {
+            let data = await dispatch(updateBusiness(formData, businessId))
+            if (Array.isArray(data)) {
+                setErrors(data)
+            } else {
+                await dispatch(updateBusiness(formData, businessId))
+                history.push(`/businesses/${business.id}`)
+            }
         }
     }
 
@@ -86,6 +107,13 @@ const BusinessForm = () => {
             <NavBar />
             <div className='create-business-main'>
                 <form className='business-form' style={{ width: '60%' }} onSubmit={handleSubmit} >
+
+                    {hasSubmitted && errors.length > 0 && (<div className='errorContainer'>
+                        {errors.map((error, ind) => (
+                            <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+                        ))}
+                    </div>)}
+
                     <div className='form-title'>Hello! Let's start!</div>
                     <p style={{ fontSize: '10px' }}>We'll use these information to help you claim your Cutielp page</p>
                     <div className='form-fields'>

@@ -7,13 +7,13 @@ import { Modal } from "../context/Modal"
 
 import './ReviewList.css'
 
-const ReviewList = () => {
+const ReviewList = ({ businessId }) => {
     const dispatch = useDispatch()
-    const businessId = useParams().businessId
+    // const businessId = useParams().businessId
     const reviews = useSelector((state) => state.reviews)
     const user = useSelector((state) => state.session.user)
     const reviewsArr = Object.values(reviews)
-    // console.log('*********user', businessId)
+    console.log('*********reviewsArr', reviewsArr)
 
     const [showModal, setShowModal] = useState(false)
     const [onClickId, setOnClickId] = useState(null)
@@ -22,20 +22,41 @@ const ReviewList = () => {
         dispatch(getReviewsByBusinessId(businessId))
     }, [dispatch, businessId])
 
+    const showCreateButton = () => {
+        if (!reviewsArr.length) return true
+        if (reviewsArr.length) {
+            if (!user?.id) return false
+            for (let review of reviewsArr) {
+                if (review?.userId == user?.id) return false
+            }
+        }
+        return true
+    }
+
     if (!reviewsArr.length) return null
     return (
         <div className="review-list-main">
+            {showCreateButton() && (
+                <button className="form-button"
+                    onClick={() => { setShowModal(true) }}>
+                    <i className="fa-regular fa-star" />Write a review
+                </button>
+            )}
             <div className="rating-container"></div>
             {reviewsArr.map((review) => (
-                <div className="review-card" key={review.id}>
+                <div className="review-card">
                     <div className="review-profile-container">
-                        <span>
+                        <span key={review.id}>
                             <img className="review-profile-image" src={review.user.profileImage} alt='profile image' />
                         </span>
                         <span className="review-profile-name">{review.user.firstName} {review.user.lastName[0]}.</span>
                     </div>
+                    <div className="stars">
+                        {Array.apply(null, { length: Math.ceil(review.stars) }).map((e, i) => (
+                            <i className="fa-regular fa-star"></i>
+                        ))}
+                    </div>
                     <div className="review-content">{review.review}</div>
-                    <div className="reivew-stars">Stars{review.stars}</div>
                     {user?.id == review.userId && (
                         <button
                             onClick={() => {
