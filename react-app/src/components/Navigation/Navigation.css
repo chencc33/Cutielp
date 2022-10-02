@@ -80,11 +80,20 @@
     position: absolute;
     right: 0;
     background-color: whitesmoke;
-    width: 100px;
+    width: 150px;
     border-radius: 5px;
     z-index: 1;
     color: black;
     font-size: small;
+}
+
+.dropdown-me {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-me:hover {
+    background-color: rgba(128, 128, 128, 0.211);
 }
 
 .dropdown-container:hover .dropdown-content {

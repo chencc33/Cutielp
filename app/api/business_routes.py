@@ -76,10 +76,8 @@ def create_business():
     new_form['csrf_token'].data = request.cookies['csrf_token']
     if new_form.validate_on_submit():
         new_business = Business(
-            owner_id=new_form.data['ownerId'],
+            owner_id=current_user.id,
             name=new_form.data['name'],
-            email=new_form.data['email'],
-            website=new_form.data['website'],
             open=new_form.data['open'],
             close=new_form.data['close'],
             phone=new_form.data['phone'],
@@ -88,7 +86,8 @@ def create_business():
             state=new_form.data['state'],
             zipcode=new_form.data['zipcode'],
             description=new_form.data['description'],
-            price_range=new_form.data['priceRange']
+            price_range=new_form.data['priceRange'],
+            preview_image=new_form.data['previewImage']
         )
         db.session.add(new_business)
         db.session.commit()
@@ -108,10 +107,8 @@ def update_business(businessId):
     if business_form.validate_on_submit():
         data = business_form.data
 
-        business.owner_id=data['ownerId']
+        business.owner_id=current_user.id
         business.name=data['name']
-        business.email=data['email']
-        business.website=data['website']
         business.open=data['open']
         business.close=data['close']
         business.phone=data['phone']
@@ -121,6 +118,7 @@ def update_business(businessId):
         business.zipcode=data['zipcode']
         business.description=data['description']
         business.price_range=data['priceRange']
+        business.preview_image=data['previewImage']
 
         db.session.commit()
         return business.to_dict()

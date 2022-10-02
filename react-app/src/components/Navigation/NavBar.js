@@ -12,6 +12,11 @@ const NavBar = ({ isSplash }) => {
   const currentUser = useSelector(state => state.session.user);
   // console.log('************current', currentUser)
 
+  const redirect = () => {
+    if (!currentUser) history.push('/login')
+    else history.push('/businesses/create')
+  }
+
   return (
     <>
       <div className='nav-bar' style={{
@@ -24,7 +29,7 @@ const NavBar = ({ isSplash }) => {
         </div>
         <div className='nav-bar-right'>
           <div className='hostButton'
-            onClick={() => (history.push('/businesses/create'))}
+            onClick={redirect}
           >Create a Business</div>
           {!currentUser && (
             <div className='login-signup'>
@@ -39,8 +44,14 @@ const NavBar = ({ isSplash }) => {
                 <img className='profile-button' src="https://img.icons8.com/carbon-copy/100/000000/test-account.png" height={30} width={30} />
               </div>
               <div className='dropdown-content'>
-                <div className='dropdown-me'>About Me</div>
-                <div className='dropdown-logout'><LogoutButton /></div>
+                <div className='dropdown-me'
+                  onClick={() => { history.push('/businesses/current') }}>
+                  <span><i className="fa-solid fa-house" style={{ marginRight: '5px' }}></i></span>My Business
+                </div>
+                <div className='dropdown-me'
+                  onClick={() => { history.push('/reviews/current') }}>
+                  <span><i className="fa-solid fa-star" style={{ marginRight: '5px' }}></i></span>My Reviews</div>
+                <div className='dropdown-me' style={{ marginLeft: '3px' }}><LogoutButton /></div>
               </div>
             </div>
           )}

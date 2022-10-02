@@ -47,7 +47,7 @@ export const getReviewById = (reviewId) => async dispatch => {
 }
 
 export const getReviewsByBusinessId = (businessId) => async dispatch => {
-    const response = await fetch(`/api/businesses/${businessId.businessId}/reviews`)
+    const response = await fetch(`/api/businesses/${businessId}/reviews`)
     if (response.ok) {
         const reviews = await response.json()
         dispatch(loadALL(reviews))
@@ -66,7 +66,7 @@ export const createReview = formData => async dispatch => {
         dispatch(add(data))
         return null
     }
-    if (data.error.length) {
+    if (data.errors.length) {
         return data.errors
     }
 }
@@ -82,8 +82,8 @@ export const updateReview = (data, businessId, reviewId) => async dispatch => {
         dispatch(update(resBody))
         return null
     }
-    if (data.error.length) {
-        return data.errors
+    if (resBody.errors.length) {
+        return resBody.errors
     }
 }
 

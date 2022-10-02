@@ -63,7 +63,7 @@ export const createBusiness = formData => async dispatch => {
         dispatch(add(data))
         return null
     }
-    if (data.error.length) {
+    if (data.errors.length) {
         return data.errors
     }
 }

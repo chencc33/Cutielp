@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "pg": "^8.8.0"
+    "pg": "^8.8.0",
+    "stars-rating": "^1.1.0"
   }
 }

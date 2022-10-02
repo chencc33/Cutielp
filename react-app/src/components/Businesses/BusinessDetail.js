@@ -9,14 +9,17 @@ import NavBar from "../Navigation/NavBar";
 import './BusinessDetail.css'
 import ReviewList from "../Reviews/ReviewList";
 
+import { Modal } from "../context/Modal"
+
 const BusinessDetail = () => {
-    const businessId = useParams().businessId
+    const businessId = +useParams().businessId
     const dispatch = useDispatch()
     const history = useHistory()
     const businesses = useSelector((state) => state.businesses)
+    const user = useSelector((state) => state.session.user)
     const business = businesses[businessId]
-
-    const [showForm, setShowForm] = useState(false)
+    // console.log('**********business', business)
+    const [showModal, setShowModal] = useState(false)
 
     const roundStar = (num) => {
         if (num % 1 == 0) return num
@@ -24,11 +27,9 @@ const BusinessDetail = () => {
         else num = Math.floor(num) + 0.5
         return num
     }
-
     useEffect(() => {
         dispatch(getBusinessById(businessId))
     }, [dispatch])
-    if (business) console.log(business)
 
     if (!business) return null
     return (
@@ -36,7 +37,7 @@ const BusinessDetail = () => {
             <NavBar />
             <div className="business-top-background">
                 <div className="business-image">
-                    <img className='detail-image' src={business.Images[0]?.url} alt='Business Image' />
+                    <img className='detail-image' src={business.previewImage} alt='Business Image' />
                     {/* {business.Images?.map((image) => (
                         <img className='detail-image' src={image.url} alt='Business Image' />
                     ))} */}
@@ -52,16 +53,14 @@ const BusinessDetail = () => {
                 </div>
             </div>
             <div className="business-bottom">
-                <button className='form-button'
-                    onClick={() => {
-                        history.push(`/businesses/${businessId}/edit`)
-                    }}>
-                    <i className="fa-solid fa-pen-to-square" />Edit this business
-                </button>
-                <button className="form-button"
-                    onClick={() => { setShowForm(true) }}>
-                    <i className="fa-regular fa-star" />Write a review
-                </button>
+                {user?.id === business.ownerId && (
+                    <button className='form-button'
+                        onClick={() => {
+                            history.push(`/businesses/${businessId}/edit`)
+                        }}>
+                        <i className="fa-solid fa-pen-to-square" />Edit this business
+                    </button>
+                )}
                 <div className="business-detail">
                     {/* <div className="open-close">Close until {business.close}</div> */}
                     <div className="contact-info">
@@ -72,7 +71,7 @@ const BusinessDetail = () => {
                 </div>
             </div>
             <div className="review-container">
-                <ReviewList businessId={businessId} />
+                <ReviewList businessId={business.id} />
                 <div className="review-profile">
                     <div className="profile-container">
                         <div className="profile-image"></div>
@@ -83,23 +82,13 @@ const BusinessDetail = () => {
                         <div className="start-reivew-instruction"></div>
                     </div>
                 </div>
-                {/* <div className="horizontal-separator"></div>
-                <div className="review-info-container">
-                    <div className="stars-container"></div>
-                    <div className="bars-container"></div>
-                </div>
-                <div className="review-card-container">
-                    <div className="user-profile-container">
-                        <div className="profile-image"></div>
-                        <div className="name"></div>
-                    </div>
-                    <div className="stars"></div>
-                    <div className="review-content"></div>
-                </div> */}
             </div>
             <div className="review-list-main">
-                {showForm && (<ReviewForm />)}
             </div>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <ReviewForm setShowModal={setShowModal} />
+                </Modal>)}
         </div>
     )
 
