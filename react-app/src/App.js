@@ -15,6 +15,7 @@ import SplashPage from './components/Splash/Splash';
 import BusinessForm from './components/Businesses/BusinessForm';
 import ReviewList from './components/Reviews/ReviewList';
 import BusinessesListByUser from './components/Businesses/BusinessListByUser';
+import ReviewListByUser from './components/Reviews/ReviewListByUser';
 
 
 function App() {
@@ -82,6 +83,9 @@ function App() {
         </Route>
         <Route exact path='/businesses'>
           <BusinessesList />
+        </Route>
+        <Route exact path='/reviews/current'>
+          <ReviewListByUser />
         </Route>
       </Switch>
     </BrowserRouter>
