@@ -9,25 +9,31 @@ import './LoginSignup.css'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(firstName, lastName, email, password));
       if (data) {
         setErrors(data)
       }
     }
   };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
   };
 
   const updateEmail = (e) => {
@@ -46,6 +52,16 @@ const SignUpForm = () => {
     return <Redirect to='/' />;
   }
 
+  function passwordCheck() {
+    if (password !== repeatPassword) {
+      return (
+        <div className='errorText'>
+          Passwords must match
+        </div>
+      )
+    }
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <TopBar />
@@ -54,17 +70,31 @@ const SignUpForm = () => {
           <div className='form-title'>Sign Up for Cutielp</div>
           <p style={{ fontSize: '10px' }}>Connect with greate businesses</p>
           <div>
-            {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
+            {errors.length > 0 && (<div className='errorContainer'>
+              {errors.map((error, ind) => (
+                <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+              ))}
+            </div>)}
+            {
+              passwordCheck()
+            }
           </div>
           <div className='form-fields'>
-            <label className='form-labels'>User Name</label>
+            <label className='form-labels'>First Name</label>
             <input
               type='text'
-              name='username'
-              onChange={updateUsername}
-              value={username}
+              name='firtname'
+              onChange={updateFirstName}
+              value={firstName}
+            ></input>
+          </div>
+          <div className='form-fields'>
+            <label className='form-labels'>Last Name</label>
+            <input
+              type='text'
+              name='lastname'
+              onChange={updateLastName}
+              value={lastName}
             ></input>
           </div>
           <div className='form-fields'>

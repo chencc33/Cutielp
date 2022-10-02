@@ -168,7 +168,12 @@ const BusinessForm = () => {
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Price Range *</label>
-                        <input type='number' value={priceRange} onChange={e => setPriceRange(e.target.value)} required></input>
+                        <select value={priceRange} className='pricerange-select'
+                            onChange={e => setPriceRange(e.target.value)} required>
+                            <option value={1}>$</option>
+                            <option value={2}>$$</option>
+                            <option value={3}>$$$</option>
+                        </select>
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Preivew Image *</label>

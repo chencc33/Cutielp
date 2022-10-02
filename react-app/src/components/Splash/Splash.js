@@ -6,6 +6,8 @@ import splash3 from '../Images/splash3.jpg'
 import splash4 from '../Images/splash4.jpg'
 import { useEffect, useState } from 'react'
 
+import './splash.css'
+
 
 function SplashPage() {
     const imagesArr = [splash1, splash2, splash3, splash4]
@@ -63,7 +65,8 @@ function SplashPage() {
                             color: 'whitesmoke',
                             fontFamily: 'Comic Sans MS, Comic Sans, cursive',
                             fontSize: '30px',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            textShadow: '1.5px 1.5px gray'
                         }}>
                         {quotesArr[quoteIdx]}</p>
                     <button className='redirect-business'
@@ -81,6 +84,30 @@ function SplashPage() {
                         <i className="fa-solid fa-magnifying-glass"></i>
                         <p>Explore Restaurants</p>
                     </button>
+                </div>
+            </div>
+            <div className="splash-footer"
+                style={{
+                    position: 'absolute',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                    textAlign: 'center',
+                    fontFamily: 'Comic Sans MS, Comic Sans, cursive',
+                    color: 'whitesmoke',
+                    fontWeight: 'bold'
+                }}>
+                Chen Chen
+                <div className='splashpage-profile-container'
+                    style={{
+                        color: 'whitesmoke'
+                    }}>
+                    <a href="https://github.com/chencc33" target="_blank">
+                        <i className="fa-brands fa-square-github devLinks"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/chencc33" target="_blank">
+                        <i className="fa-brands fa-linkedin devLinks"></i>
+                    </a>
                 </div>
             </div>
         </ div>
