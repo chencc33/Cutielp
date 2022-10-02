@@ -63,7 +63,7 @@ export const createBusiness = formData => async dispatch => {
         dispatch(add(data))
         return null
     }
-    if (data.error.length) {
+    if (data.errors.length) {
         return data.errors
     }
 }
@@ -112,6 +112,10 @@ const businessesReducer = (state = initialState, action) => {
         case UPDATE_BUSINESS:
             newState = { ...state }
             newState[action.business.id] = action.business
+            return newState
+        case DELETE_BUSINESS:
+            newState = { ...state }
+            delete newState[action.businessId]
             return newState
         default:
             return state

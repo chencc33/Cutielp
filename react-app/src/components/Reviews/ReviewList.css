@@ -1,0 +1,14 @@
+.review-profile-image {
+    border-radius: 50%;
+    width: 45px;
+}
+
+.review-content {
+    font-size: 15px;
+    color: #2D2E2E;
+}
+
+.review-profile-name {
+    font-size: 15px;
+    font-weight: bold;
+}

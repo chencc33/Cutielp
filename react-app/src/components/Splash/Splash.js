@@ -78,7 +78,7 @@ function SplashPage() {
                             fontSize: 'smaller'
                         }}
                         onClick={() => { history.push('/businesses') }}>
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i className="fa-solid fa-magnifying-glass"></i>
                         <p>Explore Restaurants</p>
                     </button>
                 </div>

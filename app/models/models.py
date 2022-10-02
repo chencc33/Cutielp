@@ -13,9 +13,7 @@ class Business(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    name = db.Column(db.String(med_str), nullable=False, unique=True)
-    email = db.Column(db.String(med_str), nullable=False, unique=True)
-    website = db.Column(db.String(med_str))
+    name = db.Column(db.String(med_str), nullable=False)
     open = db.Column(db.String(small_str), nullable=False)
     close = db.Column(db.String(small_str), nullable=False)
     phone = db.Column(db.String(small_str), nullable=False)
@@ -25,6 +23,7 @@ class Business(db.Model):
     zipcode = db.Column(db.String(small_str), nullable=False)
     description = db.Column(db.String(long_str), nullable=False)
     price_range = db.Column(db.Integer, nullable=False)
+    preview_image = db.Column(db.String(long_str))
 
     #Relationship
     user = db.relationship('User', back_populates='businesses')
@@ -37,8 +36,6 @@ class Business(db.Model):
         "id": self.id,
         "ownerId":self.owner_id,
         "name": self.name,
-        "email": self.email,
-        "website": self.website,
         "open": self.open,
         "close": self.close,
         "phone": self.phone,
@@ -47,7 +44,8 @@ class Business(db.Model):
         "state": self.state,
         "zipcode": self.zipcode,
         "description": self.description,
-        "priceRange": self.price_range
+        "priceRange": self.price_range,
+        "previewImage":self.preview_image
       }
 
 class Review(db.Model):
@@ -70,7 +68,9 @@ class Review(db.Model):
         "review": self.review,
         "stars": self.stars,
         "userId": self.user_id,
-        "businessId": self.business_id
+        "businessId": self.business_id,
+        'images':[image.to_dict() for image in self.images],
+        "user": self.user.to_dict()
       }
 
 class Image(db.Model):
