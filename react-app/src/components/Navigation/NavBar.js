@@ -12,6 +12,11 @@ const NavBar = ({ isSplash }) => {
   const currentUser = useSelector(state => state.session.user);
   // console.log('************current', currentUser)
 
+  const redirect = () => {
+    if (!currentUser) history.push('/login')
+    else history.push('/businesses/create')
+  }
+
   return (
     <>
       <div className='nav-bar' style={{
@@ -24,7 +29,7 @@ const NavBar = ({ isSplash }) => {
         </div>
         <div className='nav-bar-right'>
           <div className='hostButton'
-            onClick={() => (history.push('/businesses/create'))}
+            onClick={redirect}
           >Create a Business</div>
           {!currentUser && (
             <div className='login-signup'>
