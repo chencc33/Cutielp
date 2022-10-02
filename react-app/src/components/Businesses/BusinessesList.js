@@ -28,7 +28,6 @@ const BusinessesList = () => {
     return (
         <div className="businesslist-main">
             <NavBar />
-            {/* <button onClick={() => (setShowForm(true))}>Create a Business</button> */}
             <div className="main-bottom">
                 <div className="category-main"></div>
                 <div className="businesslist-container">
@@ -46,20 +45,19 @@ const BusinessesList = () => {
                             <div className="business-intro-container">
                                 <div className="business-name">{business.name}</div>
                                 <div className="business-rating">
-                                    <div className="stars">
+                                    <div className="stars-container">
                                         {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
-                                            <i className="fa-regular fa-star"></i>
+                                            <i className="fa-solid fa-star"></i>
                                         ))} <span className="review-nums">{business.numReview}</span>
                                     </div>
-                                    {/* {roundStar(business.avgStar)} */}
                                 </div>
                                 <div className="open-close">Open: {business.open} - {business.close}</div>
+                                <div className="description">{business.description}</div>
                             </div>
+                            <div className="horizontal-separator "></div>
                         </div>
                     ))}
                 </div>
-                <div className="map-main"></div>
-                {/* {showForm && (<BusinessForm />)} */}
             </div>
         </div>
     )

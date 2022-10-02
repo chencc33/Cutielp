@@ -26,15 +26,17 @@
 
 .business-card-container {
     display: flex;
-    width: 80%;
-    /* justify-content: center; */
-    padding: 10px;
+    width: 700px;
+    height: 250px;
+    padding: 8px;
     margin: 10px;
-    border-radius: 8px;
     cursor: pointer;
+    border-bottom: 1px solid #a2a0a2;
+    align-items: center;
 }
 
 .business-card-container:hover {
+    border-radius: 8px;
     border: 1px solid rgba(128, 128, 128, 0.391);
 }
 
@@ -61,8 +63,12 @@
     font-family: Comic Sans MS, Comic Sans, cursive;
 }
 
+.stars-container {
+    width: 2000px;
+}
+
 .fa-star {
-    color: yellow;
+    color: gold;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: orange;
 }
@@ -75,4 +81,16 @@
 .open-close {
     font-size: smaller;
     color: gray;
+}
+
+.description {
+    width: 500px;
+    display: -webkit-box;
+    color: gray;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-size: 17px;
+    margin-top: 5px;
 }
