@@ -21,7 +21,6 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
-    history.push('/businesses')
   };
 
   const updateEmail = (e) => {
@@ -36,6 +35,21 @@ const LoginForm = () => {
     return <Redirect to='/' />;
   }
 
+  const handleDemoClick = (e) => {
+    e.preventDefault()
+    let demoEmail = "demo@user.io"
+    let demoPassword = "password"
+
+    return dispatch(login(demoEmail, demoPassword)).catch(
+      async (res) => {
+        const data = await res.json()
+        if (data) {
+          setErrors(data)
+        }
+      }
+    )
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <TopBar />
@@ -46,9 +60,11 @@ const LoginForm = () => {
             <NavLink to={`/sign-up`}>Sign up</NavLink>
           }</p>
           <div>
-            {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
+            {errors.length > 0 && (<div className='errorContainer project-errors'>
+              {errors.map((error, ind) => (
+                <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+              ))}
+            </div>)}
           </div>
           <div className='form-fields'>
             <label className='form-labels' htmlFor='email'>Email</label>
@@ -70,6 +86,7 @@ const LoginForm = () => {
               onChange={updatePassword}
             />
             <button type='submit' className='form-submit-button'>Login</button>
+            <button type='button' className='form-submit-button' onClick={handleDemoClick}>Sign in as Demo user</button>
           </div>
         </form>
         <div className='loginSignup-image-container'>
