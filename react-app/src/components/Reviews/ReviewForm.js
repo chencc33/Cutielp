@@ -72,6 +72,7 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
                     onClick={async () => {
                         await dispatch(deleteReview(reviewId))
                         history.push(`/businesses/${businessId}`)
+                        setShowModal(false)
                     }}>Delete</button>
             </form>
         </div>

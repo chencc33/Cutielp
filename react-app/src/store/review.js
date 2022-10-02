@@ -82,8 +82,8 @@ export const updateReview = (data, businessId, reviewId) => async dispatch => {
         dispatch(update(resBody))
         return null
     }
-    if (data.errors.length) {
-        return data.errors
+    if (resBody.errors.length) {
+        return resBody.errors
     }
 }
 

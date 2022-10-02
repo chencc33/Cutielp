@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import NavBar from "../Navigation/NavBar";
 import './BusinessList.css'
 
-const BusinessesList = () => {
+const BusinessesListByUser = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const businesses = useSelector((state) => state.businesses)
@@ -21,7 +21,7 @@ const BusinessesList = () => {
     }
 
     useEffect(() => {
-        dispatch(getBusinesses())
+        dispatch(getBusinessesByUser())
     }, [dispatch])
 
     if (!businessesArr.length) return null
@@ -37,11 +37,10 @@ const BusinessesList = () => {
                             key={business.id}
                             onClick={() => { history.push(`/businesses/${business.id}`) }}>
                             <div className="business-image-container">
-                                {/* <img src={business['Images'][0]?.url} alt='Business Image' height={150} width={150} /> */}
-                                {/* {business['Images'] ?
-                                    <img src={business['Images'][0].url} alt='Business Image' height={200} width={200} /> :
-                                    <img src="https://www.creativefabrica.com/wp-content/uploads/2020/03/09/Simple-Fork-Plate-Icon-Restaurant-Logo-Graphics-3446203-1-580x348.jpg" alt='Business Image' height={200} width={200} />
-                                } */}
+                                <img src={business['Images'][0]?.url} alt='Business Image' height={150} width={150} />
+                                {/* {business['Images']?.map((image) => (
+                                <img src={image.url} alt='Business Image' height={200} width={200} />
+                            ))} */}
                             </div>
                             <div className="business-intro-container">
                                 <div className="business-name">{business.name}</div>
@@ -59,10 +58,9 @@ const BusinessesList = () => {
                     ))}
                 </div>
                 <div className="map-main"></div>
-                {/* {showForm && (<BusinessForm />)} */}
             </div>
         </div>
     )
 }
 
-export default BusinessesList
+export default BusinessesListByUser

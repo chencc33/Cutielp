@@ -44,7 +44,11 @@ const NavBar = ({ isSplash }) => {
                 <img className='profile-button' src="https://img.icons8.com/carbon-copy/100/000000/test-account.png" height={30} width={30} />
               </div>
               <div className='dropdown-content'>
-                <div className='dropdown-me'>About Me</div>
+                <div className='dropdown-me'>
+                  <span><i className="fa-solid fa-house" style={{ marginRight: '5px' }}></i></span>My Business
+                </div>
+                <div className='dropdown-me'>
+                  <span><i className="fa-solid fa-star" style={{ marginRight: '5px' }}></i></span>My Reviews</div>
                 <div className='dropdown-logout'><LogoutButton /></div>
               </div>
             </div>

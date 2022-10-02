@@ -76,9 +76,9 @@ def create_business():
     new_form['csrf_token'].data = request.cookies['csrf_token']
     if new_form.validate_on_submit():
         new_business = Business(
-            owner_id=new_form.data['ownerId'],
+            owner_id=current_user.id,
             name=new_form.data['name'],
-            email=new_form.data['email'],
+            # email=new_form.data['email'],
             website=new_form.data['website'],
             open=new_form.data['open'],
             close=new_form.data['close'],
@@ -108,9 +108,9 @@ def update_business(businessId):
     if business_form.validate_on_submit():
         data = business_form.data
 
-        business.owner_id=data['ownerId']
+        business.owner_id=current_user.id
         business.name=data['name']
-        business.email=data['email']
+        # business.email=data['email']
         business.website=data['website']
         business.open=data['open']
         business.close=data['close']

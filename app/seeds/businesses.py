@@ -136,7 +136,7 @@ def seed_businesses():
         business = Business(
             owner_id = randint(1,9),
             name=names[idx],
-            email=names[idx].replace(" ", "") + str(idx) + '@gmail.com',
+            # email=names[idx].replace(" ", "") + str(idx) + '@gmail.com',
             website='www.' + names[idx].replace(" ", "") + '.com',
             open=str(randint(8,11))+'am',
             close=str(randint(8,11))+'pm',
