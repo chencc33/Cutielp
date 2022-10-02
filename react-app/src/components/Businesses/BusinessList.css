@@ -26,7 +26,7 @@
 
 .business-card-container {
     display: flex;
-    width: 700px;
+    width: 750px;
     height: 250px;
     padding: 8px;
     margin: 10px;
@@ -73,9 +73,21 @@
     -webkit-text-stroke-color: orange;
 }
 
+.fa-regular.fa-star {
+    color: #8f8e8f;
+    /* -webkit-text-stroke-width: 1px; */
+    -webkit-text-stroke-color: #8f8e8f;
+}
+
 .review-nums {
     font-size: smaller;
     color: gray;
+    margin-left: 5px;
+}
+
+.open {
+    color: green;
+    font-size: larger;
 }
 
 .open-close {

@@ -36,7 +36,7 @@ const BusinessesList = () => {
                             key={business.id}
                             onClick={() => { history.push(`/businesses/${business.id}`) }}>
                             <div className="business-image-container">
-                                <img src={business.previewImage} alt='Business Image' height={150} width={150} />
+                                <img src={business.previewImage} alt='Business Image' height={180} width={180} />
                                 {/* {business['Images'] ?
                                     <img src={business['Images'][0].url} alt='Business Image' height={200} width={200} /> :
                                     <img src="https://www.creativefabrica.com/wp-content/uploads/2020/03/09/Simple-Fork-Plate-Icon-Restaurant-Logo-Graphics-3446203-1-580x348.jpg" alt='Business Image' height={200} width={200} />
@@ -48,10 +48,14 @@ const BusinessesList = () => {
                                     <div className="stars-container">
                                         {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
                                             <i className="fa-solid fa-star"></i>
-                                        ))} <span className="review-nums">{business.numReview}</span>
+                                        ))}
+                                        {Array.apply(null, { length: Math.floor(5 - business.avgStar) }).map((e, i) => (
+                                            <i className="fa-regular fa-star"></i>
+                                        ))}
+                                        <span className="review-nums">{business.numReview}</span>
                                     </div>
                                 </div>
-                                <div className="open-close">Open: {business.open} - {business.close}</div>
+                                <div className="open-close"><span className="open">Open: </span>{business.open} - {business.close}</div>
                                 <div className="description">{business.description}</div>
                             </div>
                             <div className="horizontal-separator "></div>
