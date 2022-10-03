@@ -62,10 +62,14 @@ const ReviewList = ({ businessId }) => {
                                         setOnClickId(review?.id)
                                     }}
                                     className="fa-solid fa-pen-to-square"></i>
-                                <div>empty</div>
-                                <div onClick={async () => {
-                                    await dispatch(deleteReview(review?.id))
-                                }}>delete</div>
+
+                                <div className="review-delete-button">
+                                    <i
+                                        onClick={async () => {
+                                            await dispatch(deleteReview(review?.id))
+                                        }}
+                                        class="fa-solid fa-trash"></i>
+                                </div>
                             </div>
                         )}
                     </div>

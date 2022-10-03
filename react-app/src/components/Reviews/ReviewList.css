@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+.review-delete-button {
+    margin-left: 10px;
+}
+
 .review-profile-container {
     display: flex;
     margin-bottom: 5px;
