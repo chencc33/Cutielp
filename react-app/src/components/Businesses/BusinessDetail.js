@@ -66,6 +66,11 @@ const BusinessDetail = () => {
                 </div>
             </div>
             <div className="business-bottom">
+                <div className="horizontal-separator"></div>
+                <div className="detail-about-container">
+                    <div className="detail-about-title">About</div>
+                    <div className="detail-description">{business.description}</div>
+                </div>
                 {user?.id === business.ownerId && (
                     <button className='form-button'
                         onClick={() => {
@@ -75,33 +80,38 @@ const BusinessDetail = () => {
                     </button>
                 )}
                 <div className="business-detail">
-                    {/* <div className="open-close">Close until {business.close}</div> */}
                     <div className="contact-info">
-                        <div className="website">{business.website}</div>
-                        <div className="phone">{business.phone}</div>
-                        <div className="address">{business.address}</div>
+                        <div className="phone">
+                            <span >{business.phone}</span>
+                        </div>
+                        <div className="address">
+                            <span>{business.address}</span>
+                            <div className="city-state">
+                                {business.city}, {business.state}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="review-container">
-                <ReviewList businessId={business.id} />
-                <div className="review-profile">
-                    <div className="profile-container">
-                        <div className="profile-image"></div>
-                        <div className="name"></div>
-                    </div>
-                    <div className="create-review-container">
-                        <div className="stars"></div>
-                        <div className="start-reivew-instruction"></div>
+                <div className="review-list-container">
+                    <ReviewList businessId={business.id} />
+                    <div className="review-profile">
+                        <div className="profile-container">
+                            <div className="profile-image"></div>
+                            <div className="name"></div>
+                        </div>
+                        <div className="create-review-container">
+                            <div className="stars"></div>
+                            <div className="start-reivew-instruction"></div>
+                        </div>
                     </div>
                 </div>
+                <div className="review-list-main">
+                </div>
+                {showModal && (
+                    <Modal onClose={() => setShowModal(false)}>
+                        <ReviewForm setShowModal={setShowModal} />
+                    </Modal>)}
             </div>
-            <div className="review-list-main">
-            </div>
-            {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                    <ReviewForm setShowModal={setShowModal} />
-                </Modal>)}
         </div>
     )
 

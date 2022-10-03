@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
 import { getReviewsByBusinessId } from "../../store/review"
 import ReviewForm from "./ReviewForm"
 import { Modal } from "../context/Modal"
@@ -47,13 +46,16 @@ const ReviewList = ({ businessId }) => {
             {reviewsArr.map((review) => (
                 <div className="review-card">
                     <div className="review-profile-container">
-                        <span key={review.id}>
+                        <div key={review.id}>
                             <img className="review-profile-image" src={review.user.profileImage} alt='profile image' />
-                        </span>
-                        <span className="review-profile-name">{review.user.firstName} {review.user.lastName[0]}.</span>
+                        </div>
+                        <div className="review-profile-name">{review.user.firstName} {review.user.lastName[0]}.</div>
                     </div>
-                    <div className="stars">
+                    <div className="stars-container">
                         {Array.apply(null, { length: Math.ceil(review.stars) }).map((e, i) => (
+                            <i className="fa-solid fa-star"></i>
+                        ))}
+                        {Array.apply(null, { length: Math.floor(5 - review.stars) }).map((e, i) => (
                             <i className="fa-regular fa-star"></i>
                         ))}
                     </div>

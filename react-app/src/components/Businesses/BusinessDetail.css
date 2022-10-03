@@ -64,6 +64,8 @@
 .business-bottom {
     overflow: auto;
     margin-top: 150px;
+    margin-left: 10%;
+    width: 85vw;
     /* position: absolute;
     bottom: 0; */
 }
@@ -83,4 +85,53 @@
     /* display: flex;
     flex-direction: column; */
     width: 60%;
+}
+
+.business-detail {
+    position: absolute;
+    right: 0;
+    margin-right: 50px;
+    border: solid 1px var(--border-color-active);
+    padding: 10px;
+    display: flex;
+    width: 20%;
+    height: fit-content;
+    border-radius: 4px;
+    color: var(--text-color);
+}
+
+.phone {
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid 1px var(--border-color-active);
+}
+
+.contact-info>div {
+    font-size: 17px;
+    padding: 10px;
+}
+
+.address>* {
+    padding-bottom: 5px;
+}
+
+.detail-about-container {
+    width: 70%;
+}
+
+.detail-about-title {
+    font-weight: bold;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.detail-description {
+    color: #2D2E2E;
+    font-size: 18px;
+    padding-bottom: 15px;
+    border-bottom: solid 1px var(--border-color-active)
+}
+
+.review-list-container {
+    width: 100%;
 }
