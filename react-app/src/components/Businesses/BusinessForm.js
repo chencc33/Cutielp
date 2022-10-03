@@ -102,7 +102,7 @@ const BusinessForm = () => {
                 setErrors(data)
             } else {
                 await dispatch(updateBusiness(formData, businessId))
-                history.push(`/businesses/${data.id}`)
+                history.push(`/businesses/${businessId}`)
             }
         }
     }

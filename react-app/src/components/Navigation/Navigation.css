@@ -13,7 +13,7 @@
 
 .nav-bar-right {
     display: flex;
-    margin-right: 150px;
+    /* margin-right: 150px; */
     width: 50%;
     justify-content: center;
 }

@@ -91,7 +91,8 @@ function SplashPage() {
                 style={{
                     position: 'absolute',
                     left: '0',
-                    marginTop: '500px',
+                    bottom: '0',
+                    // marginTop: '500px',
                     textAlign: 'center',
                     fontFamily: 'Comic Sans MS, Comic Sans, cursive',
                     color: 'black',
