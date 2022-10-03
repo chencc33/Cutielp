@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom"
 import { createReview, deleteReview, getReviewById, updateReview } from "../../store/review"
 
 import { Rating } from 'react-simple-star-rating'
+import './ReviewForm.css'
 
 const ReviewForm = ({ reviewId, setShowModal }) => {
     const dispatch = useDispatch()
@@ -35,9 +36,6 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
         }
     }, [dispatch, businessId, userId])
 
-    // const ratingChanged = (newRating) => {
-    //     console.log(newRating)
-    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -55,18 +53,17 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <div className='form-fields'>
-                    <label className='form-labels'>Review</label>
-                    <input type='text' value={review} onChange={e => setReview(e.target.value)}></input>
+            <form onSubmit={handleSubmit} className="review-form">
+                <div className="review-form-title">My Review</div>
+                <div className="review-form-stars">
+                    <Rating
+                        onClick={handleRating}
+                        ratingValue={stars}
+                        transition />
                 </div>
-                <Rating onClick={handleRating}
-                    ratingValue={stars}
-                    transition />
-                {/* <div className='form-fields'>
-                    <label className='form-labels'>Stars</label>
-                    <input type='number' value={stars} onChange={e => setStars(e.target.value)}></input>
-                </div> */}
+                <div className='review-form-fields'>
+                    <textarea className='form-textarea' type='textarea' value={review} onChange={e => setReview(e.target.value)}></textarea>
+                </div>
                 <button className='form-submit-button' type='submit'>Submit</button>
                 <button className='form-submit-button'
                     onClick={async () => {
