@@ -46,10 +46,21 @@ const ReviewList = ({ businessId }) => {
             {reviewsArr.map((review) => (
                 <div className="review-card">
                     <div className="review-profile-container">
-                        <div key={review.id}>
-                            <img className="review-profile-image" src={review.user.profileImage} alt='profile image' />
+                        <div className="review-profile-container">
+                            <div key={review.id}>
+                                <img className="review-profile-image" src={review.user.profileImage} alt='profile image' />
+                            </div>
+                            <div className="review-profile-name">{review.user.firstName} {review.user.lastName[0]}.</div>
                         </div>
-                        <div className="review-profile-name">{review.user.firstName} {review.user.lastName[0]}.</div>
+                        {user?.id == review.userId && (
+                            <div className="review-edit-button"
+                                onClick={() => {
+                                    setShowModal(true)
+                                    setOnClickId(review.id)
+                                }}>
+                                <i className="fa-solid fa-pen-to-square"></i>
+                            </div>
+                        )}
                     </div>
                     <div className="stars-container">
                         {Array.apply(null, { length: Math.ceil(review.stars) }).map((e, i) => (
@@ -60,14 +71,6 @@ const ReviewList = ({ businessId }) => {
                         ))}
                     </div>
                     <div className="review-content">{review.review}</div>
-                    {user?.id == review.userId && (
-                        <button
-                            onClick={() => {
-                                setShowModal(true)
-                                setOnClickId(review.id)
-                            }}
-                        >Edit </button>
-                    )}
                 </div>
             ))}
             {showModal && (

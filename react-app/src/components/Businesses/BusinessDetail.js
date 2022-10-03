@@ -93,6 +93,28 @@ const BusinessDetail = () => {
                     </div>
                 </div>
                 <div className="review-list-container">
+                    <div className="review-overview-container">
+                        <div className="review-overview-title">Reviews</div>
+                        <div className="overall-rating-container">
+                            <div className="overall-rating-title">
+                                Overall rating
+                            </div>
+                            <div className="stars-container">
+                                <div>
+                                    {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
+                                        <i className="fa-solid fa-star"></i>
+                                    ))}
+                                    {Array.apply(null, { length: Math.floor(5 - business.avgStar) }).map((e, i) => (
+                                        <i className="fa-regular fa-star"></i>
+                                    ))}
+                                </div>
+                                <span className="review-overall-nums">{business.numReview} reviews</span>
+                            </div>
+                            <div className="rating-bar-container">
+
+                            </div>
+                        </div>
+                    </div>
                     <ReviewList businessId={business.id} />
                     <div className="review-profile">
                         <div className="profile-container">

@@ -121,8 +121,8 @@
 
 .detail-about-title {
     font-weight: bold;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .detail-description {
@@ -134,4 +134,29 @@
 
 .review-list-container {
     width: 100%;
+}
+
+.review-overview-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-overview-title {
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.overall-rating-container>div {
+    padding-bottom: 20px;
+}
+
+.overall-rating-title {
+    font-size: 17px;
+}
+
+.review-overall-nums {
+    font-size: 15px;
+    padding-top: 5px;
+    color: var(--text-color)
 }

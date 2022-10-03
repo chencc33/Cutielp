@@ -2,14 +2,21 @@
     padding-top: 15px;
     padding-bottom: 15px;
     width: 100%;
-    border-bottom: solid 1px var(--border-color-active);
+    border-top: solid 1px var(--border-color-active);
     margin-bottom: 15px;
+}
+
+.review-edit-button {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
 }
 
 .review-profile-container {
     display: flex;
     margin-bottom: 5px;
     align-items: flex-start;
+    justify-content: space-between;
 }
 
 .review-profile-image {
