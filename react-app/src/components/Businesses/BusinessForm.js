@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom';
-import { getBusinessById, createBusiness, updateBusiness, deleteBusiness } from '../../store/business';
+import { getBusinessById, createBusiness, updateBusiness, deleteBusiness, getBusinesses } from '../../store/business';
 import NavBar from '../Navigation/NavBar';
 import newBusiness from '../Images/newBusiness.jpg'
 import './BusinessForm.css'
@@ -87,13 +87,13 @@ const BusinessForm = () => {
 
         if (!business && !errors.length) {
             let data = await dispatch(createBusiness(formData))
-            // console.log('**********handlesubmitBefore', data)
+            // console.log('**********handlesubmit', data)
             // if (Array.isArray(data)) {
             //     setErrors(data)
             // console.log('**********handlesubmitAfter', errors)
             // } else {
             // await dispatch(createBusiness(formData))
-            history.push(`/businesses`)
+            history.push(`/businesses/${data.id}`)
             // }
         }
         if (!errors.length && business) {
@@ -188,6 +188,7 @@ const BusinessForm = () => {
                         style={{ width: '60%' }}
                         onClick={async () => {
                             await dispatch(deleteBusiness(businessId))
+                            await dispatch(getBusinesses())
                             history.push('/businesses')
                         }}>Delete</button>)}
                 </form>
