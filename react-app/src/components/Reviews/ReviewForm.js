@@ -20,7 +20,6 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
 
     const [errors, setErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
-    const [content, setContent] = useState("")
 
     const handleRating = (rate) => {
         setStars(rate)
@@ -44,8 +43,9 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
 
     useEffect(() => {
         let errs = []
-        if (content.length < 6 || content.length > 1000) errs.push('error: Review needs to be between 6-1000.')
-    }, [content])
+        if (review.length < 6 || review.length > 1000) errs.push('error: Review needs to be between 6-1000.')
+        setErrors(errs)
+    }, [review])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -54,14 +54,15 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
         let formData = {
             review, stars: stars / 20, businessId, userId
         }
+
         if (!targetReview && !errors.length) {
             let data = await dispatch(createReview(formData))
             if (Array.isArray(data)) {
                 setErrors(data)
+            } else {
+                await dispatch(createReview(formData))
+                setShowModal(false)
             }
-        } else {
-            await dispatch(createReview(formData))
-            setShowModal(false)
         }
         if (targetReview && !errors.length) {
             let data = await dispatch(updateReview(formData, businessId, reviewId))
