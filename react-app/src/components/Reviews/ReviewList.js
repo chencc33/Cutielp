@@ -31,7 +31,6 @@ const ReviewList = ({ businessId }) => {
         }
         return true
     }
-    console.log('************showCreateButton', showCreateButton())
 
     // if (!reviewsArr.length) return null
     return (
@@ -44,36 +43,37 @@ const ReviewList = ({ businessId }) => {
                 </button>
             )}
             <div className="rating-container"></div>
-            {reviewsArr.map((review) => (
+            {reviewsArr.length > 0 && (reviewsArr.map((review) => (
                 <div className="review-card">
                     <div className="review-profile-container">
                         <div className="review-profile-container">
-                            <div key={review.id}>
-                                <img className="review-profile-image" src={review.user.profileImage} alt='profile image' />
+                            <div key={review?.id}>
+                                <img className="review-profile-image" src={review?.user.profileImage} alt='profile image'
+                                    onError={e => { e.currentTarget.src = "https://img.icons8.com/clouds/500/000000/cute-pumpkin.png" }} />
                             </div>
-                            <div className="review-profile-name">{review.user.firstName} {review.user.lastName[0]}.</div>
+                            <div className="review-profile-name">{review?.user.firstName} {review?.user.lastName[0]}.</div>
                         </div>
-                        {user?.id == review.userId && (
+                        {user?.id == review?.userId && (
                             <div className="review-edit-button"
                                 onClick={() => {
                                     setShowModal(true)
-                                    setOnClickId(review.id)
+                                    setOnClickId(review?.id)
                                 }}>
                                 <i className="fa-solid fa-pen-to-square"></i>
                             </div>
                         )}
                     </div>
                     <div className="stars-container">
-                        {Array.apply(null, { length: Math.ceil(review.stars) }).map((e, i) => (
+                        {Array.apply(null, { length: Math.ceil(review?.stars) }).map((e, i) => (
                             <i className="fa-solid fa-star"></i>
                         ))}
-                        {Array.apply(null, { length: Math.floor(5 - review.stars) }).map((e, i) => (
+                        {Array.apply(null, { length: Math.floor(5 - review?.stars) }).map((e, i) => (
                             <i className="fa-regular fa-star"></i>
                         ))}
                     </div>
-                    <div className="review-content">{review.review}</div>
+                    <div className="review-content">{review?.review}</div>
                 </div>
-            ))}
+            )))}
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <ReviewForm reviewId={onClickId} setShowModal={setShowModal} />

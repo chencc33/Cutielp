@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import { createReview, deleteReview, getReviewById, updateReview } from "../../store/review"
 
-import { Rating } from 'react-simple-star-rating'
 import './ReviewForm.css'
 
 const ReviewForm = ({ reviewId, setShowModal }) => {
@@ -14,16 +13,18 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(0)
 
+    const [star1, setStar1] = useState(1)
+    const [star2, setStar2] = useState(2)
+    const [star3, setStar3] = useState(3)
+    const [star4, setStar4] = useState(4)
+    const [star5, setStar5] = useState(5)
+
 
     const user = useSelector((state) => state.session.user)
     const userId = user?.id
 
     const [errors, setErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
-
-    const handleRating = (rate) => {
-        setStars(rate)
-    }
 
     useEffect(async () => {
         if (reviewId) {
@@ -32,7 +33,7 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
             setTargetReview(foundReview)
 
             setReview(foundReview.review)
-            setStars(foundReview.stars * 20)
+            setStars(foundReview.stars)
         } else {
             setReview('')
             setStars(0)
@@ -52,7 +53,7 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
         setHasSubmitted(true)
 
         let formData = {
-            review, stars: stars / 20, businessId, userId
+            review, stars, businessId, userId
         }
 
         if (!targetReview && !errors.length) {
@@ -60,7 +61,7 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
             if (Array.isArray(data)) {
                 setErrors(data)
             } else {
-                await dispatch(createReview(formData))
+                // await dispatch(createReview(formData))
                 setShowModal(false)
             }
         }
@@ -87,10 +88,31 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
                 </div>)}
 
                 <div className="review-form-stars">
-                    <Rating
-                        onClick={handleRating}
-                        ratingValue={stars}
-                        transition />
+                    <span
+                        onClick={() => { setStars(1) }}>
+                        <i className="fa-solid fa-star review-star star1"
+                            style={{ color: stars >= 1 ? 'gold' : 'lightgray' }} />
+                    </span>
+                    <span
+                        onClick={() => { setStars(2) }}>
+                        <i className="fa-solid fa-star review-star star2"
+                            style={{ color: stars >= 2 ? 'gold' : 'lightgray' }} />
+                    </span>
+                    <span
+                        onClick={() => { setStars(3) }}>
+                        <i className="fa-solid fa-star review-star star3"
+                            style={{ color: stars >= 3 ? 'gold' : 'lightgray' }}></i>
+                    </span>
+                    <span
+                        onClick={() => { setStars(4) }}>
+                        <i className="fa-solid fa-star review-star star4"
+                            style={{ color: stars >= 4 ? 'gold' : 'lightgray' }}></i>
+                    </span>
+                    <span
+                        onClick={() => { setStars(5) }}>
+                        <i className="fa-solid fa-star review-star star5"
+                            style={{ color: stars >= 5 ? 'gold' : 'lightgray' }}></i>
+                    </span>
                 </div>
                 <div className='review-form-fields'>
                     <textarea className='form-textarea' required
