@@ -1,0 +1,35 @@
+.review-form {
+    padding: 30px;
+}
+
+.review-form-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.review-form-stars {
+    padding-top: 15px;
+}
+
+.review-form-fields {
+    width: 100%;
+    min-height: 200px;
+    margin-top: 20px;
+}
+
+.task-form-textarea {
+    background-color: var(--bkg-color-black);
+    color: var(--text-color);
+    overflow: auto;
+    height: 100%;
+    border: #a2a0a2 1px solid;
+    resize: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.form-textarea {
+    width: 100%;
+}

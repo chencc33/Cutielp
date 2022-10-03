@@ -44,7 +44,8 @@ function SplashPage() {
         <div className='splash-container'
             style={{
                 backgroundImage: `url(${imagesArr[splashIdx]})`,
-                width: '100vw', height: '100vh',
+                width: '100vw',
+                height: '100vh',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover'
@@ -89,12 +90,12 @@ function SplashPage() {
             <div className="splash-footer"
                 style={{
                     position: 'absolute',
-                    bottom: '0',
                     left: '0',
-                    right: '0',
+                    bottom: '0',
+                    // marginTop: '500px',
                     textAlign: 'center',
                     fontFamily: 'Comic Sans MS, Comic Sans, cursive',
-                    color: 'whitesmoke',
+                    color: 'black',
                     fontWeight: 'bold'
                 }}>
                 Chen Chen

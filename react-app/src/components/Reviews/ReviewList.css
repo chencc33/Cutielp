@@ -1,4 +1,26 @@
+.review-card {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    border-top: solid 1px var(--border-color-active);
+    margin-bottom: 15px;
+}
+
+.review-edit-button {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.review-profile-container {
+    display: flex;
+    margin-bottom: 5px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
 .review-profile-image {
+    display: flex;
     border-radius: 50%;
     width: 45px;
 }
@@ -6,9 +28,19 @@
 .review-content {
     font-size: 15px;
     color: #2D2E2E;
+    padding-top: 6px;
 }
 
 .review-profile-name {
+    display: flex;
     font-size: 15px;
     font-weight: bold;
+    margin-left: 8px;
+    align-self: center;
+}
+
+.review-business-name {
+    font-size: 17px;
+    color: #2D2E2E;
+
 }

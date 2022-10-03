@@ -66,6 +66,26 @@ const BusinessDetail = () => {
                 </div>
             </div>
             <div className="business-bottom">
+                <div className="horizontal-separator"></div>
+                <div className="detail-about-container">
+                    <div className="about-box">
+                        <div className="detail-about-title">About</div>
+                        <div className="detail-description">{business.description}</div>
+                    </div>
+                    <div className="business-detail">
+                        <div className="contact-info">
+                            <div className="phone">
+                                <span >{business.phone}</span>
+                            </div>
+                            <div className="address">
+                                <span>{business.address}</span>
+                                <div className="city-state">
+                                    {business.city}, {business.state}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {user?.id === business.ownerId && (
                     <button className='form-button'
                         onClick={() => {
@@ -74,34 +94,48 @@ const BusinessDetail = () => {
                         <i className="fa-solid fa-pen-to-square" />Edit this business
                     </button>
                 )}
-                <div className="business-detail">
-                    {/* <div className="open-close">Close until {business.close}</div> */}
-                    <div className="contact-info">
-                        <div className="website">{business.website}</div>
-                        <div className="phone">{business.phone}</div>
-                        <div className="address">{business.address}</div>
+                <div className="review-list-container">
+                    <div className="review-overview-container">
+                        <div className="review-overview-title">Reviews</div>
+                        <div className="overall-rating-container">
+                            <div className="overall-rating-title">
+                                Overall rating
+                            </div>
+                            <div className="stars-container">
+                                <div>
+                                    {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
+                                        <i className="fa-solid fa-star"></i>
+                                    ))}
+                                    {Array.apply(null, { length: Math.floor(5 - business.avgStar) }).map((e, i) => (
+                                        <i className="fa-regular fa-star"></i>
+                                    ))}
+                                </div>
+                                <span className="review-overall-nums">{business.numReview} reviews</span>
+                            </div>
+                            <div className="rating-bar-container">
+
+                            </div>
+                        </div>
+                    </div>
+                    <ReviewList businessId={business.id} />
+                    <div className="review-profile">
+                        <div className="profile-container">
+                            <div className="profile-image"></div>
+                            <div className="name"></div>
+                        </div>
+                        <div className="create-review-container">
+                            <div className="stars"></div>
+                            <div className="start-reivew-instruction"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="review-container">
-                <ReviewList businessId={business.id} />
-                <div className="review-profile">
-                    <div className="profile-container">
-                        <div className="profile-image"></div>
-                        <div className="name"></div>
-                    </div>
-                    <div className="create-review-container">
-                        <div className="stars"></div>
-                        <div className="start-reivew-instruction"></div>
-                    </div>
+                <div className="review-list-main">
                 </div>
+                {showModal && (
+                    <Modal onClose={() => setShowModal(false)}>
+                        <ReviewForm setShowModal={setShowModal} />
+                    </Modal>)}
             </div>
-            <div className="review-list-main">
-            </div>
-            {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                    <ReviewForm setShowModal={setShowModal} />
-                </Modal>)}
         </div>
     )
 
