@@ -38,7 +38,8 @@ const BusinessDetail = () => {
             <NavBar />
             <div className="business-top-background">
                 <div className="business-image">
-                    <img className='detail-image' src={business.previewImage} alt='Business Image' />
+                    <img className='detail-image' src={business.previewImage} alt='Business Image'
+                        onError={e => { e.currentTarget.src = "https://images.squarespace-cdn.com/content/v1/56a2785c69a91af45e06a188/1543513629099-01N4YI9L13AKXEMTDKYX/Restaurant-New-Restaurant-Business.png?format=1500w"; }} />
                     {/* {business.Images?.map((image) => (
                         <img className='detail-image' src={image.url} alt='Business Image' />
                     ))} */}

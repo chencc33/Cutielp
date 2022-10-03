@@ -31,8 +31,9 @@ const ReviewList = ({ businessId }) => {
         }
         return true
     }
+    console.log('************showCreateButton', showCreateButton())
 
-    if (!reviewsArr.length) return null
+    // if (!reviewsArr.length) return null
     return (
         <div className="review-list-main">
             {showCreateButton() && (

@@ -87,7 +87,7 @@ const BusinessForm = () => {
 
         if (!business && !errors.length) {
             let data = await dispatch(createBusiness(formData))
-            console.log('**********handlesubmitBefore', data)
+            // console.log('**********handlesubmitBefore', data)
             // if (Array.isArray(data)) {
             //     setErrors(data)
             // console.log('**********handlesubmitAfter', errors)
@@ -128,12 +128,14 @@ const BusinessForm = () => {
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Open *</label>
-                        <input type='text' placeholder='e.g., 12pm'
+                        <input type='text' placeholder='e.g., 9am'
+                            pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
                             value={open} onChange={e => setOpen(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Close *</label>
                         <input type='text' placeholder='e.g., 9pm'
+                            pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
                             value={close} onChange={e => setClose(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
@@ -153,7 +155,8 @@ const BusinessForm = () => {
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>State *</label>
-                        <input type='text'
+                        <input type='text' placeholder='e.g, CA'
+                            pattern='[A-Z]{2}'
                             value={state} onChange={e => setState(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
