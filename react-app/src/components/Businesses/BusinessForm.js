@@ -87,14 +87,12 @@ const BusinessForm = () => {
 
         if (!business && !errors.length) {
             let data = await dispatch(createBusiness(formData))
-            // console.log('**********handlesubmit', data)
-            // if (Array.isArray(data)) {
-            //     setErrors(data)
-            // console.log('**********handlesubmitAfter', errors)
-            // } else {
-            // await dispatch(createBusiness(formData))
-            history.push(`/businesses/${data.id}`)
-            // }
+            if (Array.isArray(data)) {
+                setErrors(data)
+            } else {
+                await dispatch(createBusiness(formData))
+                history.push(`/businesses/${data.id}`)
+            }
         }
         if (!errors.length && business) {
             let data = await dispatch(updateBusiness(formData, businessId))
@@ -140,7 +138,7 @@ const BusinessForm = () => {
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Phone *</label>
-                        <input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' placeholder='123-456-789'
+                        <input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' placeholder='123-456-7891'
                             value={phone} onChange={e => setPhone(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
