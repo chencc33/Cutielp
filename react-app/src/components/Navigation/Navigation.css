@@ -1,6 +1,6 @@
 .nav-bar-main {
     width: 100vw;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .nav-bar {
@@ -90,6 +90,10 @@
     z-index: 1;
     color: black;
     font-size: small;
+}
+
+.dropdown-user {
+    padding: 10px;
 }
 
 .dropdown-me {

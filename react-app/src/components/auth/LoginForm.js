@@ -56,7 +56,7 @@ const LoginForm = () => {
       <div className='login-signup-main'>
         <form className='login-signup-form' onSubmit={onLogin}>
           <div className='form-title'>Log in to Cutielp</div>
-          <p style={{ fontSize: '10px' }}>New to Cutielp? {
+          <p style={{ fontSize: '13px' }}>New to Cutielp? {
             <NavLink to={`/sign-up`}>Sign up</NavLink>
           }</p>
           <div>
@@ -68,7 +68,7 @@ const LoginForm = () => {
           </div>
           <div className='form-fields'>
             <label className='form-labels' htmlFor='email'>Email</label>
-            <input
+            <input className='form-inputs'
               name='email'
               type='text'
               placeholder='Email'
@@ -78,7 +78,7 @@ const LoginForm = () => {
           </div>
           <div className='form-fields'>
             <label className='form-labels' htmlFor='password'>Password</label>
-            <input
+            <input className='form-inputs'
               name='password'
               type='password'
               placeholder='Password'

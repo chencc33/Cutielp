@@ -5,7 +5,6 @@ import ReviewForm from "./ReviewForm"
 import { Modal } from "../context/Modal"
 
 import './ReviewList.css'
-import NavBar from "../Navigation/NavBar"
 
 const ReviewList = ({ businessId }) => {
     const dispatch = useDispatch()
