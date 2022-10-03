@@ -68,8 +68,23 @@ const BusinessDetail = () => {
             <div className="business-bottom">
                 <div className="horizontal-separator"></div>
                 <div className="detail-about-container">
-                    <div className="detail-about-title">About</div>
-                    <div className="detail-description">{business.description}</div>
+                    <div className="about-box">
+                        <div className="detail-about-title">About</div>
+                        <div className="detail-description">{business.description}</div>
+                    </div>
+                    <div className="business-detail">
+                        <div className="contact-info">
+                            <div className="phone">
+                                <span >{business.phone}</span>
+                            </div>
+                            <div className="address">
+                                <span>{business.address}</span>
+                                <div className="city-state">
+                                    {business.city}, {business.state}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {user?.id === business.ownerId && (
                     <button className='form-button'
@@ -79,19 +94,6 @@ const BusinessDetail = () => {
                         <i className="fa-solid fa-pen-to-square" />Edit this business
                     </button>
                 )}
-                <div className="business-detail">
-                    <div className="contact-info">
-                        <div className="phone">
-                            <span >{business.phone}</span>
-                        </div>
-                        <div className="address">
-                            <span>{business.address}</span>
-                            <div className="city-state">
-                                {business.city}, {business.state}
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div className="review-list-container">
                     <div className="review-overview-container">
                         <div className="review-overview-title">Reviews</div>

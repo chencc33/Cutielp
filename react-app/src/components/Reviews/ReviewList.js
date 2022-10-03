@@ -39,7 +39,8 @@ const ReviewList = ({ businessId }) => {
             {showCreateButton() && (
                 <button className="form-button"
                     onClick={() => { setShowModal(true) }}>
-                    <i className="fa-regular fa-star" />Write a review
+                    <i className="fa-regular fa-star" />
+                    Write a review
                 </button>
             )}
             <div className="rating-container"></div>
