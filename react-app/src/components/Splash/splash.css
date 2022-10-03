@@ -1,5 +1,16 @@
+.splash-footer {
+    width: fit-content;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: aliceblue;
+
+
+}
+
 .fa-brands {
-    color: whitesmoke;
+    color: black;
     font-size: 35px;
     padding: 5px;
 }

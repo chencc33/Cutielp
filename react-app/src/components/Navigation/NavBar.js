@@ -18,7 +18,7 @@ const NavBar = ({ isSplash }) => {
   }
 
   return (
-    <>
+    <div className='nav-bar-main'>
       <div className='nav-bar' style={{
         backgroundColor: isSplash ? 'none' : '#c41200'
       }}>
@@ -46,7 +46,11 @@ const NavBar = ({ isSplash }) => {
               <div className='dropdown-content'>
                 <div className='dropdown-me'
                   onClick={() => { history.push('/businesses/current') }}>
-                  <span><i className="fa-solid fa-house" style={{ marginRight: '5px' }}></i></span>My Business
+                  <span>
+                    <i className="fa-solid fa-house"
+                      style={{ marginRight: '5px' }}>
+                    </i>
+                  </span>My Business
                 </div>
                 <div className='dropdown-me'
                   onClick={() => { history.push('/reviews/current') }}>
@@ -57,7 +61,7 @@ const NavBar = ({ isSplash }) => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
