@@ -28,6 +28,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 100vh;
+  min-height: 40vh;
+  width: 40vw;
   /* padding: 8px 32px; */
 }
 

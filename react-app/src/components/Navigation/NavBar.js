@@ -18,7 +18,7 @@ const NavBar = ({ isSplash }) => {
   }
 
   return (
-    <>
+    <div className='nav-bar-main'>
       <div className='nav-bar' style={{
         backgroundColor: isSplash ? 'none' : '#c41200'
       }}>
@@ -44,20 +44,35 @@ const NavBar = ({ isSplash }) => {
                 <img className='profile-button' src="https://img.icons8.com/carbon-copy/100/000000/test-account.png" height={30} width={30} />
               </div>
               <div className='dropdown-content'>
-                <div className='dropdown-me'
-                  onClick={() => { history.push('/businesses/current') }}>
-                  <span><i className="fa-solid fa-house" style={{ marginRight: '5px' }}></i></span>My Business
+                <div className='dropdown-user'>
+                  Hello, {currentUser.firstName}!
                 </div>
                 <div className='dropdown-me'
+                  onClick={() => { history.push('/businesses/current') }}>
+                  <span>
+                    <i className="fa-solid fa-house"
+                      style={{ marginRight: '5px' }}>
+                    </i>
+                  </span>My Business
+                </div>
+                {/* <div className='dropdown-me'
                   onClick={() => { history.push('/reviews/current') }}>
-                  <span><i className="fa-solid fa-star" style={{ marginRight: '5px' }}></i></span>My Reviews</div>
+                  <span><i className="fa-solid fa-star"
+                    style={{
+                      marginRight: '5px',
+                      color: 'black',
+                      fontSize: '18px',
+                      WebkitTextStrokeColor: 'black'
+                    }}></i></span>
+                  My Reviews
+                </div> */}
                 <div className='dropdown-me' style={{ marginLeft: '3px' }}><LogoutButton /></div>
               </div>
             </div>
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
