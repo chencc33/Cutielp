@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getReviewsByBusinessId } from "../../store/review"
+import { getReviewsByBusinessId, deleteReview } from "../../store/review"
 import ReviewForm from "./ReviewForm"
 import { Modal } from "../context/Modal"
 
@@ -31,14 +31,15 @@ const ReviewList = ({ businessId }) => {
         }
         return true
     }
-
+    console.log('*********reviewsArr', reviewsArr)
     // if (!reviewsArr.length) return null
     return (
         <div className="review-list-main">
             {showCreateButton() && (
                 <button className="form-button"
                     onClick={() => { setShowModal(true) }}>
-                    <i className="fa-regular fa-star" />
+                    <i className="fa-regular fa-star"
+                        style={{ WebkitTextStrokeColor: 'white' }} />
                     Write a review
                 </button>
             )}
@@ -48,18 +49,23 @@ const ReviewList = ({ businessId }) => {
                     <div className="review-profile-container">
                         <div className="review-profile-container">
                             <div key={review?.id}>
-                                <img className="review-profile-image" src={review?.user.profileImage} alt='profile image'
+                                <img className="review-profile-image" src={review?.user?.profileImage} alt='profile image'
                                     onError={e => { e.currentTarget.src = "https://img.icons8.com/clouds/500/000000/cute-pumpkin.png" }} />
                             </div>
-                            <div className="review-profile-name">{review?.user.firstName} {review?.user.lastName[0]}.</div>
+                            <div className="review-profile-name">{review?.user?.firstName} {review?.user?.lastName[0]}.</div>
                         </div>
                         {user?.id == review?.userId && (
-                            <div className="review-edit-button"
-                                onClick={() => {
-                                    setShowModal(true)
-                                    setOnClickId(review?.id)
-                                }}>
-                                <i className="fa-solid fa-pen-to-square"></i>
+                            <div className="review-edit-button">
+                                <i
+                                    onClick={() => {
+                                        setShowModal(true)
+                                        setOnClickId(review?.id)
+                                    }}
+                                    className="fa-solid fa-pen-to-square"></i>
+                                <div>empty</div>
+                                <div onClick={async () => {
+                                    await dispatch(deleteReview(review?.id))
+                                }}>delete</div>
                             </div>
                         )}
                     </div>
