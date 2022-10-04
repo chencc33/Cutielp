@@ -225,3 +225,9 @@
     position: left;
     border-radius: 10px;
 }
+
+.business-not-exist {
+    margin-top: 30px;
+    font-weight: bold;
+    color: #c41200;
+}

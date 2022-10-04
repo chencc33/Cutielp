@@ -17,6 +17,7 @@ const BusinessDetail = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const businesses = useSelector((state) => state.businesses)
+    console.log('*******************', businesses)
     const user = useSelector((state) => state.session.user)
     const business = businesses[businessId]
     let reviewsArr
@@ -59,6 +60,26 @@ const BusinessDetail = () => {
         dispatch(getBusinessById(businessId))
     }, [dispatch, reviewsArr])
 
+
+    function redirect() {
+        setTimeout(() => { history.push(`/`) }, 1500)
+    }
+
+    let businessExist = false
+    Object.values(businesses).forEach(business => {
+        if (Number(business.id) === Number(businessId)) {
+            businessExist = true
+        }
+    })
+
+    if (!businessExist) {
+        return (
+            <div>
+                <h1 className='business-not-exist'>Business does not exist...redirecting</h1>
+                {redirect()}
+            </div>
+        )
+    }
 
     if (!business) return null
 
