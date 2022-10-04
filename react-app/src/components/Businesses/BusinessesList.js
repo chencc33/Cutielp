@@ -61,7 +61,6 @@ const BusinessesList = () => {
                                 <div className="open-close"><span className="open">Open: </span>{business.open} - {business.close}</div>
                                 <div className="description">{business.description}</div>
                             </div>
-                            <div className="horizontal-separator "></div>
                         </div>
                     ))}
                 </div>

@@ -24,6 +24,7 @@ const BusinessDetail = () => {
 
     const [showModal, setShowModal] = useState(false)
 
+
     const roundStar = (num) => {
         if (num % 1 == 0) return num
         else if ((num - Math.floor(num)) >= 0.5) num = Math.ceil(num)
@@ -58,7 +59,10 @@ const BusinessDetail = () => {
         dispatch(getBusinessById(businessId))
     }, [dispatch, reviewsArr])
 
+
     if (!business) return null
+
+
     return (
         <div className="business-detail-page">
             <NavBar />
