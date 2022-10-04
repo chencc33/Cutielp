@@ -1,6 +1,7 @@
 
 # from turtle import back
 
+from email.policy import default
 from flask_sqlalchemy import SQLAlchemy
 from .db import db
 
@@ -23,7 +24,7 @@ class Business(db.Model):
     zipcode = db.Column(db.String(small_str), nullable=False)
     description = db.Column(db.String(long_str), nullable=False)
     price_range = db.Column(db.Integer, nullable=False)
-    preview_image = db.Column(db.String(long_str))
+    preview_image = db.Column(db.String(long_str), nullable=False)
 
     #Relationship
     user = db.relationship('User', back_populates='businesses')

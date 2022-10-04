@@ -19,7 +19,9 @@ const BusinessDetail = () => {
     const businesses = useSelector((state) => state.businesses)
     const user = useSelector((state) => state.session.user)
     const business = businesses[businessId]
-    // console.log('**********business', business)
+    let reviewsArr
+    if (business) reviewsArr = business.Reviews
+
     const [showModal, setShowModal] = useState(false)
 
     const roundStar = (num) => {
@@ -28,9 +30,33 @@ const BusinessDetail = () => {
         else num = Math.floor(num) + 0.5
         return num
     }
+
+    const starPercent = () => {
+        let dic = {}
+        if (business) {
+            if (reviewsArr) {
+                for (let review of reviewsArr) {
+                    if (!dic[review.stars]) {
+                        dic[review.stars] = 1
+                    }
+                    else {
+                        dic[review.stars]++
+                    }
+                }
+                for (let i = 1; i <= 5; i++) {
+                    if (!dic[i]) { dic[i] = 0 }
+                    if (dic[i]) { dic[i] = Math.round(dic[i] / business.numReview * 100) }
+                }
+                return dic
+            }
+        }
+    }
+
+    // console.log('**********star', starPercent())
+
     useEffect(() => {
         dispatch(getBusinessById(businessId))
-    }, [dispatch])
+    }, [dispatch, reviewsArr])
 
     if (!business) return null
     return (
@@ -38,7 +64,8 @@ const BusinessDetail = () => {
             <NavBar />
             <div className="business-top-background">
                 <div className="business-image">
-                    <img className='detail-image' src={business.previewImage} alt='Business Image' />
+                    <img className='detail-image' src={business.previewImage} alt='Business Image'
+                        onError={e => { e.currentTarget.src = "https://images.squarespace-cdn.com/content/v1/56a2785c69a91af45e06a188/1543513629099-01N4YI9L13AKXEMTDKYX/Restaurant-New-Restaurant-Business.png?format=1500w"; }} />
                     {/* {business.Images?.map((image) => (
                         <img className='detail-image' src={image.url} alt='Business Image' />
                     ))} */}
@@ -48,16 +75,16 @@ const BusinessDetail = () => {
                     <div className="business-detail-rating">
                         <div className="stars-container">
                             {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
-                                <i className="fa-solid fa-star"></i>
+                                <i key={i} className="fa-solid fa-star"></i>
                             ))}
                             {Array.apply(null, { length: Math.floor(5 - business.avgStar) }).map((e, i) => (
-                                <i className="fa-regular fa-star"></i>
+                                <i key={i} className="fa-regular fa-star"></i>
                             ))}
                             <span className="review-detail-nums">{business.numReview} reviews</span>
                         </div>
                         <div className="open-close-detail">
                             {Array.apply(null, { length: Math.floor(business.priceRange) }).map((e, i) => (
-                                <span className="priceRange-detail">$</span>
+                                <span key={i} className="priceRange-detail">$</span>
                             ))}
                             <span>Open: </span>
                             <span>{business.open} - {business.close}</span>
@@ -96,24 +123,63 @@ const BusinessDetail = () => {
                 )}
                 <div className="review-list-container">
                     <div className="review-overview-container">
-                        <div className="review-overview-title">Reviews</div>
                         <div className="overall-rating-container">
+                            <div className="review-overview-title">Reviews</div>
                             <div className="overall-rating-title">
                                 Overall rating
-                            </div>
-                            <div className="stars-container">
-                                <div>
-                                    {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
-                                        <i className="fa-solid fa-star"></i>
-                                    ))}
-                                    {Array.apply(null, { length: Math.floor(5 - business.avgStar) }).map((e, i) => (
-                                        <i className="fa-regular fa-star"></i>
-                                    ))}
+                                <div className="stars-container">
+                                    <div>
+                                        {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
+                                            <i className="fa-solid fa-star"></i>
+                                        ))}
+                                        {Array.apply(null, { length: Math.floor(5 - business.avgStar) }).map((e, i) => (
+                                            <i className="fa-regular fa-star"></i>
+                                        ))}
+                                    </div>
+                                    <span className="review-overall-nums">{business.numReview} reviews</span>
                                 </div>
-                                <span className="review-overall-nums">{business.numReview} reviews</span>
                             </div>
-                            <div className="rating-bar-container">
-
+                        </div>
+                        <div className="rating-bar-container">
+                            <div className="rating-bar-fields">
+                                <div className="rating-bar-label">stars5</div>
+                                <div className="rating-bar-background">
+                                    {starPercent() && reviewsArr.length > 0 && (
+                                        <div className="rating-bar" style={{ width: `${starPercent()[5]}%`, backgroundColor: 'rgb(251,80,60)' }}></div>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="rating-bar-fields">
+                                <div className="rating-bar-label">stars4</div>
+                                <div className="rating-bar-background">
+                                    {starPercent() && reviewsArr.length > 0 && (
+                                        <div className="rating-bar" style={{ width: `${starPercent()[4]}%`, backgroundColor: 'rgb(253,100,62)' }}></div>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="rating-bar-fields">
+                                <div className="rating-bar-label">stars3</div>
+                                <div className="rating-bar-background">
+                                    {starPercent() && reviewsArr.length > 0 && (
+                                        <div className="rating-bar" style={{ width: `${starPercent()[3]}%`, backgroundColor: 'rgb(254,135,66)' }}></div>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="rating-bar-fields">
+                                <div className="rating-bar-label">stars2</div>
+                                <div className="rating-bar-background">
+                                    {starPercent() && reviewsArr.length > 0 && (
+                                        <div className="rating-bar" style={{ width: `${starPercent()[2]}%`, backgroundColor: 'rgb(254,173,72)' }}></div>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="rating-bar-fields">
+                                <div className="rating-bar-label">stars1</div>
+                                <div className="rating-bar-background">
+                                    {starPercent() && reviewsArr.length > 0 && (
+                                        <div className="rating-bar" style={{ width: `${starPercent()[1]}%`, backgroundColor: 'rgb(255,204,75)' }}></div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -136,7 +202,7 @@ const BusinessDetail = () => {
                         <ReviewForm setShowModal={setShowModal} />
                     </Modal>)}
             </div>
-        </div>
+        </div >
     )
 
 }

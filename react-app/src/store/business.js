@@ -61,7 +61,7 @@ export const createBusiness = formData => async dispatch => {
     const data = await response.json()
     if (response.ok) {
         dispatch(add(data))
-        return null
+        return data
     }
     if (data.errors.length) {
         return data.errors

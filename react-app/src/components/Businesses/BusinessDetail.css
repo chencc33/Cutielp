@@ -27,18 +27,19 @@
 
 .business-detail-name {
     position: absolute;
-    top: 30%;
-    left: 20%;
+    top: 25%;
+    left: 10%;
     font-size: 50px;
     font-family: Comic Sans MS, Comic Sans, cursive;
     color: whitesmoke;
     font-weight: bold;
+    width: 800px;
 }
 
 .business-detail-rating {
     position: absolute;
-    left: 20%;
-    top: 40%;
+    left: 10%;
+    top: 35%;
     font-family: Comic Sans MS, Comic Sans, cursive;
     color: whitesmoke;
 }
@@ -97,7 +98,7 @@
     height: fit-content;
     color: var(--text-color);
     margin-top: 20px;
-    margin-right: 30px;
+    margin-right: 25px;
     max-width: 180px;
 }
 
@@ -138,16 +139,31 @@
     color: #2D2E2E;
     font-size: 18px;
     padding-bottom: 15px;
-    border-bottom: solid 1px var(--border-color-active)
+    border-bottom: solid 1px var(--border-color-active);
+    padding-bottom: 40px;
+    overflow: hidden;
+    overflow-wrap: break-word;
 }
 
 .review-list-container {
     width: 100%;
+    margin-top: 30px;
 }
 
 .review-overview-container {
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    height: 200px;
+}
+
+.rating-bar-container {
+    width: 60%;
+}
+
+.stars-container {
+    width: 100%;
+    margin-top: 20px;
 }
 
 .review-overview-title {
@@ -162,10 +178,50 @@
 
 .overall-rating-title {
     font-size: 17px;
+    padding-bottom: 20px;
 }
 
 .review-overall-nums {
     font-size: 15px;
     padding-top: 5px;
     color: var(--text-color)
+}
+
+.rating-bar-container {
+    width: 60%;
+    height: 300px;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.rating-bar-fields {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    width: 100%;
+}
+
+
+.rating-bar-label {
+    color: var(--text-color);
+    font-size: 17px;
+}
+
+.rating-bar {
+    border-radius: 10px;
+}
+
+.rating-bar-background {
+    width: 100%;
+    background-color: #F0F0F0;
+    height: 10px;
+    border-radius: 10px;
+    max-width: 350px;
+    margin-left: 10px;
+}
+
+.rating-bar {
+    height: 10px;
+    position: left;
+    border-radius: 10px;
 }

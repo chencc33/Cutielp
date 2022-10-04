@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     city = db.Column(db.String(small_str))
     state = db.Column(db.String(small_str))
     zipcode = db.Column(db.String, nullable=True)
-    profile_image = db.Column(db.String(long_str), nullable=True)
+    profile_image = db.Column(db.String(long_str), nullable=True, default="https://t3.ftcdn.net/jpg/01/84/37/46/360_F_184374660_v81TYsHokp0DwEsQOui6gzGgkXCy0E0m.jpg")
 
     # Relationship
     businesses = db.relationship('Business', back_populates='user', cascade="all, delete")
