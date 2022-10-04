@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import NavBar from "../Navigation/NavBar";
 import './BusinessList.css'
+import { NavLink } from "react-router-dom";
 
 const BusinessesListByUser = () => {
     const dispatch = useDispatch()
@@ -23,17 +24,24 @@ const BusinessesListByUser = () => {
         dispatch(getBusinessesByUser())
     }, [dispatch])
 
-    if (!businessesArr.length) return null
+    // if (!businessesArr.length) return null
     return (
         <div className="businesslist-main">
             <NavBar />
+            {!businessesArr.length && (
+                <div className="no-business-container">
+                    <div className="no-business-message">You don't have any businesses yet....
+                        <NavLink className="no-business-message no-business-link" to={`/businesses/create`}> Create one? </NavLink>
+                    </div>
+                    <div>
+                        <img className="no-business-pumpkin" src={"https://pbs.twimg.com/media/EgcK9waVAAUZCqs.jpg:large"} alt='pumpkin' height={300} width={300} />
+                    </div>
+                </div>
+            )}
             <div className="main-bottom">
                 <div className="category-main"></div>
                 <div className="businesslist-container">
-                    {!businessesArr.length && (
-                        <div>You don't have any businesses yet. Create one?</div>
-                    )}
-                    {businessesArr.length && businessesArr.map((business) => (
+                    {businessesArr.length > 0 && businessesArr.map((business) => (
                         <div className="business-card-container"
                             key={business.id}
                             onClick={() => { history.push(`/businesses/${business.id}`) }}>

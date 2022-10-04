@@ -55,17 +55,6 @@ const NavBar = ({ isSplash }) => {
                     </i>
                   </span>My Business
                 </div>
-                {/* <div className='dropdown-me'
-                  onClick={() => { history.push('/reviews/current') }}>
-                  <span><i className="fa-solid fa-star"
-                    style={{
-                      marginRight: '5px',
-                      color: 'black',
-                      fontSize: '18px',
-                      WebkitTextStrokeColor: 'black'
-                    }}></i></span>
-                  My Reviews
-                </div> */}
                 <div className='dropdown-me' style={{ marginLeft: '3px' }}><LogoutButton /></div>
               </div>
             </div>
