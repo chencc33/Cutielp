@@ -74,15 +74,24 @@ const BusinessForm = () => {
         if (address.length > 50) errs.push('error: Address length less than 50')
         if (description.length < 5 || description.length > 255) errs.push('error: Description length 5-255')
         if (priceRange < 1 || priceRange > 4) errs.push('error: price range 1 - 3')
+        if (open.length === 4) {
+            if (parseInt(open.slice(0, 2)) > 12) { errs.push('error: invalid open time') }
+        }
+        if (close.length === 4) {
+            if (parseInt(close.slice(0, 2)) > 12) { errs.push('error: invalid close time') }
+        }
+        if (open.slice(-2) === close.slice(-2)) {
+            if (open.slice(0, 2) > close.slice(0, 2)) { errs.push('error: close time can not be early than open time') }
+        }
         setErrors(errs)
-    }, [name, priceRange, description, address])
+    }, [name, priceRange, description, address, open, close])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setHasSubmitted(true)
 
         let formData = {
-            name, open, close, phone, address, city, state, zipcode, description, priceRange, ownerId, previewImage
+            name, open, close, phone, address, city, state, zipcode, open, close, description, priceRange, ownerId, previewImage
         }
 
         if (!business && !errors.length) {
