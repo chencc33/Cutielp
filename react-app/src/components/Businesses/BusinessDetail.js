@@ -56,7 +56,7 @@ const BusinessDetail = () => {
 
     useEffect(() => {
         dispatch(getBusinessById(businessId))
-    }, [dispatch])
+    }, [dispatch, reviewsArr])
 
     if (!business) return null
     return (
