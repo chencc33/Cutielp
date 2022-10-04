@@ -81,7 +81,9 @@ const BusinessForm = () => {
             if (parseInt(close.slice(0, 2)) > 12) { errs.push('error: invalid close time') }
         }
         if (open.slice(-2) === close.slice(-2)) {
-            if (open.slice(0, 2) > close.slice(0, 2)) { errs.push('error: close time can not be early than open time') }
+            if (open !== '12am') {
+                if (parseInt(open.slice(0, 2)) > parseInt(close.slice(0, 2))) { errs.push('error: close time can not be early than open time') }
+            }
         }
         setErrors(errs)
     }, [name, priceRange, description, address, open, close])
