@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getReviewsByBusinessId } from "../../store/review"
+import { getReviewsByBusinessId, deleteReview } from "../../store/review"
 import ReviewForm from "./ReviewForm"
 import { Modal } from "../context/Modal"
 
@@ -12,7 +12,7 @@ const ReviewList = ({ businessId }) => {
     const reviews = useSelector((state) => state.reviews)
     const user = useSelector((state) => state.session.user)
     const reviewsArr = Object.values(reviews)
-    // console.log('*********reviewsArr', reviewsArr)
+    console.log('*********reviewsArr', reviewsArr)
 
     const [showModal, setShowModal] = useState(false)
     const [onClickId, setOnClickId] = useState(null)
@@ -31,48 +31,62 @@ const ReviewList = ({ businessId }) => {
         }
         return true
     }
-
-    if (!reviewsArr.length) return null
+    // console.log('*********reviewsArr', reviewsArr)
+    // if (!reviewsArr.length) return null
     return (
         <div className="review-list-main">
             {showCreateButton() && (
                 <button className="form-button"
                     onClick={() => { setShowModal(true) }}>
-                    <i className="fa-regular fa-star" />
+                    <i className="fa-regular fa-star"
+                        style={{ WebkitTextStrokeColor: 'white' }} />
                     Write a review
                 </button>
             )}
             <div className="rating-container"></div>
-            {reviewsArr.map((review) => (
+            {reviewsArr.length > 0 && (reviewsArr.map((review) => (
                 <div className="review-card">
                     <div className="review-profile-container">
                         <div className="review-profile-container">
-                            <div key={review.id}>
-                                <img className="review-profile-image" src={review.user.profileImage} alt='profile image' />
+                            <div key={review?.id}>
+                                <img className="review-profile-image"
+                                    src={review?.user?.profileImage}
+                                    alt='profile image'
+                                    onError={e => { e.currentTarget.src = "https://st2.depositphotos.com/2805411/8085/i/450/depositphotos_80851650-stock-photo-sketch-design-of-coffee-shop.jpg" }}
+                                />
                             </div>
-                            <div className="review-profile-name">{review.user.firstName} {review.user.lastName[0]}.</div>
+                            <div className="review-profile-name">{review?.user?.firstName} {review?.user?.lastName[0]}.</div>
                         </div>
-                        {user?.id == review.userId && (
-                            <div className="review-edit-button"
-                                onClick={() => {
-                                    setShowModal(true)
-                                    setOnClickId(review.id)
-                                }}>
-                                <i className="fa-solid fa-pen-to-square"></i>
+                        {user?.id == review?.userId && (
+                            <div className="review-edit-button">
+                                <i
+                                    onClick={() => {
+                                        setShowModal(true)
+                                        setOnClickId(review?.id)
+                                    }}
+                                    className="fa-solid fa-pen-to-square"></i>
+
+                                <div className="review-delete-button">
+                                    <i
+                                        onClick={async () => {
+                                            await dispatch(deleteReview(review?.id))
+                                        }}
+                                        className="fa-solid fa-trash"></i>
+                                </div>
                             </div>
                         )}
                     </div>
                     <div className="stars-container">
-                        {Array.apply(null, { length: Math.ceil(review.stars) }).map((e, i) => (
-                            <i className="fa-solid fa-star"></i>
+                        {Array.apply(null, { length: Math.ceil(review?.stars) }).map((e, i) => (
+                            <i key={i} className="fa-solid fa-star"></i>
                         ))}
-                        {Array.apply(null, { length: Math.floor(5 - review.stars) }).map((e, i) => (
-                            <i className="fa-regular fa-star"></i>
+                        {Array.apply(null, { length: Math.floor(5 - review?.stars) }).map((e, i) => (
+                            <i key={i} className="fa-regular fa-star"></i>
                         ))}
                     </div>
-                    <div className="review-content">{review.review}</div>
+                    <div className="review-content">{review?.review}</div>
                 </div>
-            ))}
+            )))}
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <ReviewForm reviewId={onClickId} setShowModal={setShowModal} />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom';
-import { getBusinessById, createBusiness, updateBusiness, deleteBusiness } from '../../store/business';
+import { getBusinessById, createBusiness, updateBusiness, deleteBusiness, getBusinesses } from '../../store/business';
 import NavBar from '../Navigation/NavBar';
 import newBusiness from '../Images/newBusiness.jpg'
 import './BusinessForm.css'
@@ -74,27 +74,36 @@ const BusinessForm = () => {
         if (address.length > 50) errs.push('error: Address length less than 50')
         if (description.length < 5 || description.length > 255) errs.push('error: Description length 5-255')
         if (priceRange < 1 || priceRange > 4) errs.push('error: price range 1 - 3')
+        if (open.length === 4) {
+            if (parseInt(open.slice(0, 2)) > 12) { errs.push('error: invalid open time') }
+        }
+        if (close.length === 4) {
+            if (parseInt(close.slice(0, 2)) > 12) { errs.push('error: invalid close time') }
+        }
+        if (open.slice(-2) === close.slice(-2)) {
+            if (open !== '12am') {
+                if (parseInt(open.slice(0, 2)) > parseInt(close.slice(0, 2))) { errs.push('error: close time can not be early than open time') }
+            }
+        }
         setErrors(errs)
-    }, [name, priceRange, description, address])
+    }, [name, priceRange, description, address, open, close])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setHasSubmitted(true)
 
         let formData = {
-            name, open, close, phone, address, city, state, zipcode, description, priceRange, ownerId, previewImage
+            name, open, close, phone, address, city, state, zipcode, open, close, description, priceRange, ownerId, previewImage
         }
 
         if (!business && !errors.length) {
             let data = await dispatch(createBusiness(formData))
-            console.log('**********handlesubmitBefore', data)
-            // if (Array.isArray(data)) {
-            //     setErrors(data)
-            // console.log('**********handlesubmitAfter', errors)
-            // } else {
-            // await dispatch(createBusiness(formData))
-            history.push(`/businesses`)
-            // }
+            if (Array.isArray(data)) {
+                setErrors(data)
+            } else {
+                // await dispatch(createBusiness(formData))
+                history.push(`/businesses/${data.id}`)
+            }
         }
         if (!errors.length && business) {
             let data = await dispatch(updateBusiness(formData, businessId))
@@ -113,7 +122,7 @@ const BusinessForm = () => {
             <div className='create-business-main'>
                 <form className='business-form' style={{ width: '60%' }} onSubmit={handleSubmit} >
                     <div className='form-title'>Hello! Let's start!</div>
-                    <p style={{ fontSize: '10px' }}>We'll use these information to help you claim your Cutielp page</p>
+                    <p style={{ fontSize: '13px' }}>We'll use these information to help you claim your Cutielp page</p>
 
                     {hasSubmitted && errors.length > 0 && (<div className='errorContainer'>
                         {errors.map((error, ind) => (
@@ -128,17 +137,19 @@ const BusinessForm = () => {
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Open *</label>
-                        <input type='text' placeholder='e.g., 12pm'
+                        <input type='text' placeholder='e.g., 9am'
+                            pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
                             value={open} onChange={e => setOpen(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Close *</label>
                         <input type='text' placeholder='e.g., 9pm'
+                            pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
                             value={close} onChange={e => setClose(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Phone *</label>
-                        <input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' placeholder='123-456-789'
+                        <input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' placeholder='123-456-7891'
                             value={phone} onChange={e => setPhone(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
@@ -153,7 +164,8 @@ const BusinessForm = () => {
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>State *</label>
-                        <input type='text'
+                        <input type='text' placeholder='e.g, CA'
+                            pattern='[A-Z]{2}'
                             value={state} onChange={e => setState(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
@@ -185,6 +197,7 @@ const BusinessForm = () => {
                         style={{ width: '60%' }}
                         onClick={async () => {
                             await dispatch(deleteBusiness(businessId))
+                            await dispatch(getBusinesses())
                             history.push('/businesses')
                         }}>Delete</button>)}
                 </form>

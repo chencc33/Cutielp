@@ -12,6 +12,18 @@
     padding-top: 15px;
 }
 
+.review-star {
+    cursor: pointer;
+}
+
+.review-star:hover {
+    color: gold;
+}
+
+.star1:hover {
+    color: gold;
+}
+
 .review-form-fields {
     width: 100%;
     min-height: 200px;
