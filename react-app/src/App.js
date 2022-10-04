@@ -16,6 +16,7 @@ import BusinessForm from './components/Businesses/BusinessForm';
 import ReviewList from './components/Reviews/ReviewList';
 import BusinessesListByUser from './components/Businesses/BusinessListByUser';
 import ReviewListByUser from './components/Reviews/ReviewListByUser';
+import PageNotFound from './components/PageNotFount';
 
 
 function App() {
@@ -86,6 +87,9 @@ function App() {
         </Route>
         <Route exact path='/reviews/current'>
           <ReviewListByUser />
+        </Route>
+        <Route>
+          <PageNotFound />
         </Route>
       </Switch>
     </BrowserRouter>

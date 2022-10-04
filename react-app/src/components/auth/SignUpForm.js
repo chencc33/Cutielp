@@ -32,7 +32,7 @@ const SignUpForm = () => {
 
     setHasSubmitted(true)
 
-    if (password === repeatPassword) {
+    if (password === repeatPassword && !errors.length) {
       const data = await dispatch(signUp(firstName, lastName, email, password));
       if (data) {
         setErrors(data)
@@ -114,10 +114,11 @@ const SignUpForm = () => {
           <div className='form-fields'>
             <label className='form-labels'>Email*</label>
             <input
-              type='text'
+              type='email'
               name='email'
               onChange={updateEmail}
               value={email}
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               required
             ></input>
           </div>
