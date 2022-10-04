@@ -56,14 +56,18 @@ const BusinessesListByUser = () => {
                             <div className="business-intro-container">
                                 <div className="business-name">{business.name}</div>
                                 <div className="business-rating">
-                                    <div className="stars">
+                                    <div className="stars-container">
                                         {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
-                                            <i className="fa-regular fa-star"></i>
-                                        ))} <span className="review-nums">{business.numReview}</span>
+                                            <i className="fa-solid fa-star"></i>
+                                        ))}
+                                        {Array.apply(null, { length: Math.floor(5 - business.avgStar) }).map((e, i) => (
+                                            <i key={i} className="fa-regular fa-star"></i>
+                                        ))}
+                                        <span className="review-nums">{business.numReview}</span>
                                     </div>
-                                    {/* {roundStar(business.avgStar)} */}
                                 </div>
                                 <div className="open-close">Open: {business.open} - {business.close}</div>
+                                <div className="description">{business.description}</div>
                             </div>
                         </div>
                     ))}

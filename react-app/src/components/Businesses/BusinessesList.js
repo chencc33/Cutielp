@@ -50,10 +50,10 @@ const BusinessesList = () => {
                                 <div className="business-rating">
                                     <div className="stars-container">
                                         {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
-                                            <i className="fa-solid fa-star"></i>
+                                            <i key={i} className="fa-solid fa-star"></i>
                                         ))}
                                         {Array.apply(null, { length: Math.floor(5 - business.avgStar) }).map((e, i) => (
-                                            <i className="fa-regular fa-star"></i>
+                                            <i key={i} className="fa-regular fa-star"></i>
                                         ))}
                                         <span className="review-nums">{business.numReview}</span>
                                     </div>
