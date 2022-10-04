@@ -122,7 +122,7 @@ const BusinessForm = () => {
             <div className='create-business-main'>
                 <form className='business-form' style={{ width: '60%' }} onSubmit={handleSubmit} >
                     <div className='form-title'>Hello! Let's start!</div>
-                    <p style={{ fontSize: '10px' }}>We'll use these information to help you claim your Cutielp page</p>
+                    <p style={{ fontSize: '13px' }}>We'll use these information to help you claim your Cutielp page</p>
 
                     {hasSubmitted && errors.length > 0 && (<div className='errorContainer'>
                         {errors.map((error, ind) => (
