@@ -100,7 +100,7 @@
     margin-top: 20px;
     margin-right: 25px;
     max-width: 350px;
-    overflow: scroll;
+    overflow: visible;
     overflow-wrap: break-word;
 }
 

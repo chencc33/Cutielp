@@ -12,7 +12,7 @@ const ReviewList = ({ businessId }) => {
     const reviews = useSelector((state) => state.reviews)
     const user = useSelector((state) => state.session.user)
     const reviewsArr = Object.values(reviews)
-    // console.log('*********reviewsArr', reviewsArr)
+    console.log('*********user', user)
 
     const [showModal, setShowModal] = useState(false)
     const [onClickId, setOnClickId] = useState(null)
@@ -22,7 +22,8 @@ const ReviewList = ({ businessId }) => {
     }, [dispatch, businessId])
 
     const showCreateButton = () => {
-        if (!reviewsArr.length) return true
+        if (!user) return false
+        if (!reviewsArr.length && user) return true
         if (reviewsArr.length) {
             if (!user?.id) return false
             for (let review of reviewsArr) {

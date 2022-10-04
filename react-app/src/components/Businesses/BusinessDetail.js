@@ -128,13 +128,11 @@ const BusinessDetail = () => {
                     <div className="business-detail">
                         <div className="contact-info">
                             <div className="phone">
+                                <i className="fa-solid fa-phone"></i>
                                 <span >{business.phone}</span>
                             </div>
                             <div className="address">
-                                <span>{business.address}</span>
-                                <div className="city-state">
-                                    {business.city}, {business.state}
-                                </div>
+                                <span><i className="fa-solid fa-location-pin"></i> {business.address}, {business.city}, {business.state}</span>
                             </div>
                         </div>
                     </div>
