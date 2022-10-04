@@ -131,24 +131,24 @@ const BusinessForm = () => {
                     </div>)}
 
                     <div className='form-fields'>
-                        <label className='form-labels'>Name *</label>
-                        <input type='text' placeholder='required'
+                        <label className='form-labels'>Business Name *</label>
+                        <input type='text'
                             value={name} onChange={e => setName(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
-                        <label className='form-labels'>Open *</label>
+                        <label className='form-labels'>Open * (ex: 5pm)</label>
                         <input type='text' placeholder='e.g., 9am'
                             pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
                             value={open} onChange={e => setOpen(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
-                        <label className='form-labels'>Close *</label>
+                        <label className='form-labels'>Close * (ex: 9pm)</label>
                         <input type='text' placeholder='e.g., 9pm'
                             pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
                             value={close} onChange={e => setClose(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
-                        <label className='form-labels'>Phone *</label>
+                        <label className='form-labels'>Phone * (ex: 123-345-5678)</label>
                         <input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' placeholder='123-456-7891'
                             value={phone} onChange={e => setPhone(e.target.value)} required></input>
                     </div>
