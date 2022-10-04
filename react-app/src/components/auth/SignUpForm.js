@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import Login from '../Images/Login.jpg'
 import TopBar from '../TopBar';
@@ -24,8 +24,9 @@ const SignUpForm = () => {
     if (firstName.length > 15) { errs.push('error: First name less than 15 characters.') }
     if (lastName.length > 15) { errs.push('error: Last name less than 15 characters.') }
     if (!email.includes('@')) { errs.push('error: Invalid email address.') }
+    if (password.length < 6) { errs.push('error: Password at least 6 characters.') }
     setErrors(errs)
-  }, [firstName, lastName, email])
+  }, [firstName, lastName, email, password])
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -142,6 +143,11 @@ const SignUpForm = () => {
               required={true}
             ></input>
             <button type='submit' className='form-submit-button'>Sign Up</button>
+          </div>
+          <div>
+            <p style={{ fontSize: '13px' }}>Already sign up?
+              <NavLink to={`/login`}> Login</NavLink>
+            </p>
           </div>
         </form>
         <div className='loginSignup-image-container'>

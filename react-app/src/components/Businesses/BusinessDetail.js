@@ -11,19 +11,23 @@ import './BusinessList.css'
 import ReviewList from "../Reviews/ReviewList";
 
 import { Modal } from "../context/Modal"
+import { getReviewsByBusinessId } from "../../store/review";
 
 const BusinessDetail = () => {
     const businessId = +useParams().businessId
     const dispatch = useDispatch()
     const history = useHistory()
     const businesses = useSelector((state) => state.businesses)
-    console.log('*******************', businesses)
+    const reviews = useSelector((state) => state.reviews)
     const user = useSelector((state) => state.session.user)
     const business = businesses[businessId]
     let reviewsArr
-    if (business) reviewsArr = business.Reviews
+    if (reviews) reviewsArr = Object.values(reviews)
 
+    // console.log('*************business', business)
     const [showModal, setShowModal] = useState(false)
+    const [businessNotFound, setBusinessNotFound] = useState(false)
+    const [businessLoaded, setBusinessLoaded] = useState(false)
 
 
     const roundStar = (num) => {
@@ -54,25 +58,23 @@ const BusinessDetail = () => {
         }
     }
 
-    // console.log('**********star', starPercent())
-
     useEffect(() => {
-        dispatch(getBusinessById(businessId))
-    }, [dispatch, reviewsArr])
+        (async () => {
+            const res = await dispatch(getBusinessById(businessId))
+            if (!res) {
+                setBusinessNotFound(true)
+            }
+            setBusinessLoaded(true)
+        })()
+    }, [dispatch, reviews, businessId, setBusinessLoaded])
 
+    if (!businessLoaded) return null
 
     function redirect() {
         setTimeout(() => { history.push(`/`) }, 1500)
     }
 
-    let businessExist = false
-    Object.values(businesses).forEach(business => {
-        if (Number(business.id) === Number(businessId)) {
-            businessExist = true
-        }
-    })
-
-    if (!businessExist) {
+    if (businessNotFound) {
         return (
             <div>
                 <h1 className='business-not-exist'>Business does not exist...redirecting</h1>
@@ -81,10 +83,9 @@ const BusinessDetail = () => {
         )
     }
 
-    if (!business) return null
 
 
-    return (
+    return businessLoaded && business ? (
         <div className="business-detail-page">
             <NavBar />
             <div className="business-top-background">
@@ -228,7 +229,7 @@ const BusinessDetail = () => {
                     </Modal>)}
             </div>
         </div >
-    )
+    ) : null
 
 }
 export default BusinessDetail
