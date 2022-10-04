@@ -30,12 +30,17 @@ const BusinessesListByUser = () => {
             <div className="main-bottom">
                 <div className="category-main"></div>
                 <div className="businesslist-container">
-                    {businessesArr.map((business) => (
+                    {!businessesArr.length && (
+                        <div>You don't have any businesses yet. Create one?</div>
+                    )}
+                    {businessesArr.length && businessesArr.map((business) => (
                         <div className="business-card-container"
                             key={business.id}
                             onClick={() => { history.push(`/businesses/${business.id}`) }}>
                             <div className="business-image-container">
-                                <img src={business.previewImage} alt='Business Image' height={150} width={150} />
+                                <img src={business.previewImage} alt='Business Image' height={150} width={150}
+                                    onError={e => { e.currentTarget.src = "https://images.squarespace-cdn.com/content/v1/56a2785c69a91af45e06a188/1543513629099-01N4YI9L13AKXEMTDKYX/Restaurant-New-Restaurant-Business.png?format=1500w"; }}
+                                />
                                 {/* {business['Images']?.map((image) => (
                                 <img src={image.url} alt='Business Image' height={200} width={200} />
                             ))} */}

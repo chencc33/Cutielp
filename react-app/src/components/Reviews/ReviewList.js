@@ -12,7 +12,7 @@ const ReviewList = ({ businessId }) => {
     const reviews = useSelector((state) => state.reviews)
     const user = useSelector((state) => state.session.user)
     const reviewsArr = Object.values(reviews)
-    // console.log('*********reviewsArr', reviewsArr)
+    console.log('*********reviewsArr', reviewsArr)
 
     const [showModal, setShowModal] = useState(false)
     const [onClickId, setOnClickId] = useState(null)
@@ -31,7 +31,7 @@ const ReviewList = ({ businessId }) => {
         }
         return true
     }
-    console.log('*********reviewsArr', reviewsArr)
+    // console.log('*********reviewsArr', reviewsArr)
     // if (!reviewsArr.length) return null
     return (
         <div className="review-list-main">
@@ -49,8 +49,11 @@ const ReviewList = ({ businessId }) => {
                     <div className="review-profile-container">
                         <div className="review-profile-container">
                             <div key={review?.id}>
-                                <img className="review-profile-image" src={review?.user?.profileImage} alt='profile image'
-                                    onError={e => { e.currentTarget.src = "https://img.icons8.com/clouds/500/000000/cute-pumpkin.png" }} />
+                                <img className="review-profile-image"
+                                    src={review?.user?.profileImage}
+                                    alt='profile image'
+                                    onError={e => { e.currentTarget.src = "https://st2.depositphotos.com/2805411/8085/i/450/depositphotos_80851650-stock-photo-sketch-design-of-coffee-shop.jpg" }}
+                                />
                             </div>
                             <div className="review-profile-name">{review?.user?.firstName} {review?.user?.lastName[0]}.</div>
                         </div>
@@ -68,17 +71,17 @@ const ReviewList = ({ businessId }) => {
                                         onClick={async () => {
                                             await dispatch(deleteReview(review?.id))
                                         }}
-                                        class="fa-solid fa-trash"></i>
+                                        className="fa-solid fa-trash"></i>
                                 </div>
                             </div>
                         )}
                     </div>
                     <div className="stars-container">
                         {Array.apply(null, { length: Math.ceil(review?.stars) }).map((e, i) => (
-                            <i className="fa-solid fa-star"></i>
+                            <i key={i} className="fa-solid fa-star"></i>
                         ))}
                         {Array.apply(null, { length: Math.floor(5 - review?.stars) }).map((e, i) => (
-                            <i className="fa-regular fa-star"></i>
+                            <i key={i} className="fa-regular fa-star"></i>
                         ))}
                     </div>
                     <div className="review-content">{review?.review}</div>
