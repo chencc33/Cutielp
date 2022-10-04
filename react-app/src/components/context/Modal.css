@@ -40,7 +40,8 @@
 }
 
 #modal-content form input,
-#modal-content textarea {
+#modal-content textarea,
+#modal-content form option {
   border-radius: 4px;
   background-color: var(--bkg-color-black);
   border: 1px solid gray;
