@@ -12,11 +12,13 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [hasSubmitted, setHasSubmitted] = useState(false)
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
+    setHasSubmitted(true)
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
@@ -60,7 +62,7 @@ const LoginForm = () => {
             <NavLink to={`/sign-up`}>Sign up</NavLink>
           }</p>
           <div>
-            {errors.length > 0 && (<div className='errorContainer project-errors'>
+            {hasSubmitted && errors.length > 0 && (<div className='errorContainer project-errors'>
               {errors.map((error, ind) => (
                 <div key={ind} className='errorText'>{error.split(":")[1]}</div>
               ))}
