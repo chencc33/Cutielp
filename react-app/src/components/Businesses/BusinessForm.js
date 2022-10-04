@@ -33,6 +33,8 @@ const BusinessForm = () => {
     const [previewImage, setPreviewImage] = useState("")
     const [ownerId, setOwnerId] = useState(userId || 0)
 
+    const statesArr = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
+
     useEffect(async () => {
         if (businessId) {
             const foundBusiness = await dispatch(getBusinessById(businessId))
@@ -164,9 +166,17 @@ const BusinessForm = () => {
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>State *</label>
-                        <input type='text' placeholder='e.g, CA'
+                        <select value={state} onChange={e => setState(e.target.value)} required >
+                            <option disabled selected hidden value="">Choose your state</option>
+                            {
+                                Object.values(statesArr).map(state => (
+                                    <option key={state} value={state}>{state}</option>
+                                ))
+                            }
+                        </select>
+                        {/* <input type='text' placeholder='e.g, CA'
                             pattern='[A-Z]{2}'
-                            value={state} onChange={e => setState(e.target.value)} required></input>
+                            value={state} onChange={e => setState(e.target.value)} required></input> */}
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Zipcode *</label>
