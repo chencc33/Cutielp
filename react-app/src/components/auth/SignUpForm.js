@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -17,6 +17,14 @@ const SignUpForm = () => {
 
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    let errs = []
+    if (firstName.length > 15) { errs.push('error: First name less than 15 characters.') }
+    if (lastName.length > 15) { errs.push('error: Last name less than 15 characters.') }
+    if (!email.includes('@')) { errs.push('error: Invalid email address.') }
+    setErrors(errs)
+  }, [firstName, lastName, email])
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -80,43 +88,47 @@ const SignUpForm = () => {
             }
           </div>
           <div className='form-fields'>
-            <label className='form-labels'>First Name</label>
+            <label className='form-labels'>First Name*</label>
             <input
               type='text'
               name='firtname'
               onChange={updateFirstName}
               value={firstName}
+              required
             ></input>
           </div>
           <div className='form-fields'>
-            <label className='form-labels'>Last Name</label>
+            <label className='form-labels'>Last Name*</label>
             <input
               type='text'
               name='lastname'
               onChange={updateLastName}
               value={lastName}
+              required
             ></input>
           </div>
           <div className='form-fields'>
-            <label className='form-labels'>Email</label>
+            <label className='form-labels'>Email*</label>
             <input
               type='text'
               name='email'
               onChange={updateEmail}
               value={email}
+              required
             ></input>
           </div>
           <div className='form-fields'>
-            <label className='form-labels'>Password</label>
+            <label className='form-labels'>Password*</label>
             <input
               type='password'
               name='password'
               onChange={updatePassword}
               value={password}
+              required
             ></input>
           </div>
           <div className='form-fields'>
-            <label className='form-labels'>Repeat Password</label>
+            <label className='form-labels'>Repeat Password*</label>
             <input
               type='password'
               name='repeat_password'
