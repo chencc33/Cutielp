@@ -29,6 +29,7 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+
     setHasSubmitted(true)
 
     if (password === repeatPassword) {
@@ -79,7 +80,7 @@ const SignUpForm = () => {
       <div className='login-signup-main'>
         <form className='login-signup-form' onSubmit={onSignUp}>
           <div className='form-title'>Sign Up for Cutielp</div>
-          <p style={{ fontSize: '10px' }}>Connect with greate businesses</p>
+          <p style={{ fontSize: '13px' }}>Connect with greate businesses</p>
           <div>
             {hasSubmitted && errors.length > 0 && (<div className='errorContainer'>
               {errors.map((error, ind) => (
