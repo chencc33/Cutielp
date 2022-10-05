@@ -21,7 +21,8 @@
 .detail-image {
     opacity: 0.5;
     width: 100%;
-    position: relative
+    position: relative;
+    min-height: 350px;
 }
 
 
@@ -33,7 +34,7 @@
     font-family: Comic Sans MS, Comic Sans, cursive;
     color: whitesmoke;
     font-weight: bold;
-    width: 800px;
+    width: 850px;
 }
 
 .business-detail-rating {

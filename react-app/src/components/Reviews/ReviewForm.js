@@ -5,7 +5,7 @@ import { createReview, deleteReview, getReviewById, getReviewsByBusinessId, upda
 
 import './ReviewForm.css'
 
-const ReviewForm = ({ reviewId, setShowModal }) => {
+const ReviewForm = ({ reviewId, setShowEditModal }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const businessId = useParams().businessId
@@ -59,7 +59,7 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
             //     setShowModal(false)
             // }
             await dispatch(createReview(formData))
-            setShowModal(false)
+            setShowEditModal(false)
         }
         if (targetReview && !errors.length) {
             let data = await dispatch(updateReview(formData, businessId, reviewId))
@@ -67,7 +67,7 @@ const ReviewForm = ({ reviewId, setShowModal }) => {
                 setErrors(data)
             } else {
                 await dispatch(updateReview(formData, businessId, reviewId))
-                setShowModal(false)
+                setShowEditModal(false)
             }
         }
     }
