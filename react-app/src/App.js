@@ -17,6 +17,7 @@ import ReviewList from './components/Reviews/ReviewList';
 import BusinessesListByUser from './components/Businesses/BusinessListByUser';
 import ReviewListByUser from './components/Reviews/ReviewListByUser';
 import PageNotFound from './components/PageNotFount';
+import LogoutButton from './components/auth/LogoutButton';
 
 
 function App() {

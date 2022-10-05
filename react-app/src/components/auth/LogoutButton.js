@@ -12,7 +12,7 @@ const LogoutButton = () => {
   };
 
   return (
-    <span onClick={onLogout} ><i className="fa-solid fa-right-from-bracket" style={{ marginRight: '5px' }}></i>Logout</span>
+    <span onClick={onLogout} ><i className="fa-solid fa-right-from-bracket"></i>Log Out</span>
   );
 };
 
