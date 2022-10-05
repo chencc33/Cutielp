@@ -37,6 +37,7 @@ const BusinessDetail = () => {
         return num
     }
 
+
     const starPercent = () => {
         let dic = {}
         if (business) {
