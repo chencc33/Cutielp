@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import LogoutButton from '../auth/LogoutButton';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import './Navigation.css';
 import Logo from '../Images/Logo.png'
-import { useSelector } from 'react-redux';
-// import User from '../User';
-import BusinessForm from '../Businesses/BusinessForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../store/session';
+
 
 const NavBar = ({ isSplash }) => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const currentUser = useSelector(state => state.session.user);
   // console.log('************current', currentUser)
 
@@ -16,6 +16,11 @@ const NavBar = ({ isSplash }) => {
     if (!currentUser) history.push('/login')
     else history.push('/businesses/create')
   }
+
+  const onLogout = async (e) => {
+    await dispatch(logout());
+    history.push('/')
+  };
 
   return (
     <div className='nav-bar-main'>
@@ -54,9 +59,18 @@ const NavBar = ({ isSplash }) => {
                     <i className="fa-solid fa-house"
                       style={{ marginRight: '5px' }}>
                     </i>
-                  </span>My Business
+                  </span>
+                  <span>My Business</span>
                 </div>
-                <div className='dropdown-me' style={{ marginLeft: '3px' }}><LogoutButton /></div>
+                <div className='dropdown-me'
+                  onClick={onLogout}>
+                  <span>
+                    <i className="fa-solid fa-right-from-bracket"
+                      style={{ marginRight: '5px' }}>
+                    </i>
+                  </span>
+                  <span>Log Out</span>
+                </div>
               </div>
             </div>
           )}
