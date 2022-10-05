@@ -114,7 +114,7 @@ const BusinessDetail = () => {
                                 <span key={i} className="priceRange-detail">$</span>
                             ))}
                             <span>Open: </span>
-                            <span>{business.open} - {business.close}</span>
+                            <span>{business.open === business.close ? '24 hours' : `${business.open} - ${business.close}`}</span>
                         </div>
                     </div>
                 </div>
