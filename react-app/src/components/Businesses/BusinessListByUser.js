@@ -24,7 +24,7 @@ const BusinessesListByUser = () => {
         dispatch(getBusinessesByUser())
     }, [dispatch])
 
-    // if (!businessesArr.length) return null
+    if (!businessesArr.length) return null
     return (
         <div className="businesslist-main">
             <NavBar />
