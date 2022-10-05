@@ -79,3 +79,21 @@ pipenv install -r requirements.txt
 * Create a .env file based on the example with proper settings for your development environment
 * Make sure the SQLite3 database connection URL is in the .env file
 * Get into your pipenv, migrate your database, seed your database, and run your Flask app
+```
+pipenv shell
+```
+```
+flask db upgrade
+```
+```
+flask seed all
+```
+```
+flask run
+```
+### Step3: Frontend Setup
+Navigate to the /react-app directory, run the following command to set up the necessary Node.js dependencies and then start the server.
+```
+npm install
+npm start
+```
