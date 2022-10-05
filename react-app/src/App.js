@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -22,6 +22,7 @@ import PageNotFound from './components/PageNotFount';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory()
   const currentUser = useSelector(state => state.session.user);
 
 
@@ -32,15 +33,6 @@ function App() {
     })();
   }, [dispatch]);
 
-  const HomePage = () => {
-    if (!currentUser) {
-      return (
-        <>
-          <SplashPage />
-        </>
-      )
-    }
-  }
 
   if (!loaded) {
     return null;
@@ -86,7 +78,7 @@ function App() {
           <BusinessesList />
         </Route>
         <Route exact path='/reviews/current'>
-          <ReviewListByUser />
+          <BusinessesListByUser />
         </Route>
         <Route>
           <PageNotFound />
