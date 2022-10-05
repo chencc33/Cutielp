@@ -13,7 +13,7 @@ const BusinessesListByUser = () => {
     const businesses = useSelector((state) => state.businesses)
     const businessesArr = Object.values(businesses)
     const [isLoaded, setIsLoaded] = useState(false)
-    // console.log('**********businessArr', businessesArr)
+
 
     const roundStar = (num) => {
         if (num % 1 == 0) return num
@@ -26,7 +26,7 @@ const BusinessesListByUser = () => {
         dispatch(getBusinessesByUser()).then(() => setIsLoaded(true))
     }, [dispatch])
 
-    // if (!businessesArr.length) return null
+
     return isLoaded ? (
         <div className="businesslist-main">
             <NavBar />
