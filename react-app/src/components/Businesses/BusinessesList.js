@@ -1,6 +1,6 @@
 import { getBusinesses } from "../../store/business";
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory } from "react-router-dom";
 import NavBar from "../Navigation/NavBar";
 import './BusinessList.css'
@@ -10,6 +10,7 @@ const BusinessesList = () => {
     const history = useHistory()
     const businesses = useSelector((state) => state.businesses)
     const businessesArr = Object.values(businesses)
+    const [isLoaded, setIsLoaded] = useState(false)
 
 
     const roundStar = (num) => {
@@ -20,11 +21,11 @@ const BusinessesList = () => {
     }
 
     useEffect(() => {
-        dispatch(getBusinesses())
+        dispatch(getBusinesses()).then(() => setIsLoaded(true))
     }, [dispatch])
 
     if (!businessesArr.length) return null
-    return (
+    return isLoaded ? (
         <div className="businesslist-main">
             <NavBar />
             <div className="main-bottom">
@@ -65,7 +66,7 @@ const BusinessesList = () => {
                 </div>
             </div>
         </div>
-    )
+    ) : null
 }
 
 export default BusinessesList
