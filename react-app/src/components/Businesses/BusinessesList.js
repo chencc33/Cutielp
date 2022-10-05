@@ -56,7 +56,7 @@ const BusinessesList = () => {
                                         <span className="review-nums">{business.numReview}</span>
                                     </div>
                                 </div>
-                                <div className="open-close"><span className="open">Open: </span>{business.open} - {business.close}</div>
+                                <div className="open-close"><span className="open">Open: </span>{business.open === business.close ? '24 hours' : `${business.open} - ${business.close}`}</div>
                                 <div className="description">{business.description}</div>
                             </div>
                         </div>
