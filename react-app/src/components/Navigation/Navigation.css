@@ -26,13 +26,16 @@
 
 .login-signup span {
     cursor: pointer;
+    display: flex;
     border-radius: 4px;
     margin-right: 10px;
     width: 75px;
     height: 25px;
     font-size: smaller;
-    text-align: center;
-    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    /* text-align: center;
+    vertical-align: middle; */
 }
 
 .splash-login:hover {
