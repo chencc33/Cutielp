@@ -58,3 +58,24 @@ When a signed-in user click "write a review" button, a form will appear that let
 ### Edit a review:
 When a signed-in user click the edit review icon, a form will appear with data pre-populated into the fields for the user to edit.
 ![Screen Shot 2022-10-05 at 10 54 32 AM](https://user-images.githubusercontent.com/47489094/194128522-4f0e5d3c-e234-42a0-bbd2-fa4c9fcd4ff1.png)
+
+### Delete a review:
+When a signed-in review click the trash icon to delete a reveiw, a message will apear for the user to confirm the action.
+![Screen Shot 2022-10-05 at 1 34 55 PM](https://user-images.githubusercontent.com/47489094/194158228-f84d3544-778e-4a03-a74f-0de620ae73c3.png)
+
+# Local Installation
+To run this application locally, you will need Python and NPM. This root folder contains a backend (app) and frontend (react-app) directory.
+
+### Step1: Download
+Clone the project repository in your terminal
+```
+https://github.com/chencc33/Cutielp.git
+```
+### Step2: Backend Setup
+* Inside of the root directory, run the following command in the terminal to set up the necessary Python dependencies for running the backend server and database.
+```
+pipenv install -r requirements.txt
+```
+* Create a .env file based on the example with proper settings for your development environment
+* Make sure the SQLite3 database connection URL is in the .env file
+* Get into your pipenv, migrate your database, seed your database, and run your Flask app
