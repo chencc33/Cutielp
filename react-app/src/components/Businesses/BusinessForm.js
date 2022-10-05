@@ -231,6 +231,13 @@ const BusinessForm = () => {
                         <label className='form-labels'>Preivew Image *</label>
                         <input type='text' value={previewImage} onChange={e => setPreviewImage(e.target.value)} required></input>
                     </div>
+
+                    {hasSubmitted && errors.length > 0 && (<div className='errorContainer'>
+                        {errors.map((error, ind) => (
+                            <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+                        ))}
+                    </div>)}
+
                     <button type='submit' className='form-submit-button'
                         style={{ width: '60%' }}>Submit</button>
                     {businessId && (<button className='form-submit-button'
@@ -238,7 +245,7 @@ const BusinessForm = () => {
                         onClick={async () => {
                             await dispatch(deleteBusiness(businessId))
                             await dispatch(getBusinesses())
-                            history.push('/businesses')
+                            history.push('/businesses/all')
                         }}>Delete</button>)}
                 </form>
                 <div className='businessForm-image-container' style={{ width: "40%" }}>

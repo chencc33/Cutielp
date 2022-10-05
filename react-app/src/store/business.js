@@ -40,6 +40,7 @@ export const getBusinessesByUser = () => async dispatch => {
     const response = await fetch(`/api/businesses/current`)
     if (response.ok) {
         const businesses = await response.json()
+        // console.log('**********businesses', businesses)
         dispatch(loadALL(businesses))
         return businesses
     }
