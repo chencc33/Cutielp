@@ -12,7 +12,7 @@ const BusinessesListByUser = () => {
     const history = useHistory()
     const businesses = useSelector((state) => state.businesses)
     const businessesArr = Object.values(businesses)
-    console.log('**********businessArr', businessesArr)
+    // console.log('**********businessArr', businessesArr)
 
     const roundStar = (num) => {
         if (num % 1 == 0) return num
@@ -40,7 +40,6 @@ const BusinessesListByUser = () => {
                 </div>
             )}
             {businessesArr.length > 0 && (
-
                 <div className="main-bottom">
                     <div className="category-main"></div>
                     <div className="businesslist-container">

@@ -238,7 +238,7 @@ const BusinessForm = () => {
                         onClick={async () => {
                             await dispatch(deleteBusiness(businessId))
                             await dispatch(getBusinesses())
-                            history.push('/businesses')
+                            history.push('/businesses/all')
                         }}>Delete</button>)}
                 </form>
                 <div className='businessForm-image-container' style={{ width: "40%" }}>
