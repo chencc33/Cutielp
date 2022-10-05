@@ -1,7 +1,7 @@
 
 import { getBusinessesByUser } from "../../store/business";
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory } from "react-router-dom";
 import NavBar from "../Navigation/NavBar";
 import './BusinessList.css'
@@ -12,6 +12,7 @@ const BusinessesListByUser = () => {
     const history = useHistory()
     const businesses = useSelector((state) => state.businesses)
     const businessesArr = Object.values(businesses)
+    const [isLoaded, setIsLoaded] = useState(false)
     // console.log('**********businessArr', businessesArr)
 
     const roundStar = (num) => {
@@ -22,14 +23,14 @@ const BusinessesListByUser = () => {
     }
 
     useEffect(() => {
-        dispatch(getBusinessesByUser())
+        dispatch(getBusinessesByUser()).then(() => setIsLoaded(true))
     }, [dispatch])
 
     // if (!businessesArr.length) return null
-    return (
+    return isLoaded ? (
         <div className="businesslist-main">
             <NavBar />
-            {!businessesArr.length && (
+            {isLoaded && !businessesArr.length && (
                 <div className="no-business-container">
                     <div className="no-business-message">You don't have any businesses yet....
                         <NavLink className="no-business-message no-business-link" to={`/businesses/create`}> Create one? </NavLink>
@@ -78,7 +79,7 @@ const BusinessesListByUser = () => {
                 </div>
             )}
         </div>
-    )
+    ) : null
 }
 
 export default BusinessesListByUser
