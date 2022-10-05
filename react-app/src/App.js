@@ -69,9 +69,6 @@ function App() {
         <Route exact path='/businesses/:businessId/edit'>
           <BusinessForm />
         </Route>
-        {/* <Route exact path='/businesses/:businessId/reviews'>
-          <ReviewList />
-        </Route> */}
         <Route exact path='/businesses/:businessId'>
           <BusinessDetail />
         </Route>
