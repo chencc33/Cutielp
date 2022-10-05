@@ -5,6 +5,7 @@ import ReviewForm from "./ReviewForm"
 import { Modal } from "../context/Modal"
 
 import './ReviewList.css'
+import ReviewDelete from "./ReviewDelete"
 
 const ReviewList = ({ businessId }) => {
     const dispatch = useDispatch()
@@ -14,7 +15,8 @@ const ReviewList = ({ businessId }) => {
     const reviewsArr = Object.values(reviews)
     // console.log('*********user', user)
 
-    const [showModal, setShowModal] = useState(false)
+    const [showEditModal, setShowEditModal] = useState(false)
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [onClickId, setOnClickId] = useState(null)
 
     useEffect(() => {
@@ -32,13 +34,12 @@ const ReviewList = ({ businessId }) => {
         }
         return true
     }
-    // console.log('*********reviewsArr', reviewsArr)
-    // if (!reviewsArr.length) return null
+
     return (
         <div className="review-list-main">
             {showCreateButton() && (
                 <button className="form-button"
-                    onClick={() => { setShowModal(true) }}>
+                    onClick={() => { setShowEditModal(true) }}>
                     <i className="fa-regular fa-star"
                         style={{ WebkitTextStrokeColor: 'white' }} />
                     Write a review
@@ -62,17 +63,23 @@ const ReviewList = ({ businessId }) => {
                             <div className="review-edit-button">
                                 <i
                                     onClick={() => {
-                                        setShowModal(true)
+                                        setShowEditModal(true)
                                         setOnClickId(review?.id)
                                     }}
                                     className="fa-solid fa-pen-to-square"></i>
 
                                 <div className="review-delete-button">
-                                    <i
+                                    <i className="fa-solid fa-trash"
+                                        onClick={() => {
+                                            setShowDeleteModal(true)
+                                            setOnClickId(review?.id)
+                                        }}>
+                                    </i>
+                                    {/* <i
                                         onClick={async () => {
                                             await dispatch(deleteReview(review?.id))
                                         }}
-                                        className="fa-solid fa-trash"></i>
+                                        className="fa-solid fa-trash"></i> */}
                                 </div>
                             </div>
                         )}
@@ -88,9 +95,14 @@ const ReviewList = ({ businessId }) => {
                     <div className="review-content">{review?.review}</div>
                 </div>
             )))}
-            {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                    <ReviewForm reviewId={onClickId} setShowModal={setShowModal} />
+            {showEditModal && (
+                <Modal onClose={() => setShowEditModal(false)}>
+                    <ReviewForm reviewId={onClickId} setShowEditModal={setShowEditModal} />
+                </Modal>
+            )}
+            {showDeleteModal && (
+                <Modal onClose={() => setShowDeleteModal(false)}>
+                    <ReviewDelete reviewId={onClickId} setShowDeleteModal={setShowDeleteModal} />
                 </Modal>
             )}
         </div>
