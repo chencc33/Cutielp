@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -7,7 +7,6 @@ import Login from '../Images/Login.jpg'
 import './LoginSignup.css'
 
 const LoginForm = () => {
-  const history = useHistory()
 
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
@@ -24,6 +23,11 @@ const LoginForm = () => {
       setErrors(data);
     }
   };
+
+  useEffect(() => {
+    let errs = []
+    if (!email.includes('@')) errs.push('error: invalid email')
+  }, [email, password])
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -72,9 +76,10 @@ const LoginForm = () => {
             <label className='form-labels' htmlFor='email'>Email</label>
             <input className='form-inputs'
               name='email'
-              type='text'
+              type='email'
               placeholder='Email'
               value={email}
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               onChange={updateEmail}
             />
           </div>

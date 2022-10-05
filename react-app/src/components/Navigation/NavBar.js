@@ -40,7 +40,8 @@ const NavBar = ({ isSplash }) => {
           {currentUser && (
             <div className='dropdown-container'>
               <div className='profile-button'
-                onClick={() => { history.push(`/users/${currentUser.id}`) }}>
+              // onClick={() => { history.push(`/users/${currentUser.id}`) }}
+              >
                 <img className='profile-button' src="https://img.icons8.com/carbon-copy/100/000000/test-account.png" height={30} width={30} />
               </div>
               <div className='dropdown-content'>

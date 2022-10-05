@@ -41,11 +41,15 @@
 
 .splash-login {
     border: 1.5px solid whitesmoke;
+    padding: 5px;
+    align-self: center;
 }
 
 .splash-signup {
     background-color: #c41200;
     border: 1.5px solid #c41200;
+    padding: 5px;
+    align-self: center;
 }
 
 .hostButton {

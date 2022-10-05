@@ -99,7 +99,9 @@
     color: var(--text-color);
     margin-top: 20px;
     margin-right: 25px;
-    max-width: 180px;
+    max-width: 350px;
+    overflow: visible;
+    overflow-wrap: break-word;
 }
 
 .phone {
@@ -114,7 +116,10 @@
 }
 
 .address>* {
+    width: 100%;
     padding-bottom: 5px;
+    overflow: hidden;
+    overflow-wrap: break-word;
 }
 
 .detail-about-container {

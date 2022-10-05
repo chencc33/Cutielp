@@ -4,6 +4,7 @@
     width: 100%;
     border-top: solid 1px var(--border-color-active);
     margin-bottom: 15px;
+    max-width: 800px;
 }
 
 .review-edit-button {
@@ -33,6 +34,8 @@
     font-size: 15px;
     color: #2D2E2E;
     padding-top: 6px;
+    overflow: hidden;
+    overflow-wrap: break-word;
 }
 
 .review-profile-name {

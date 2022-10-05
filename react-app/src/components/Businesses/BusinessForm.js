@@ -33,6 +33,18 @@ const BusinessForm = () => {
     const [previewImage, setPreviewImage] = useState("")
     const [ownerId, setOwnerId] = useState(userId || 0)
 
+    const statesArr = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
+
+    let timesArr = []
+    for (let i = 1; i <= 12; i++) {
+        timesArr.push(`${i}am`)
+    }
+    for (let i = 1; i <= 12; i++) {
+        timesArr.push(`${i}pm`)
+    }
+
+    const priceRangeObj = { "$": 1, "$$": 2, "$$$": 3 }
+
     useEffect(async () => {
         if (businessId) {
             const foundBusiness = await dispatch(getBusinessById(businessId))
@@ -131,25 +143,44 @@ const BusinessForm = () => {
                     </div>)}
 
                     <div className='form-fields'>
-                        <label className='form-labels'>Name *</label>
-                        <input type='text' placeholder='required'
+                        <label className='form-labels'>Business Name *</label>
+                        <input type='text'
                             value={name} onChange={e => setName(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Open *</label>
-                        <input type='text' placeholder='e.g., 9am'
+                        <select className='form-selects' value={open} onChange={e => setOpen(e.target.value)} required >
+                            <option className='form-options-default' disabled selected hidden value="">Choose your open time</option>
+                            {
+                                timesArr.map(open => (
+                                    <option className='form-options' key={open} value={open}>{open}</option>
+                                ))
+                            }
+                        </select>
+                        {/* <input type='text' placeholder='e.g., 9am'
                             pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
-                            value={open} onChange={e => setOpen(e.target.value)} required></input>
+                            value={open} onChange={e => setOpen(e.target.value)} required></input> */}
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Close *</label>
-                        <input type='text' placeholder='e.g., 9pm'
+                        <select className='form-selects' value={close} onChange={e => setClose(e.target.value)} required >
+                            <option className='form-options-default'
+                                disabled selected hidden value="">
+                                Choose your close time
+                            </option>
+                            {
+                                timesArr.map(close => (
+                                    <option className='form-options' key={close} value={close}>{close}</option>
+                                ))
+                            }
+                        </select>
+                        {/* <input type='text' placeholder='e.g., 9pm'
                             pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
-                            value={close} onChange={e => setClose(e.target.value)} required></input>
+                            value={close} onChange={e => setClose(e.target.value)} required></input> */}
                     </div>
                     <div className='form-fields'>
-                        <label className='form-labels'>Phone *</label>
-                        <input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' placeholder='123-456-7891'
+                        <label className='form-labels'>Phone * (ex: 123-345-5678)</label>
+                        <input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
                             value={phone} onChange={e => setPhone(e.target.value)} required></input>
                     </div>
                     <div className='form-fields'>
@@ -164,9 +195,17 @@ const BusinessForm = () => {
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>State *</label>
-                        <input type='text' placeholder='e.g, CA'
+                        <select className='form-selects' value={state} onChange={e => setState(e.target.value)} required >
+                            <option className='form-options' disabled selected hidden value="">Choose your state</option>
+                            {
+                                statesArr.map(state => (
+                                    <option className='form-options' key={state} value={state}>{state}</option>
+                                ))
+                            }
+                        </select>
+                        {/* <input type='text' placeholder='e.g, CA'
                             pattern='[A-Z]{2}'
-                            value={state} onChange={e => setState(e.target.value)} required></input>
+                            value={state} onChange={e => setState(e.target.value)} required></input> */}
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Zipcode *</label>
@@ -180,11 +219,12 @@ const BusinessForm = () => {
                     </div>
                     <div className='form-fields'>
                         <label className='form-labels'>Price Range *</label>
-                        <select value={priceRange} className='pricerange-select'
+                        <select className='form-selects' value={priceRange}
                             onChange={e => setPriceRange(e.target.value)} required>
-                            <option value={1}>$</option>
-                            <option value={2}>$$</option>
-                            <option value={3}>$$$</option>
+                            <option className='form-options' disabled selected hidden value="">Choose your price range</option>
+                            {Object.keys(priceRangeObj).map((priceRange) => (
+                                <option className='form-options' key={priceRange} value={priceRangeObj[priceRange]}>{priceRange}</option>
+                            ))}
                         </select>
                     </div>
                     <div className='form-fields'>
