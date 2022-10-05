@@ -11,6 +11,7 @@ const BusinessesList = () => {
     const businesses = useSelector((state) => state.businesses)
     const businessesArr = Object.values(businesses)
 
+
     const roundStar = (num) => {
         if (num % 1 == 0) return num
         else if ((num - Math.floor(num)) >= 0.5) num = Math.ceil(num)

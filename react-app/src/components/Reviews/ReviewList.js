@@ -12,7 +12,7 @@ const ReviewList = ({ businessId }) => {
     const reviews = useSelector((state) => state.reviews)
     const user = useSelector((state) => state.session.user)
     const reviewsArr = Object.values(reviews)
-    console.log('*********user', user)
+    // console.log('*********user', user)
 
     const [showModal, setShowModal] = useState(false)
     const [onClickId, setOnClickId] = useState(null)

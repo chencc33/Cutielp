@@ -12,6 +12,7 @@ const BusinessesListByUser = () => {
     const history = useHistory()
     const businesses = useSelector((state) => state.businesses)
     const businessesArr = Object.values(businesses)
+    // console.log('**********businessArr', businessesArr)
 
     const roundStar = (num) => {
         if (num % 1 == 0) return num
@@ -41,9 +42,9 @@ const BusinessesListByUser = () => {
             <div className="main-bottom">
                 <div className="category-main"></div>
                 <div className="businesslist-container">
-                    {businessesArr.length > 0 && businessesArr.map((business) => (
+                    {businessesArr.length > 0 && businessesArr.map((business, idx) => (
                         <div className="business-card-container"
-                            key={business.id}
+                            key={idx}
                             onClick={() => { history.push(`/businesses/${business.id}`) }}>
                             <div className="business-image-container">
                                 <img src={business.previewImage} alt='Business Image' height={150} width={150}
@@ -58,7 +59,7 @@ const BusinessesListByUser = () => {
                                 <div className="business-rating">
                                     <div className="stars-container">
                                         {Array.apply(null, { length: Math.ceil(business.avgStar) }).map((e, i) => (
-                                            <i className="fa-solid fa-star"></i>
+                                            <i key={i} className="fa-solid fa-star"></i>
                                         ))}
                                         {Array.apply(null, { length: Math.floor(5 - business.avgStar) }).map((e, i) => (
                                             <i key={i} className="fa-regular fa-star"></i>
