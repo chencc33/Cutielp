@@ -23,8 +23,6 @@ import LogoutButton from './components/auth/LogoutButton';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory()
-  const currentUser = useSelector(state => state.session.user);
 
 
   useEffect(() => {
@@ -63,9 +61,6 @@ function App() {
         <Route exact path='/businesses/create'>
           <BusinessForm />
         </Route>
-        <Route exact path='/businesses/all'>
-          <BusinessesList />
-        </Route>
         <Route exact path='/businesses/current'>
           <BusinessesListByUser />
         </Route>
@@ -74,6 +69,9 @@ function App() {
         </Route>
         <Route exact path='/businesses/:businessId'>
           <BusinessDetail />
+        </Route>
+        <Route exact path='/businesses'>
+          <BusinessesList />
         </Route>
         <Route exact path='/reviews/current'>
           <BusinessesListByUser />
