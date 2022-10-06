@@ -98,9 +98,8 @@ const BusinessForm = () => {
             }
         }
         if (!zipcode.length === 5) { errs.push('error: Zipcode should be a 5-digit number') }
-        if (!previewImage.includes('.jpg') || !previewImage.includes('.jpeg') || !previewImage.includes('.png')) { errs.push('error: Invalid image url') }
         setErrors(errs)
-    }, [name, priceRange, description, address, open, close, zipcode, previewImage])
+    }, [name, priceRange, description, address, open, close, zipcode])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
