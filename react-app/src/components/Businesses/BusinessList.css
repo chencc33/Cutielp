@@ -26,8 +26,8 @@
 
 .business-card-container {
     display: flex;
-    width: 750px;
-    height: 250px;
+    width: 650px;
+    height: 230px;
     padding: 8px;
     margin: 10px;
     cursor: pointer;
@@ -97,7 +97,7 @@
 }
 
 .description {
-    width: 500px;
+    width: 400px;
     display: -webkit-box;
     color: gray;
     overflow: hidden;
