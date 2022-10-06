@@ -13,7 +13,7 @@ const BusinessForm = () => {
     const businessId = useParams().businessId
 
     const existBusiness = useSelector((state) => state.businesses)[businessId]
-    // console.log('***********', existBusiness)
+
     const user = useSelector((state) => state.session.user)
     const userId = user?.id
 
@@ -84,6 +84,7 @@ const BusinessForm = () => {
 
     useEffect(() => {
         let errs = []
+        const validImage = ['jpg', 'jpeg', 'png']
         if (name.length < 2 || name.length > 30) errs.push('error: Name length needs to be between 2-30.')
         if (address.length < 3 || address.length > 50) errs.push('error: Address length should be 2-50')
         if (description.length < 5 || description.length > 255) errs.push('error: Description length 5-255')
@@ -100,8 +101,9 @@ const BusinessForm = () => {
             }
         }
         if (!zipcode.length === 5) { errs.push('error: Zipcode should be a 5-digit number') }
+        if (!validImage.some(item => previewImage.includes(item))) { errs.push('error: Please provide a valid image address') }
         setErrors(errs)
-    }, [name, priceRange, description, address, open, close, zipcode])
+    }, [name, priceRange, description, address, open, close, zipcode, previewImage])
 
     // do not allow none-owner to edit a business
     let hasAuth
