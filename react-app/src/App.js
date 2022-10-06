@@ -63,9 +63,6 @@ function App() {
         <Route exact path='/businesses/create'>
           <BusinessForm />
         </Route>
-        <Route exact path='/businesses/all'>
-          <BusinessesList />
-        </Route>
         <Route exact path='/businesses/current'>
           <BusinessesListByUser />
         </Route>
@@ -74,6 +71,9 @@ function App() {
         </Route>
         <Route exact path='/businesses/:businessId'>
           <BusinessDetail />
+        </Route>
+        <Route exact path='/businesses'>
+          <BusinessesList />
         </Route>
         <Route exact path='/reviews/current'>
           <BusinessesListByUser />
