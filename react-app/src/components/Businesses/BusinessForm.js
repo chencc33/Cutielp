@@ -12,6 +12,8 @@ const BusinessForm = () => {
 
     const businessId = useParams().businessId
 
+    const existBusiness = useSelector((state) => state.businesses)[businessId]
+    // console.log('***********', existBusiness)
     const user = useSelector((state) => state.session.user)
     const userId = user?.id
 
@@ -19,6 +21,17 @@ const BusinessForm = () => {
 
     const [errors, setErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
+    // const [hasAuth, setHasAuth] = useState(false)
+    // const [forCreate, setForCreate] = useState(false)
+
+    // if (businessId && existBusiness?.ownerId === businessId) {
+    //     setHasAuth(true)
+    //     setForCreate(true)
+    // }
+    // if (!businessId) {
+    //     setHasAuth(true)
+    //     setForCreate(true)
+    // }
 
     const [name, setName] = useState('')
     const [open, setOpen] = useState('')

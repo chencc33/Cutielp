@@ -12,6 +12,7 @@ import ReviewList from "../Reviews/ReviewList";
 
 import { Modal } from "../context/Modal"
 import { getReviewsByBusinessId } from "../../store/review";
+import BusinessForm from "./BusinessForm";
 
 const BusinessDetail = () => {
     const businessId = +useParams().businessId
@@ -24,7 +25,6 @@ const BusinessDetail = () => {
     let reviewsArr
     if (reviews) reviewsArr = Object.values(reviews)
 
-    // console.log('*************business', business)
     const [showModal, setShowModal] = useState(false)
     const [businessNotFound, setBusinessNotFound] = useState(false)
     const [businessLoaded, setBusinessLoaded] = useState(false)
