@@ -21,17 +21,6 @@ const BusinessForm = () => {
 
     const [errors, setErrors] = useState([])
     const [hasSubmitted, setHasSubmitted] = useState(false)
-    // const [hasAuth, setHasAuth] = useState(false)
-    // const [forCreate, setForCreate] = useState(false)
-
-    // if (businessId && existBusiness?.ownerId === businessId) {
-    //     setHasAuth(true)
-    //     setForCreate(true)
-    // }
-    // if (!businessId) {
-    //     setHasAuth(true)
-    //     setForCreate(true)
-    // }
 
     const [name, setName] = useState('')
     const [open, setOpen] = useState('')
@@ -114,6 +103,24 @@ const BusinessForm = () => {
         setErrors(errs)
     }, [name, priceRange, description, address, open, close, zipcode])
 
+    // do not allow none-owner to edit a business
+    let hasAuth
+    if (!businessId) hasAuth = true
+    else if (existBusiness?.ownerId === userId) {
+        hasAuth = true
+    } else {
+        hasAuth = false
+    }
+
+    if (!hasAuth) {
+        return (
+            <>
+                <NavBar />
+                <h2 style={{ textAlign: 'center' }}>You don't have authorization to edit this business</h2>
+            </>
+        )
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setHasSubmitted(true)
@@ -145,128 +152,131 @@ const BusinessForm = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <NavBar />
-            <div className='create-business-main'>
-                <form className='business-form' style={{ width: '60%' }} onSubmit={handleSubmit} >
-                    <div className='form-title'>Hello! Let's start!</div>
-                    <p style={{ fontSize: '13px' }}>We'll use these information to help you claim your Cutielp page</p>
+            {hasAuth && (
 
-                    {hasSubmitted && errors.length > 0 && (<div className='errorContainer'>
-                        {errors.map((error, ind) => (
-                            <div key={ind} className='errorText'>{error.split(":")[1]}</div>
-                        ))}
-                    </div>)}
+                <div className='create-business-main'>
+                    <form className='business-form' style={{ width: '60%' }} onSubmit={handleSubmit} >
+                        <div className='form-title'>Hello! Let's start!</div>
+                        <p style={{ fontSize: '13px' }}>We'll use these information to help you claim your Cutielp page</p>
 
-                    <div className='form-fields'>
-                        <label className='form-labels'>Business Name *</label>
-                        <input type='text'
-                            value={name} onChange={e => setName(e.target.value)} required></input>
-                    </div>
-                    <div className='form-fields'>
-                        <label className='form-labels'>Open *</label>
-                        <select className='form-selects' value={open} onChange={e => setOpen(e.target.value)} required >
-                            <option className='form-options-default' disabled selected hidden value="">Choose your open time</option>
-                            {
-                                timesArr.map(open => (
-                                    <option className='form-options' key={open} value={open}>{open}</option>
-                                ))
-                            }
-                        </select>
-                        {/* <input type='text' placeholder='e.g., 9am'
+                        {hasSubmitted && errors.length > 0 && (<div className='errorContainer'>
+                            {errors.map((error, ind) => (
+                                <div key={ind} className='errorText'>{error.split(":")[1]}</div>
+                            ))}
+                        </div>)}
+
+                        <div className='form-fields'>
+                            <label className='form-labels'>Business Name *</label>
+                            <input type='text'
+                                value={name} onChange={e => setName(e.target.value)} required></input>
+                        </div>
+                        <div className='form-fields'>
+                            <label className='form-labels'>Open *</label>
+                            <select className='form-selects' value={open} onChange={e => setOpen(e.target.value)} required >
+                                <option className='form-options-default' disabled selected hidden value="">Choose your open time</option>
+                                {
+                                    timesArr.map(open => (
+                                        <option className='form-options' key={open} value={open}>{open}</option>
+                                    ))
+                                }
+                            </select>
+                            {/* <input type='text' placeholder='e.g., 9am'
                             pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
                             value={open} onChange={e => setOpen(e.target.value)} required></input> */}
-                    </div>
-                    <div className='form-fields'>
-                        <label className='form-labels'>Close *</label>
-                        <select className='form-selects' value={close} onChange={e => setClose(e.target.value)} required >
-                            <option className='form-options-default'
-                                disabled selected hidden value="">
-                                Choose your close time
-                            </option>
-                            {
-                                timesArr.map(close => (
-                                    <option className='form-options' key={close} value={close}>{close}</option>
-                                ))
-                            }
-                        </select>
-                        {/* <input type='text' placeholder='e.g., 9pm'
+                        </div>
+                        <div className='form-fields'>
+                            <label className='form-labels'>Close *</label>
+                            <select className='form-selects' value={close} onChange={e => setClose(e.target.value)} required >
+                                <option className='form-options-default'
+                                    disabled selected hidden value="">
+                                    Choose your close time
+                                </option>
+                                {
+                                    timesArr.map(close => (
+                                        <option className='form-options' key={close} value={close}>{close}</option>
+                                    ))
+                                }
+                            </select>
+                            {/* <input type='text' placeholder='e.g., 9pm'
                             pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
                             value={close} onChange={e => setClose(e.target.value)} required></input> */}
-                    </div>
-                    <div className='form-fields'>
-                        <label className='form-labels'>Phone * (ex: 123-345-5678)</label>
-                        <input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
-                            value={phone} onChange={e => setPhone(e.target.value)} required></input>
-                    </div>
-                    <div className='form-fields'>
-                        <label className='form-labels'>Address *</label>
-                        <input type='text' placeholder=''
-                            value={address} onChange={e => setAddress(e.target.value)} required></input>
-                    </div>
-                    <div className='form-fields'>
-                        <label className='form-labels'>City *</label>
-                        <input type='text'
-                            value={city} onChange={e => setCity(e.target.value)} required></input>
-                    </div>
-                    <div className='form-fields'>
-                        <label className='form-labels'>State *</label>
-                        <select className='form-selects' value={state} onChange={e => setState(e.target.value)} required >
-                            <option className='form-options' disabled selected hidden value="">Choose your state</option>
-                            {
-                                statesArr.map(state => (
-                                    <option className='form-options' key={state} value={state}>{state}</option>
-                                ))
-                            }
-                        </select>
-                        {/* <input type='text' placeholder='e.g, CA'
+                        </div>
+                        <div className='form-fields'>
+                            <label className='form-labels'>Phone * (ex: 123-345-5678)</label>
+                            <input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+                                value={phone} onChange={e => setPhone(e.target.value)} required></input>
+                        </div>
+                        <div className='form-fields'>
+                            <label className='form-labels'>Address *</label>
+                            <input type='text' placeholder=''
+                                value={address} onChange={e => setAddress(e.target.value)} required></input>
+                        </div>
+                        <div className='form-fields'>
+                            <label className='form-labels'>City *</label>
+                            <input type='text'
+                                value={city} onChange={e => setCity(e.target.value)} required></input>
+                        </div>
+                        <div className='form-fields'>
+                            <label className='form-labels'>State *</label>
+                            <select className='form-selects' value={state} onChange={e => setState(e.target.value)} required >
+                                <option className='form-options' disabled selected hidden value="">Choose your state</option>
+                                {
+                                    statesArr.map(state => (
+                                        <option className='form-options' key={state} value={state}>{state}</option>
+                                    ))
+                                }
+                            </select>
+                            {/* <input type='text' placeholder='e.g, CA'
                             pattern='[A-Z]{2}'
                             value={state} onChange={e => setState(e.target.value)} required></input> */}
-                    </div>
-                    <div className='form-fields'>
-                        <label className='form-labels'>Zipcode *</label>
-                        <input type='text' pattern='[0-9]{5}'
-                            value={zipcode} onChange={e => setZipcode(e.target.value)} required></input>
-                    </div>
-                    <div className='form-fields'>
-                        <label className='form-labels'>Description *</label>
-                        <input type='text' placeholder='Tell us about your restaurant'
-                            value={description} onChange={e => setDescription(e.target.value)} required></input>
-                    </div>
-                    <div className='form-fields'>
-                        <label className='form-labels'>Price Range *</label>
-                        <select className='form-selects' value={priceRange}
-                            onChange={e => setPriceRange(e.target.value)} required>
-                            <option className='form-options' disabled selected hidden value="">Choose your price range</option>
-                            {Object.keys(priceRangeObj).map((priceRange) => (
-                                <option className='form-options' key={priceRange} value={priceRangeObj[priceRange]}>{priceRange}</option>
+                        </div>
+                        <div className='form-fields'>
+                            <label className='form-labels'>Zipcode *</label>
+                            <input type='text' pattern='[0-9]{5}'
+                                value={zipcode} onChange={e => setZipcode(e.target.value)} required></input>
+                        </div>
+                        <div className='form-fields'>
+                            <label className='form-labels'>Description *</label>
+                            <input type='text' placeholder='Tell us about your restaurant'
+                                value={description} onChange={e => setDescription(e.target.value)} required></input>
+                        </div>
+                        <div className='form-fields'>
+                            <label className='form-labels'>Price Range *</label>
+                            <select className='form-selects' value={priceRange}
+                                onChange={e => setPriceRange(e.target.value)} required>
+                                <option className='form-options' disabled selected hidden value="">Choose your price range</option>
+                                {Object.keys(priceRangeObj).map((priceRange) => (
+                                    <option className='form-options' key={priceRange} value={priceRangeObj[priceRange]}>{priceRange}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className='form-fields'>
+                            <label className='form-labels'>Preivew Image *</label>
+                            <input type='text' value={previewImage} onChange={e => setPreviewImage(e.target.value)} required></input>
+                        </div>
+
+                        {hasSubmitted && errors.length > 0 && (<div className='errorContainer'>
+                            {errors.map((error, ind) => (
+                                <div key={ind} className='errorText'>{error.split(":")[1]}</div>
                             ))}
-                        </select>
-                    </div>
-                    <div className='form-fields'>
-                        <label className='form-labels'>Preivew Image *</label>
-                        <input type='text' value={previewImage} onChange={e => setPreviewImage(e.target.value)} required></input>
-                    </div>
+                        </div>)}
 
-                    {hasSubmitted && errors.length > 0 && (<div className='errorContainer'>
-                        {errors.map((error, ind) => (
-                            <div key={ind} className='errorText'>{error.split(":")[1]}</div>
-                        ))}
-                    </div>)}
-
-                    <button type='submit' className='form-submit-button'
-                        style={{ width: '60%' }}>Submit</button>
-                    {businessId && (<button className='form-submit-button'
-                        style={{ width: '60%' }}
-                        onClick={async () => {
-                            await dispatch(deleteBusiness(businessId))
-                            await dispatch(getBusinesses())
-                            history.push('/businesses')
-                        }}>Delete</button>)}
-                </form>
-                <div className='businessForm-image-container' style={{ width: "40%" }}>
-                    <img className='businessForm-image' src={newBusiness} alt='Business Image' height={600} />
-                </div>
-            </div>
-        </div>
+                        <button type='submit' className='form-submit-button'
+                            style={{ width: '60%' }}>Submit</button>
+                        {businessId && (<button className='form-submit-button'
+                            style={{ width: '60%' }}
+                            onClick={async () => {
+                                await dispatch(deleteBusiness(businessId))
+                                await dispatch(getBusinesses())
+                                history.push('/businesses')
+                            }}>Delete</button>)}
+                    </form>
+                    <div className='businessForm-image-container' style={{ width: "40%" }}>
+                        <img className='businessForm-image' src={newBusiness} alt='Business Image' height={600} />
+                    </div>
+                </div >
+            )}
+        </div >
     )
 }
 
