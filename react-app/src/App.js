@@ -23,8 +23,6 @@ import LogoutButton from './components/auth/LogoutButton';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory()
-  const currentUser = useSelector(state => state.session.user);
 
 
   useEffect(() => {
