@@ -82,8 +82,8 @@ const BusinessForm = () => {
 
     useEffect(() => {
         let errs = []
-        if (name.length < 2 || name.length > 30) errs.push('error: Name length needs to be between 3-30.')
-        if (address.length > 50) errs.push('error: Address length less than 50')
+        if (name.length < 2 || name.length > 30) errs.push('error: Name length needs to be between 2-30.')
+        if (address.length < 3 || address.length > 50) errs.push('error: Address length should be 2-50')
         if (description.length < 5 || description.length > 255) errs.push('error: Description length 5-255')
         if (priceRange < 1 || priceRange > 4) errs.push('error: price range 1 - 3')
         if (open.length === 4) {
@@ -97,8 +97,10 @@ const BusinessForm = () => {
                 if (parseInt(open.slice(0, 2)) > parseInt(close.slice(0, 2))) { errs.push('error: close time can not be early than open time') }
             }
         }
+        if (!zipcode.length === 5) { errs.push('error: Zipcode should be a 5-digit number') }
+        if (!previewImage.includes('.jpg') || !previewImage.includes('.jpeg') || !previewImage.includes('.png')) { errs.push('error: Invalid image url') }
         setErrors(errs)
-    }, [name, priceRange, description, address, open, close])
+    }, [name, priceRange, description, address, open, close, zipcode, previewImage])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
