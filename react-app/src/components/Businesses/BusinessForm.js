@@ -268,8 +268,8 @@ const BusinessForm = () => {
                         {businessId && (<button className='form-submit-button'
                             style={{ width: '60%' }}
                             onClick={async () => {
-                                await dispatch(deleteBusiness(businessId))
-                                await dispatch(getBusinesses())
+                                setTimeout(() => dispatch(deleteBusiness(businessId)), 500)
+                                // await dispatch(getBusinesses())
                                 history.push('/businesses')
                             }}>Delete</button>)}
                     </form>
