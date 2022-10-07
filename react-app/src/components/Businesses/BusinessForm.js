@@ -35,6 +35,9 @@ const BusinessForm = () => {
     const [previewImage, setPreviewImage] = useState("")
     const [ownerId, setOwnerId] = useState(userId || 0)
 
+    const [image, setImage] = useState(null)
+    const [imageLoading, setImageLoading] = useState(false)
+
     const statesArr = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
 
     let timesArr = []
@@ -123,6 +126,7 @@ const BusinessForm = () => {
         )
     }
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setHasSubmitted(true)
@@ -149,6 +153,42 @@ const BusinessForm = () => {
                 history.push(`/businesses/${businessId}`)
             }
         }
+    }
+
+    const handleSubmitImage = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("image", image);
+
+        // aws uploads can be a bit slow—displaying
+        // some sort of loading message is a good idea
+        setImageLoading(true);
+
+        const res = await fetch('/api/businesses/upload', {
+            method: "POST",
+            body: formData,
+        });
+
+        // console.log('**************ImageUrl', res)
+        if (res.ok) {
+            const response = await res.json();
+            setPreviewImage(response.url);
+
+            setImageLoading(false);
+            // history.push("/images");
+        }
+        else {
+            setImageLoading(false);
+            // a real app would probably use more advanced
+            // error handling
+            alert("An error occurred while uploading the image.");
+
+        }
+    }
+
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
     }
 
     return (
@@ -254,14 +294,34 @@ const BusinessForm = () => {
                         </div>
                         <div className='form-fields'>
                             <label className='form-labels'>Preivew Image *</label>
-                            <input type='text' value={previewImage} onChange={e => setPreviewImage(e.target.value)} required></input>
+                            <input
+                                type='file'
+                                accept='image/*'
+                                onChange={updateImage}
+                                id='file-input'
+                            />
+                            <button
+                                onClick={handleSubmitImage}
+                            // disabled={image === null}
+                            >Submit</button>
+                            <button
+                                onClick={() => {
+                                    setImage(null)
+                                    setPreviewImage('')
+                                    document.getElementById('file-input').value = null;
+                                }}
+                                disabled={image === null}
+                            >Delete</button>
+                            {(imageLoading) && <p>Loading...</p>}
                         </div>
+
 
                         {hasSubmitted && errors.length > 0 && (<div className='errorContainer'>
                             {errors.map((error, ind) => (
                                 <div key={ind} className='errorText'>{error.split(":")[1]}</div>
                             ))}
                         </div>)}
+
 
                         <button type='submit' className='form-submit-button'
                             style={{ width: '60%' }}>Submit</button>
