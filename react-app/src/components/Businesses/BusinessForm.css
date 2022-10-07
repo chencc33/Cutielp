@@ -36,3 +36,12 @@
 select:invalid {
     color: gray
 }
+
+.file-upload-button {
+    width: 150px;
+    margin: 8px 8px 8px 0;
+    height: 30px;
+    box-sizing: border-box;
+    font-size: 17px;
+    max-width: 100%;
+}

@@ -91,16 +91,16 @@ const BusinessForm = () => {
         if (name.length < 2 || name.length > 30) errs.push('error: Name length needs to be between 2-30.')
         if (address.length < 3 || address.length > 50) errs.push('error: Address length should be 2-50')
         if (description.length < 5 || description.length > 255) errs.push('error: Description length 5-255')
-        if (priceRange < 1 || priceRange > 4) errs.push('error: price range 1 - 3')
+        if (priceRange < 1 || priceRange > 4) errs.push('error: Price range 1 - 3')
         if (open.length === 4) {
-            if (parseInt(open.slice(0, 2)) > 12) { errs.push('error: invalid open time') }
+            if (parseInt(open.slice(0, 2)) > 12) { errs.push('error: Invalid open time') }
         }
         if (close.length === 4) {
-            if (parseInt(close.slice(0, 2)) > 12) { errs.push('error: invalid close time') }
+            if (parseInt(close.slice(0, 2)) > 12) { errs.push('error: Invalid close time') }
         }
         if (open.slice(-2) === close.slice(-2)) {
             if (open !== '12am') {
-                if (parseInt(open.slice(0, 2)) > parseInt(close.slice(0, 2))) { errs.push('error: close time can not be early than open time') }
+                if (parseInt(open.slice(0, 2)) > parseInt(close.slice(0, 2))) { errs.push('error: Close time can not be early than open time') }
             }
         }
         if (!zipcode.length === 5) { errs.push('error: Zipcode should be a 5-digit number') }
@@ -169,13 +169,13 @@ const BusinessForm = () => {
             body: formData,
         });
 
-        // console.log('**************ImageUrl', res)
+
         if (res.ok) {
             const response = await res.json();
             setPreviewImage(response.url);
 
             setImageLoading(false);
-            // history.push("/images");
+
         }
         else {
             setImageLoading(false);
@@ -222,9 +222,7 @@ const BusinessForm = () => {
                                     ))
                                 }
                             </select>
-                            {/* <input type='text' placeholder='e.g., 9am'
-                            pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
-                            value={open} onChange={e => setOpen(e.target.value)} required></input> */}
+
                         </div>
                         <div className='form-fields'>
                             <label className='form-labels'>Close *</label>
@@ -239,9 +237,7 @@ const BusinessForm = () => {
                                     ))
                                 }
                             </select>
-                            {/* <input type='text' placeholder='e.g., 9pm'
-                            pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
-                            value={close} onChange={e => setClose(e.target.value)} required></input> */}
+
                         </div>
                         <div className='form-fields'>
                             <label className='form-labels'>Phone * (ex: 123-345-5678)</label>
@@ -293,25 +289,26 @@ const BusinessForm = () => {
                             </select>
                         </div>
                         <div className='form-fields'>
-                            <label className='form-labels'>Preivew Image *</label>
-                            <input
+                            <label className='form-labels'>Preivew Image</label>
+                            <input className='file-upload'
                                 type='file'
                                 accept='image/*'
                                 onChange={updateImage}
                                 id='file-input'
                             />
-                            <button
-                                onClick={handleSubmitImage}
-                            // disabled={image === null}
-                            >Submit</button>
-                            <button
-                                onClick={() => {
-                                    setImage(null)
-                                    setPreviewImage('')
-                                    document.getElementById('file-input').value = null;
-                                }}
-                                disabled={image === null}
-                            >Delete</button>
+                            <div style={{ display: 'flex' }}>
+                                <button className='file-upload-button'
+                                    onClick={handleSubmitImage}
+                                >Submit</button>
+                                <button className='file-upload-button'
+                                    onClick={() => {
+                                        setImage(null)
+                                        setPreviewImage('')
+                                        document.getElementById('file-input').value = null;
+                                    }}
+                                    disabled={image === null}
+                                >Delete</button>
+                            </div>
                             {(imageLoading) && <p>Loading...</p>}
                         </div>
 
@@ -329,7 +326,6 @@ const BusinessForm = () => {
                             style={{ width: '60%' }}
                             onClick={async () => {
                                 setTimeout(() => dispatch(deleteBusiness(businessId)), 500)
-                                // await dispatch(getBusinesses())
                                 history.push('/businesses')
                             }}>Delete</button>)}
                     </form>
