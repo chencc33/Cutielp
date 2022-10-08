@@ -299,6 +299,7 @@ const BusinessForm = () => {
                             <div style={{ display: 'flex' }}>
                                 <button className='file-upload-button'
                                     onClick={handleSubmitImage}
+                                    disabled={image === null}
                                 >Submit</button>
                                 <button className='file-upload-button'
                                     onClick={() => {
