@@ -35,6 +35,9 @@ const BusinessForm = () => {
     const [previewImage, setPreviewImage] = useState("")
     const [ownerId, setOwnerId] = useState(userId || 0)
 
+    const [image, setImage] = useState(null)
+    const [imageLoading, setImageLoading] = useState(false)
+
     const statesArr = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
 
     let timesArr = []
@@ -88,7 +91,7 @@ const BusinessForm = () => {
         if (name.length < 2 || name.length > 30) errs.push('error: Name length needs to be between 2-30.')
         if (address.length < 3 || address.length > 50) errs.push('error: Address length should be 2-50')
         if (description.length < 5 || description.length > 255) errs.push('error: Description length 5-255')
-        if (priceRange < 1 || priceRange > 4) errs.push('error: price range 1 - 3')
+        if (priceRange < 1 || priceRange > 4) errs.push('error: Price range 1 - 3')
         if (open.length === 4) {
             if (parseInt(open.slice(0, 2)) > 12) { errs.push('error: Invalid open time') }
         }
@@ -123,6 +126,7 @@ const BusinessForm = () => {
         )
     }
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setHasSubmitted(true)
@@ -149,6 +153,42 @@ const BusinessForm = () => {
                 history.push(`/businesses/${businessId}`)
             }
         }
+    }
+
+    const handleSubmitImage = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("image", image);
+
+        // aws uploads can be a bit slow—displaying
+        // some sort of loading message is a good idea
+        setImageLoading(true);
+
+        const res = await fetch('/api/businesses/upload', {
+            method: "POST",
+            body: formData,
+        });
+
+
+        if (res.ok) {
+            const response = await res.json();
+            setPreviewImage(response.url);
+
+            setImageLoading(false);
+
+        }
+        else {
+            setImageLoading(false);
+            // a real app would probably use more advanced
+            // error handling
+            alert("An error occurred while uploading the image.");
+
+        }
+    }
+
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
     }
 
     return (
@@ -182,9 +222,7 @@ const BusinessForm = () => {
                                     ))
                                 }
                             </select>
-                            {/* <input type='text' placeholder='e.g., 9am'
-                            pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
-                            value={open} onChange={e => setOpen(e.target.value)} required></input> */}
+
                         </div>
                         <div className='form-fields'>
                             <label className='form-labels'>Close *</label>
@@ -199,9 +237,7 @@ const BusinessForm = () => {
                                     ))
                                 }
                             </select>
-                            {/* <input type='text' placeholder='e.g., 9pm'
-                            pattern='([0-9]{1,2}am)||([0-9]{1,2}pm)'
-                            value={close} onChange={e => setClose(e.target.value)} required></input> */}
+
                         </div>
                         <div className='form-fields'>
                             <label className='form-labels'>Phone * (ex: 123-345-5678)</label>
@@ -253,9 +289,30 @@ const BusinessForm = () => {
                             </select>
                         </div>
                         <div className='form-fields'>
-                            <label className='form-labels'>Preivew Image *</label>
-                            <input type='text' value={previewImage} onChange={e => setPreviewImage(e.target.value)} required></input>
+                            <label className='form-labels'>Preivew Image</label>
+                            <input className='file-upload'
+                                type='file'
+                                accept='image/*'
+                                onChange={updateImage}
+                                id='file-input'
+                            />
+                            <div style={{ display: 'flex' }}>
+                                <button className='file-upload-button'
+                                    onClick={handleSubmitImage}
+                                    disabled={image === null}
+                                >Submit</button>
+                                <button className='file-upload-button'
+                                    onClick={() => {
+                                        setImage(null)
+                                        setPreviewImage('')
+                                        document.getElementById('file-input').value = null;
+                                    }}
+                                    disabled={image === null}
+                                >Delete</button>
+                            </div>
+                            {(imageLoading) && <p>Loading...</p>}
                         </div>
+
 
                         {hasSubmitted && errors.length > 0 && (<div className='errorContainer'>
                             {errors.map((error, ind) => (
@@ -263,13 +320,13 @@ const BusinessForm = () => {
                             ))}
                         </div>)}
 
+
                         <button type='submit' className='form-submit-button'
                             style={{ width: '60%' }}>Submit</button>
                         {businessId && (<button className='form-submit-button'
                             style={{ width: '60%' }}
                             onClick={async () => {
                                 setTimeout(() => dispatch(deleteBusiness(businessId)), 500)
-                                // await dispatch(getBusinesses())
                                 history.push('/businesses')
                             }}>Delete</button>)}
                     </form>
