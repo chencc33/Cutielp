@@ -1,15 +1,36 @@
 .businesslist-main {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .main-bottom {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .category-main {
-    width: 20vw;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.category-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.category-icon-img {
+    height: 50%;
+}
+
+.category-name {
+    color: var(--text-color)
 }
 
 .businesslist-container {

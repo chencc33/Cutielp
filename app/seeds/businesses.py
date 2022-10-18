@@ -179,7 +179,8 @@ def seed_businesses():
             zipcode=zipcodes[idx],
             description=descriptions[randint(0,6)],
             price_range=randint(1,3),
-            preview_image=urls[idx]
+            preview_image=urls[idx],
+            category_id=(idx%6) + 1
         )
         db.session.add(business)
     db.session.commit()
