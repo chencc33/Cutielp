@@ -20,15 +20,14 @@ def get_all_categories():
 @category_routes.route('/<int:categoryId>/businesses')
 def get_all_business_by_category(categoryId):
     businesses = Business.query.filter(Business.category_id == categoryId)
-    reviews = Review.query.filter(Review.business_id == id)
     response = {business.id: business.to_dict() for business in businesses}
-    # for id in response:
-    #     business = response[id]
-    #     reviews = Review.query.filter(Review.business_id == id)
-    #     if reviews:
-    #         business['Reviews'] = [review.to_dict() for review in reviews]
-    #         numReview = len(business['Reviews'])
-    #         avgStar = sum([review['stars'] for review in business['Reviews']])
-    #         business['numReview'] = numReview
-    #         business['avgStar'] = round(avgStar/numReview, 1) if numReview else 0
+    for id in response:
+        business = response[id]
+        reviews = Review.query.filter(Review.business_id == id)
+        if reviews:
+            business['Reviews'] = [review.to_dict() for review in reviews]
+            numReview = len(business['Reviews'])
+            avgStar = sum([review['stars'] for review in business['Reviews']])
+            business['numReview'] = numReview
+            business['avgStar'] = round(avgStar/numReview, 1) if numReview else 0
     return response

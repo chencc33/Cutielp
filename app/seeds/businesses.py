@@ -180,7 +180,7 @@ def seed_businesses():
             description=descriptions[randint(0,6)],
             price_range=randint(1,3),
             preview_image=urls[idx],
-            category_id=randint(1,5)
+            category_id=(idx%6) + 1
         )
         db.session.add(business)
     db.session.commit()
