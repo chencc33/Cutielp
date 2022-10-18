@@ -2,7 +2,7 @@ from random import randint
 from unicodedata import category
 from app.models import db, Category
 
-categories = ['Asian', 'Breakfast', 'Sandwiches', 'American', 'Burgers', 'Pizza']
+categories = ['Japanese', 'Cafe', 'American', 'Burger', 'Breakfast', 'Chinese']
 
 def seed_category():
     for idx in range(len(categories)):

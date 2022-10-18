@@ -1,4 +1,4 @@
-import { getBusinesses } from "../../store/business";
+import { getBusinesses, getBusinessByCategoryId } from "../../store/business";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useHistory } from "react-router-dom";
@@ -29,7 +29,50 @@ const BusinessesList = () => {
         <div className="businesslist-main">
             <NavBar />
             <div className="main-bottom">
-                <div className="category-main"></div>
+                <div className="category-main" >
+                    <div className="category-icon"
+                        onClick={async () => {
+                            await dispatch(getBusinessByCategoryId(1))
+                        }}>
+                        <img className="category-icon-img" src="https://img.icons8.com/emoji/64/000000/bento-box-emoji.png" />
+                        <p className="category-name">Japanese</p>
+                    </div>
+                    <div className="category-icon"
+                        onClick={async () => {
+                            await dispatch(getBusinessByCategoryId(2))
+                        }}>
+                        <img className="category-icon-img" src="https://img.icons8.com/external-febrian-hidayat-flat-febrian-hidayat/64/000000/external-dessert-restaurant-febrian-hidayat-flat-febrian-hidayat.png" />
+                        <p className="category-name">Cafe</p>
+                    </div>
+                    <div className="category-icon"
+                        onClick={async () => {
+                            await dispatch(getBusinessByCategoryId(3))
+                        }}>
+                        <img className="category-icon-img" src="https://img.icons8.com/emoji/64/000000/hot-dog-emoji.png" />
+                        <p className="category-name">American</p>
+                    </div>
+                    <div className="category-icon"
+                        onClick={async () => {
+                            await dispatch(getBusinessByCategoryId(4))
+                        }}>
+                        <img className="category-icon-img" src="https://img.icons8.com/color/64/000000/hamburger.png" />
+                        <p className="category-name">Burger</p>
+                    </div>
+                    <div className="category-icon"
+                        onClick={async () => {
+                            await dispatch(getBusinessByCategoryId(1))
+                        }}>
+                        <img className="category-icon-img" src="https://img.icons8.com/external-linector-flat-linector/64/000000/external-breakfast-hotel-service-linector-flat-linector.png" />
+                        <p className="category-name">Breakfast</p>
+                    </div>
+                    <div className="category-icon"
+                        onClick={async () => {
+                            await dispatch(getBusinessByCategoryId(6))
+                        }}>
+                        <img className="category-icon-img" src="https://img.icons8.com/external-photo3ideastudio-flat-photo3ideastudio/64/000000/external-jiaozi-china-photo3ideastudio-flat-photo3ideastudio.png" />
+                        <p className="category-name">Chinese</p>
+                    </div>
+                </div>
                 <div className="businesslist-container">
                     {businessesArr.map((business) => (
                         <div className="business-card-container"
