@@ -25,12 +25,13 @@ class Business(db.Model):
     description = db.Column(db.String(long_str), nullable=False)
     price_range = db.Column(db.Integer, nullable=False)
     preview_image = db.Column(db.String(long_str), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
     #Relationship
     user = db.relationship('User', back_populates='businesses')
     images = db.relationship('Image', back_populates='business', cascade="all, delete")
     reviews = db.relationship('Review', back_populates='business', cascade="all, delete")
-
+    category = db.relationship('Category', back_populates='businesses')
 
     def to_dict(self):
         return {
@@ -46,7 +47,8 @@ class Business(db.Model):
         "zipcode": self.zipcode,
         "description": self.description,
         "priceRange": self.price_range,
-        "previewImage":self.preview_image
+        "previewImage":self.preview_image,
+        "categoryId":self.category_id
       }
 
 class Review(db.Model):
@@ -97,3 +99,18 @@ class Image(db.Model):
         "businessId": self.business_id,
         "reviewId": self.review_id
       }
+
+class Category(db.Model):
+  __tablename__ = 'categories'
+
+  id = db.Column(db.Integer, primary_key=True)
+  category = db.Column(db.String(small_str), nullable=False)
+
+  #Relationship
+  businesses = db.relationship('Business', back_populates='category')
+
+  def to_dict(self):
+    return {
+    "id": self.id,
+    "category": self.category
+  }

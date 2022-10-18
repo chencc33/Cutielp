@@ -36,6 +36,15 @@ export const getBusinesses = () => async dispatch => {
         return businesses
     }
 }
+export const getBusinessByCategoryId = (categoryId) => async dispatch => {
+    const response = await fetch(`/api/categories/${categoryId}/businesses`)
+    if (response.ok) {
+        const businesses = await response.json()
+        dispatch(loadALL(businesses))
+        return businesses
+    }
+}
+
 export const getBusinessesByUser = () => async dispatch => {
     const response = await fetch(`/api/businesses/current`)
     if (response.ok) {
