@@ -88,6 +88,7 @@ const BusinessesList = () => {
                                     <img src="https://www.creativefabrica.com/wp-content/uploads/2020/03/09/Simple-Fork-Plate-Icon-Restaurant-Logo-Graphics-3446203-1-580x348.jpg" alt='Business Image' height={200} width={200} />
                                 } */}
                             </div>
+                            {/* kok */}
                             <div className="business-intro-container">
                                 <div className="business-name">{business.name}</div>
                                 <div className="business-rating">
