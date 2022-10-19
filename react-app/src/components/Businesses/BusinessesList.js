@@ -60,7 +60,7 @@ const BusinessesList = () => {
                     </div>
                     <div className="category-icon"
                         onClick={async () => {
-                            await dispatch(getBusinessByCategoryId(1))
+                            await dispatch(getBusinessByCategoryId(5))
                         }}>
                         <img className="category-icon-img" src="https://img.icons8.com/external-linector-flat-linector/64/000000/external-breakfast-hotel-service-linector-flat-linector.png" />
                         <p className="category-name">Breakfast</p>

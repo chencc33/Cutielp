@@ -1,5 +1,6 @@
 from app.models import db, Business
 from random import randint
+from sqlalchemy import exc
 
 names = [
 'Meow Cafe',
@@ -180,10 +181,13 @@ def seed_businesses():
             description=descriptions[randint(0,6)],
             price_range=randint(1,3),
             preview_image=urls[idx],
-            category_id=1
+            category_id=(idx%5 + 1)
         )
         db.session.add(business)
-    db.session.commit()
+    try:
+        db.session.commit()
+    except exc.IntegrityError:
+        db.session.rollback()
 
 # Uses a raw SQL query to TRUNCATE the users table.
 # SQLAlchemy doesn't have a built in function to do this
