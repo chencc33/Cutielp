@@ -32,6 +32,13 @@ const BusinessesList = () => {
                 <div className="category-main" >
                     <div className="category-icon"
                         onClick={async () => {
+                            await dispatch(getBusinesses())
+                        }}>
+                        <img src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-foods-vacation-planning-guys-trip-flaticons-flat-flat-icons.png" />
+                        <p className="category-name">All</p>
+                    </div>
+                    <div className="category-icon"
+                        onClick={async () => {
                             await dispatch(getBusinessByCategoryId(1))
                         }}>
                         <img className="category-icon-img" src="https://img.icons8.com/emoji/64/000000/bento-box-emoji.png" />

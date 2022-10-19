@@ -11,7 +11,7 @@ long_str = 2000
 
 
 class Category(db.Model):
-  __tablename__ = 'category'
+  __tablename__ = 'categories'
 
   id = db.Column(db.Integer, primary_key=True)
   category = db.Column(db.String(small_str), nullable=False)
@@ -30,7 +30,7 @@ class Business(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     name = db.Column(db.String(med_str), nullable=False)
     open = db.Column(db.String(small_str), nullable=False)
     close = db.Column(db.String(small_str), nullable=False)
