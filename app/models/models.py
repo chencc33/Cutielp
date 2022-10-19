@@ -9,6 +9,22 @@ small_str = 15
 med_str = 255
 long_str = 2000
 
+
+class Category(db.Model):
+  __tablename__ = 'categories'
+
+  id = db.Column(db.Integer, primary_key=True)
+  category = db.Column(db.String(small_str), nullable=False)
+
+  #Relationship
+  businesses = db.relationship('Business', back_populates='category')
+
+  def to_dict(self):
+    return {
+    "id": self.id,
+    "category": self.category
+  }
+
 class Business(db.Model):
     __tablename__ = 'businesses'
 
@@ -48,7 +64,7 @@ class Business(db.Model):
         "description": self.description,
         "priceRange": self.price_range,
         "previewImage":self.preview_image,
-        "categoryId":self.category.to_dict()
+        "categoryId":self.category_id
       }
 
 class Review(db.Model):
@@ -99,18 +115,3 @@ class Image(db.Model):
         "businessId": self.business_id,
         "reviewId": self.review_id
       }
-
-class Category(db.Model):
-  __tablename__ = 'categories'
-
-  id = db.Column(db.Integer, primary_key=True)
-  category = db.Column(db.String(small_str), nullable=False)
-
-  #Relationship
-  businesses = db.relationship('Business', back_populates='category')
-
-  def to_dict(self):
-    return {
-    "id": self.id,
-    "category": self.category
-  }
