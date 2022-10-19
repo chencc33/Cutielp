@@ -1,5 +1,6 @@
 from random import randint
 from app.models import db, Review
+from sqlalchemy import exc
 
 reviews = [
     "OMG! So good! This was one of the best mouth-watering steaks I've had grace my taste buds in a long time. The waiter was prompt and polite. The decor was unique and incredible. I'd give more than 5 stars if I could!",
@@ -43,7 +44,10 @@ def seed_reviews():
             business_id=randint(1,17)
         )
         db.session.add(review)
-    db.session.commit()
+    try:
+        db.session.commit()
+    except exc.IntegrityError:
+        db.session.rollback()
 
 
 # Uses a raw SQL query to TRUNCATE the users table.
