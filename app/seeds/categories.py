@@ -5,11 +5,30 @@ from app.models import db, Category
 categories = ['Japanese', 'Cafe', 'American', 'Burger', 'Breakfast', 'Chinese']
 
 def seed_category():
-    for idx in range(len(categories)):
-        category = Category(
-            category=categories[idx]
+    category0 = Category(
+            category=categories[0]
         )
-        db.session.add(category)
+    category1 = Category(
+            category=categories[1]
+        )
+    category2 = Category(
+        category=categories[2]
+    )
+    category3 = Category(
+        category=categories[3]
+    )
+    category4 = Category(
+        category=categories[4]
+    )
+    # for idx in range(len(categories)):
+    #     category = Category(
+    #         category=categories[idx]
+    #     )
+    db.session.add(category0)
+    db.session.add(category1)
+    db.session.add(category2)
+    db.session.add(category3)
+    db.session.add(category4)
     db.session.commit()
 
 

@@ -17,7 +17,7 @@ class Category(db.Model):
   category = db.Column(db.String(small_str), nullable=False)
 
   #Relationship
-  businesses = db.relationship('Business', back_populates='category')
+  businesses = db.relationship('Business', back_populates='category', cascade="all, delete")
 
   def to_dict(self):
     return {
