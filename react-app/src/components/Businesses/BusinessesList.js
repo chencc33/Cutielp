@@ -65,13 +65,13 @@ const BusinessesList = () => {
                         <img className="category-icon-img" src="https://img.icons8.com/external-linector-flat-linector/64/000000/external-breakfast-hotel-service-linector-flat-linector.png" />
                         <p className="category-name">Breakfast</p>
                     </div>
-                    <div className="category-icon"
+                    {/* <div className="category-icon"
                         onClick={async () => {
                             await dispatch(getBusinessByCategoryId(6))
                         }}>
                         <img className="category-icon-img" src="https://img.icons8.com/external-photo3ideastudio-flat-photo3ideastudio/64/000000/external-jiaozi-china-photo3ideastudio-flat-photo3ideastudio.png" />
                         <p className="category-name">Chinese</p>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="businesslist-container">
                     {businessesArr.map((business) => (
