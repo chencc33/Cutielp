@@ -24,6 +24,7 @@ def seed_category():
     #     category = Category(
     #         category=categories[idx]
     #     )
+    # 00
     db.session.add(category0)
     db.session.add(category1)
     db.session.add(category2)
