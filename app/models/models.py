@@ -48,7 +48,7 @@ class Business(db.Model):
         "description": self.description,
         "priceRange": self.price_range,
         "previewImage":self.preview_image,
-        "categoryId":self.category_id
+        "categoryId":self.category.to_dict()
       }
 
 class Review(db.Model):
