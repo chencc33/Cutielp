@@ -11,7 +11,7 @@ long_str = 2000
 
 
 class Category(db.Model):
-  __tablename__ = 'categories'
+  __tablename__ = 'category'
 
   id = db.Column(db.Integer, primary_key=True)
   category = db.Column(db.String(small_str), nullable=False)
@@ -30,6 +30,7 @@ class Business(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     name = db.Column(db.String(med_str), nullable=False)
     open = db.Column(db.String(small_str), nullable=False)
     close = db.Column(db.String(small_str), nullable=False)
@@ -41,13 +42,12 @@ class Business(db.Model):
     description = db.Column(db.String(long_str), nullable=False)
     price_range = db.Column(db.Integer, nullable=False)
     preview_image = db.Column(db.String(long_str), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
 
     #Relationship
     user = db.relationship('User', back_populates='businesses')
+    category = db.relationship('Category', back_populates='businesses')
     images = db.relationship('Image', back_populates='business', cascade="all, delete")
     reviews = db.relationship('Review', back_populates='business', cascade="all, delete")
-    category = db.relationship('Category', back_populates='businesses')
 
     def to_dict(self):
         return {
