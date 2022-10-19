@@ -44,10 +44,8 @@ def seed_reviews():
             business_id=randint(1,17)
         )
         db.session.add(review)
-    try:
-        db.session.commit()
-    except exc.IntegrityError:
-        db.session.rollback()
+
+    db.session.commit()
 
 
 # Uses a raw SQL query to TRUNCATE the users table.

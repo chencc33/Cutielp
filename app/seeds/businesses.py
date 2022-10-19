@@ -184,10 +184,9 @@ def seed_businesses():
             category_id=(idx%5 + 1)
         )
         db.session.add(business)
-    try:
-        db.session.commit()
-    except exc.IntegrityError:
-        db.session.rollback()
+
+    db.session.commit()
+
 
 # Uses a raw SQL query to TRUNCATE the users table.
 # SQLAlchemy doesn't have a built in function to do this
