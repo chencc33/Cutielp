@@ -25,7 +25,7 @@ class Business(db.Model):
     description = db.Column(db.String(long_str), nullable=False)
     price_range = db.Column(db.Integer, nullable=False)
     preview_image = db.Column(db.String(long_str), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
 
     #Relationship
     user = db.relationship('User', back_populates='businesses')
