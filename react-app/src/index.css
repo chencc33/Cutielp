@@ -5,6 +5,7 @@
     --border-color: #6a696a;
     --border-color-hover: #8f8e8f;
     --border-color-active: #a2a0a2;
+    --category-color: rgb(240, 240, 240)
 }
 
 body {

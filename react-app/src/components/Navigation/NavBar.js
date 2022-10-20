@@ -10,7 +10,7 @@ const NavBar = ({ isSplash }) => {
   const history = useHistory()
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.session.user);
-  // console.log('************current', currentUser)
+
 
   const redirect = () => {
     if (!currentUser) history.push('/login')
