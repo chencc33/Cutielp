@@ -45,8 +45,8 @@ const NavBar = ({ isSplash }) => {
           <p className='logo-content'>Cutielp</p>
         </div>
         <div className='search-bar-container'>
-          <SearchBar businessesArr={businessesArr} setSearchResults={setSearchResults} />
-          <ListBusinessPage searchResults={searchResults} />
+          <SearchBar businessesArr={businessesArr} setSearchResults={setSearchResults} setSearchInput={setSearchInput} />
+          <ListBusinessPage searchResults={searchResults} searchInput={searchInput} />
         </div>
         <div className='nav-bar-right'>
           <div className='hostButton'

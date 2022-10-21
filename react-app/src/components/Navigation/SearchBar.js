@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { getBusinesses } from "../../store/business";
+import React from "react";
 
-function SearchBar({ businessesArr, setSearchResults }) {
+function SearchBar({ businessesArr, setSearchResults, setSearchInput }) {
 
     const handleSubmit = (e) => e.preventDefault()
     const handleChange = (e) => {
         if (!e.target.value) return setSearchResults([])
         const resultsArr = businessesArr.filter(business => business.name.toLowerCase().includes(e.target.value.toLowerCase()) || business.categoryName.toLowerCase().includes(e.target.value.toLowerCase()))
         setSearchResults(resultsArr)
+        setSearchInput(e.target.value)
     };
 
     return (

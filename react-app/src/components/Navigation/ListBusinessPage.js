@@ -1,11 +1,9 @@
 import { useHistory } from "react-router-dom"
 
-function ListBusinessPage({ searchResults }) {
-    // const results = searchResults.map(business => (
-    //     <div>{business.name}</div>
-    // ))
-    // const content = results
+function ListBusinessPage({ searchResults, searchInput }) {
+
     const history = useHistory()
+    if (!searchResults.length && searchInput) return <div className="search-results">No results</div>
     return (
         <>
             {searchResults.length > 0 && (
