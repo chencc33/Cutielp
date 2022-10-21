@@ -1,5 +1,6 @@
 from random import randint
 from app.models import db, Image
+from sqlalchemy import exc
 
 urls = [
     'https://i.pinimg.com/736x/b5/80/30/b58030b3f1368e44e93c9917485440c3.jpg',

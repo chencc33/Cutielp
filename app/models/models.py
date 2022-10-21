@@ -9,11 +9,28 @@ small_str = 15
 med_str = 255
 long_str = 2000
 
+
+class Category(db.Model):
+  __tablename__ = 'categories'
+
+  id = db.Column(db.Integer, primary_key=True)
+  category = db.Column(db.String(small_str), nullable=False)
+
+  #Relationship
+  businesses = db.relationship('Business', back_populates='category', cascade="all, delete")
+
+  def to_dict(self):
+    return {
+    "id": self.id,
+    "category": self.category
+  }
+
 class Business(db.Model):
     __tablename__ = 'businesses'
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     name = db.Column(db.String(med_str), nullable=False)
     open = db.Column(db.String(small_str), nullable=False)
     close = db.Column(db.String(small_str), nullable=False)
@@ -28,9 +45,9 @@ class Business(db.Model):
 
     #Relationship
     user = db.relationship('User', back_populates='businesses')
+    category = db.relationship('Category', back_populates='businesses')
     images = db.relationship('Image', back_populates='business', cascade="all, delete")
     reviews = db.relationship('Review', back_populates='business', cascade="all, delete")
-
 
     def to_dict(self):
         return {
@@ -46,7 +63,9 @@ class Business(db.Model):
         "zipcode": self.zipcode,
         "description": self.description,
         "priceRange": self.price_range,
-        "previewImage":self.preview_image
+        "previewImage":self.preview_image,
+        "categoryId":self.category_id,
+        "categoryName":self.category.category
       }
 
 class Review(db.Model):

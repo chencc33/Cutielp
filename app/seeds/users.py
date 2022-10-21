@@ -74,7 +74,7 @@ def seed_users():
         profile_image='https://i.pravatar.cc/150?img=7'
     )
     user8 = User(
-        first_name='Jorge',
+        first_name='Joge',
         last_name='Barrell',
         email='mlewan@icloud.com',
         password='QYQUJhk',
