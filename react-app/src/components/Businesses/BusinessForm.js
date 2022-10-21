@@ -34,11 +34,13 @@ const BusinessForm = () => {
     const [priceRange, setPriceRange] = useState(1)
     const [previewImage, setPreviewImage] = useState("")
     const [ownerId, setOwnerId] = useState(userId || 0)
+    const [categoryId, setCategoryId] = useState('')
 
     const [image, setImage] = useState(null)
     const [imageLoading, setImageLoading] = useState(false)
 
     const statesArr = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']
+    const categoryArr = ['Japanese', 'Cafe', 'American', 'Burger', 'Breakfast']
 
     let timesArr = []
     for (let i = 1; i <= 12; i++) {
@@ -49,7 +51,7 @@ const BusinessForm = () => {
     }
 
     const priceRangeObj = { "$": 1, "$$": 2, "$$$": 3 }
-
+    console.log('*************old', categoryId)
     useEffect(async () => {
         if (businessId) {
             const foundBusiness = await dispatch(getBusinessById(businessId))
@@ -67,6 +69,8 @@ const BusinessForm = () => {
             setPriceRange(foundBusiness.priceRange)
             setOwnerId(foundBusiness.ownerId)
             setPreviewImage(foundBusiness.previewImage)
+            setCategoryId(foundBusiness.categoryId)
+            console.log('*************updated', categoryId)
         } else {
             setName('')
             setOpen('')
@@ -82,6 +86,7 @@ const BusinessForm = () => {
             setPreviewImage('')
             setErrors([])
             setHasSubmitted(false)
+            setCategoryId('')
         }
     }, [dispatch, businessId])
 
@@ -132,7 +137,7 @@ const BusinessForm = () => {
         setHasSubmitted(true)
 
         let formData = {
-            name, open, close, phone, address, city, state, zipcode, open, close, description, priceRange, ownerId, previewImage
+            name, open, close, phone, address, city, state, zipcode, open, close, description, priceRange, ownerId, previewImage, categoryId
         }
 
         if (!business && !errors.length) {
@@ -264,9 +269,6 @@ const BusinessForm = () => {
                                     ))
                                 }
                             </select>
-                            {/* <input type='text' placeholder='e.g, CA'
-                            pattern='[A-Z]{2}'
-                            value={state} onChange={e => setState(e.target.value)} required></input> */}
                         </div>
                         <div className='form-fields'>
                             <label className='form-labels'>Zipcode *</label>
@@ -286,6 +288,18 @@ const BusinessForm = () => {
                                 {Object.keys(priceRangeObj).map((priceRange) => (
                                     <option className='form-options' key={priceRange} value={priceRangeObj[priceRange]}>{priceRange}</option>
                                 ))}
+                            </select>
+                        </div>
+                        <div className='form-fields'>
+                            <label className='form-labels'>Business Category</label>
+                            <select className='form-selects' value={categoryId}
+                                onChange={e => setCategoryId(e.target.value)} required>
+                                <option className='form-options' disabled selected hidden value="">Choose your business category</option>
+                                {
+                                    categoryArr.map((category, idx) => (
+                                        <option className='form-options' key={category} value={idx + 1}>{category}</option>
+                                    ))
+                                }
                             </select>
                         </div>
                         <div className='form-fields'>

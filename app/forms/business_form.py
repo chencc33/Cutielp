@@ -18,3 +18,4 @@ class BusinessForm(FlaskForm):
     description = StringField("Description", validators=[DataRequired(message="Description is required"), Length(max=long_str, message='Description must be less than 2000 characters.')])
     priceRange = IntegerField("Price Range", validators=[DataRequired(message="Price Range is required"), NumberRange(min=1, max=5, message='Price range must in range 1 to 5.')])
     previewImage = StringField("Preview Image")
+    categoryId = IntegerField("Category Id")

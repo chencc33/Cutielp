@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import { getBusinesses } from "../../store/business";
+import ListBusinessPage from "./ListBusinessPage";
+import { useDispatch, useSelector } from 'react-redux';
 
-function SearchBar({ businessesArr, setSearchResults, setSearchInput }) {
+function SearchBar({ businessesArr, setSearchInput, setSearchResults }) {
+    // const dispatch = useDispatch()
+    // const businesses = useSelector(state => state.businesses)
+    // const businessesArr = Object.values(businesses)
+    // const [searchInput, setSearchInput] = useState("")
+    // const [searchResults, setSearchResults] = useState([])
+
+    // useEffect(() => {
+    //     dispatch(getBusinesses())
+    // }, [])
 
     const handleSubmit = (e) => e.preventDefault()
     const handleChange = (e) => {
@@ -26,6 +38,7 @@ function SearchBar({ businessesArr, setSearchResults, setSearchInput }) {
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </button>
             </form>
+            {/* <ListBusinessPage searchResults={searchResults} searchInput={searchInput} setSearchResults={setSearchResults} setSearchInput={setSearchInput} /> */}
         </div >
     )
 }

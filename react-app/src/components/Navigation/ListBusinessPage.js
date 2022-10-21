@@ -9,6 +9,7 @@ function ListBusinessPage({ searchResults, searchInput }) {
             {searchResults.length > 0 && (
                 searchResults.map(business => (
                     <div className="search-results"
+                        key={business}
                         onClick={() => { history.push(`/businesses/${business.id}`) }}
                     >
                         <div className="search-results-row1">
