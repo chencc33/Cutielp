@@ -48,10 +48,10 @@ const ReviewListByUser = () => {
                 )}
                 <div className="rating-container"></div>
                 {reviewsArr.map((review) => (
-                    <div className="review-card">
+                    <div className="review-card" key={review.id}>
                         <div className="review-profile-container"
                             style={{ justifyContent: 'flex-start' }}>
-                            <div key={review.id}>
+                            <div >
                                 <img className="review-profile-image" src={review.user.profileImage} alt='profile image' />
                             </div>
                             <div className="review-profile-name">{review.user.firstName} {review.user.lastName[0]}.</div>

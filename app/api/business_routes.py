@@ -1,4 +1,5 @@
 import re
+from unicodedata import category
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from sqlalchemy.sql import func
@@ -112,6 +113,7 @@ def create_business():
             zipcode=new_form.data['zipcode'],
             description=new_form.data['description'],
             price_range=new_form.data['priceRange'],
+            category_id=new_form.data['categoryId'],
             preview_image=new_form.data['previewImage']
         )
         db.session.add(new_business)
@@ -144,6 +146,7 @@ def update_business(businessId):
         business.description=data['description']
         business.price_range=data['priceRange']
         business.preview_image=data['previewImage']
+        business.category_id=data['categoryId']
 
         db.session.commit()
         return business.to_dict()
