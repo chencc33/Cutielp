@@ -107,6 +107,14 @@
     margin-left: 5px;
 }
 
+.card-category-name {
+    background-color: var(--category-color);
+    width: fit-content;
+    border-radius: 5px;
+    font-size: smaller;
+    padding: 3px;
+}
+
 .open {
     color: green;
     font-size: larger;
