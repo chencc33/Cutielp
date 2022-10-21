@@ -51,7 +51,7 @@ const BusinessForm = () => {
     }
 
     const priceRangeObj = { "$": 1, "$$": 2, "$$$": 3 }
-    console.log('*************old', categoryId)
+
     useEffect(async () => {
         if (businessId) {
             const foundBusiness = await dispatch(getBusinessById(businessId))
@@ -70,7 +70,7 @@ const BusinessForm = () => {
             setOwnerId(foundBusiness.ownerId)
             setPreviewImage(foundBusiness.previewImage)
             setCategoryId(foundBusiness.categoryId)
-            console.log('*************updated', categoryId)
+
         } else {
             setName('')
             setOpen('')

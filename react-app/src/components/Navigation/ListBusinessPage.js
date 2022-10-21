@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom"
 
-function ListBusinessPage({ searchResults, searchInput }) {
+function ListBusinessPage({ searchResults, searchInput, setSearchResults, setSearchInput }) {
 
     const history = useHistory()
     if (!searchResults.length && searchInput) return <div className="search-results">No results</div>
@@ -10,7 +10,11 @@ function ListBusinessPage({ searchResults, searchInput }) {
                 searchResults.map(business => (
                     <div className="search-results"
                         key={business}
-                        onClick={() => { history.push(`/businesses/${business.id}`) }}
+                        onClick={() => {
+                            history.push(`/businesses/${business.id}`)
+                            setSearchResults([])
+                            setSearchInput("")
+                        }}
                     >
                         <div className="search-results-row1">
                             <div className="search-results-name">{business.name}</div>

@@ -20,9 +20,9 @@ const NavBar = ({ isSplash }) => {
   const [searchInput, setSearchInput] = useState("")
   const [searchResults, setSearchResults] = useState([])
 
-  // useEffect(() => {
-  //   dispatch(getBusinesses())
-  // }, [])
+  useEffect(() => {
+    dispatch(getBusinesses())
+  }, [])
 
 
   const redirect = () => {
@@ -47,7 +47,7 @@ const NavBar = ({ isSplash }) => {
         </div>
         <div className='search-bar-container'>
           <SearchBar businessesArr={businessesArr} setSearchResults={setSearchResults} setSearchInput={setSearchInput} />
-          <ListBusinessPage searchResults={searchResults} searchInput={searchInput} />
+          <ListBusinessPage searchResults={searchResults} setSearchResults={setSearchResults} searchInput={searchInput} setSearchInput={setSearchInput} />
         </div>
         <div className='nav-bar-right'>
           <div className='hostButton'
