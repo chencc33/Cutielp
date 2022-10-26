@@ -14,7 +14,7 @@ const ReviewListByUser = () => {
     const reviews = useSelector((state) => state.reviews)
     const user = useSelector((state) => state.session.user)
     const reviewsArr = Object.values(reviews)
-    // console.log('*********reviewsArr', typeof reviewsArr)
+
 
     const [showModal, setShowModal] = useState(false)
     const [onClickId, setOnClickId] = useState(null)
