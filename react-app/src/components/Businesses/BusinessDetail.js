@@ -2,6 +2,7 @@ import { getBusinessById } from "../../store/business";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from "react-router-dom";
+import ImageGallery from 'react-image-gallery';
 
 import ReviewForm from "../Reviews/ReviewForm";
 import NavBar from "../Navigation/NavBar";
@@ -84,18 +85,24 @@ const BusinessDetail = () => {
         )
     }
 
-
+    // let imagesObj = {}
+    // if (business.Images && business.Images.length > 0) {
+    //     business.Images.forEach((image) => imagesObj['original'] = image.url)
+    // }
 
     return businessLoaded && business ? (
         <div className="business-detail-page">
             <NavBar />
             <div className="business-top-background">
                 <div className="business-image">
-                    <img className='detail-image' src={business.previewImage} alt='Business Image'
+                    <img className='detail-image-background' src={business.previewImage} alt='Business Image'
+                        onError={e => { e.currentTarget.src = "https://images.squarespace-cdn.com/content/v1/56a2785c69a91af45e06a188/1543513629099-01N4YI9L13AKXEMTDKYX/Restaurant-New-Restaurant-Business.png?format=1500w"; }} />
+                    <img className='detail-image-front' src={business.previewImage} alt='Business Image'
                         onError={e => { e.currentTarget.src = "https://images.squarespace-cdn.com/content/v1/56a2785c69a91af45e06a188/1543513629099-01N4YI9L13AKXEMTDKYX/Restaurant-New-Restaurant-Business.png?format=1500w"; }} />
                     {/* {business.Images?.map((image) => (
-                        <img className='detail-image' src={image.url} alt='Business Image' />
+                        <img className='detail-image-front' src={image.url} alt='Business Image' />
                     ))} */}
+                    {/* <ImageGallery items={businessesArr} */}
                     <div className="business-detail-name">
                         {business.name}
                     </div>
