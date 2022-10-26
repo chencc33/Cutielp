@@ -5,8 +5,8 @@ import Logo from '../Images/Logo.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../store/session';
 import SearchBar from './SearchBar';
-import { getBusinesses } from '../../store/business';
 import ListBusinessPage from './ListBusinessPage';
+import { getBusinesses } from '../../store/business';
 
 
 const NavBar = ({ isSplash }) => {
@@ -16,12 +16,13 @@ const NavBar = ({ isSplash }) => {
 
   const businesses = useSelector(state => state.businesses)
   const businessesArr = Object.values(businesses)
+
   const [searchInput, setSearchInput] = useState("")
   const [searchResults, setSearchResults] = useState([])
 
   useEffect(() => {
     dispatch(getBusinesses())
-  }, [dispatch])
+  }, [])
 
 
   const redirect = () => {
@@ -46,7 +47,7 @@ const NavBar = ({ isSplash }) => {
         </div>
         <div className='search-bar-container'>
           <SearchBar businessesArr={businessesArr} setSearchResults={setSearchResults} setSearchInput={setSearchInput} />
-          <ListBusinessPage searchResults={searchResults} searchInput={searchInput} />
+          <ListBusinessPage searchResults={searchResults} setSearchResults={setSearchResults} searchInput={searchInput} setSearchInput={setSearchInput} />
         </div>
         <div className='nav-bar-right'>
           <div className='hostButton'
@@ -91,7 +92,7 @@ const NavBar = ({ isSplash }) => {
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
