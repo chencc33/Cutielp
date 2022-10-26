@@ -18,11 +18,20 @@
     height: 350px;
 }
 
-.detail-image {
+.detail-image-background {
     opacity: 0.5;
     width: 100%;
     position: relative;
     min-height: 350px;
+    filter: blur(10px);
+}
+
+.detail-image-front {
+    opacity: 0.5;
+    width: 45%;
+    height: 350px;
+    position: absolute;
+    left: 27.5%;
 }
 
 
