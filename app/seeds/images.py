@@ -33,11 +33,18 @@ urls = [
     'https://64.media.tumblr.com/147a8a1f87f4163240c73b4f13866b02/tumblr_pg00wkz3gf1uk7v3v_400.jpg',
     'https://m.media-amazon.com/images/I/71M7CoB9HAL._SX1000_.jpg',
     'https://lumiere-a.akamaihd.net/v1/images/recipe-winnie-the-pooh-wtp-pizza-elise-apffel-9_ab14181e.jpeg?region=0,0,1200,800',
-    'https://cdn.chefclub.tools/uploads/recipes/cover-thumbnail/05b366ea-7937-4cec-bd01-38d41d7bb43a_qr4xJSi.jpg'
+    'https://cdn.chefclub.tools/uploads/recipes/cover-thumbnail/05b366ea-7937-4cec-bd01-38d41d7bb43a_qr4xJSi.jpg',
+    'https://data.whicdn.com/images/331044932/original.jpg',
+    'https://realfood.tesco.com/media/images/RFO-1400x919-Monster-burgers-ea2d9eb9-3c70-4453-aca3-b48f9cc872c5-0-1400x919.jpg',
+    'https://ae01.alicdn.com/kf/H00302de1351245268fc674b91fc18fc9N.jpg',
+    'http://cdn.shopify.com/s/files/1/0277/8290/5933/products/MachoPancakes2_1024x1024.jpg?v=1613360755',
+    'https://d3rctclhuobtt7.cloudfront.net/Pictures/1024x536/0/5/1/233051_colourfuldonuts_856339.jpg',
+    'https://i.ytimg.com/vi/SIctv-Txoo0/maxresdefault.jpg',
+    'https://i.pinimg.com/originals/53/4a/76/534a761dcf2413b5a193454523edcbe8.png',
+    'https://images.squarespace-cdn.com/content/v1/58d89675cd0f6848b7a69f9c/1631231910247-FZTMUEI9XB64EFGQCNIJ/vivian+pizza+1+-+low+res.png'
 ]
-
 def seed_images():
-    for idx in range(30):
+    for idx in range(39):
         image = Image(
             url=urls[idx],
             user_id=randint(1,9),
