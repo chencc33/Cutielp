@@ -108,7 +108,7 @@
     height: fit-content;
     color: var(--text-color);
     margin-top: 20px;
-    margin-right: 25px;
+    margin-right: 10px;
     max-width: 350px;
     overflow: visible;
     overflow-wrap: break-word;
@@ -137,11 +137,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 20px
+    gap: 20px;
+    max-width: 1200px;
 }
 
 .about-box {
     width: 60%;
+    max-width: 730px;
 }
 
 .detail-about-title {
@@ -167,14 +169,12 @@
 
 .review-overview-container {
     width: 100%;
+    max-width: 1200px;
     display: flex;
     flex-direction: row;
-    height: 200px;
+    height: 250px;
 }
 
-.rating-bar-container {
-    width: 60%;
-}
 
 .stars-container {
     width: 100%;
@@ -185,6 +185,10 @@
     font-weight: bold;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+
+.overall-rating-container {
+    width: 15%;
 }
 
 .overall-rating-container>div {
@@ -203,7 +207,7 @@
 }
 
 .rating-bar-container {
-    width: 60%;
+    width: 45%;
     height: 300px;
     margin-left: 100px;
     margin-top: 50px;
@@ -245,4 +249,14 @@
     margin-top: 30px;
     font-weight: bold;
     color: #c41200;
+}
+
+.map-container {
+    display: flex;
+    width: 35%;
+}
+
+.map-box {
+    border: none;
+    border-radius: 4px;
 }
