@@ -227,7 +227,7 @@ const BusinessDetail = () => {
                             </div>
                         </div>
                         <div className="map-container">
-                            <iframe className="map-box" src={`https://maps.google.com/maps?q=${business.lat},${business.lng}&hl=es;&output=embed`} height={300} width={350}>
+                            <iframe className="map-box" src={`https://maps.google.com/maps?q=${business.lat},${business.lng}&hl=es;&output=embed`} height={280} width={360}>
                             </iframe>
                         </div>
                     </div>

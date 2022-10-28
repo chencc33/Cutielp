@@ -15,21 +15,21 @@
     background-color: black;
     position: relative;
     width: 100vw;
-    height: 350px;
+    height: 400px;
 }
 
 .detail-image-background {
     opacity: 0.5;
     width: 100%;
     position: relative;
-    min-height: 350px;
+    min-height: 400px;
     filter: blur(10px);
 }
 
 .detail-image-front {
     opacity: 0.7;
     width: 45%;
-    height: 350px;
+    height: 400px;
     position: absolute;
     left: 27.5%;
 }
@@ -41,8 +41,8 @@
     top: 50%;
     z-index: 1000;
     cursor: pointer;
-    color: aliceblue;
-    font-size: 30px;
+    color: rgba(240, 248, 255, 0.768);
+    font-size: 50px;
 }
 
 .prev-slide:hover {
@@ -60,8 +60,8 @@
     top: 50%;
     z-index: 1000;
     cursor: pointer;
-    color: aliceblue;
-    font-size: 30px;
+    color: rgba(240, 248, 255, 0.768);
+    font-size: 50px;
 }
 
 .business-detail-name {
@@ -103,7 +103,7 @@
 
 .business-bottom {
     overflow: auto;
-    margin-top: 150px;
+    margin-top: 230px;
     margin-left: 10%;
     width: 85vw;
     /* position: absolute;
