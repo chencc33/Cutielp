@@ -2,7 +2,6 @@ import { getBusinessById } from "../../store/business";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from "react-router-dom";
-import ImageGallery from 'react-image-gallery';
 
 import ReviewForm from "../Reviews/ReviewForm";
 import NavBar from "../Navigation/NavBar";
@@ -28,6 +27,8 @@ const BusinessDetail = () => {
     const [showModal, setShowModal] = useState(false)
     const [businessNotFound, setBusinessNotFound] = useState(false)
     const [businessLoaded, setBusinessLoaded] = useState(false)
+    const [isPreviewImage, setIsPreviewImage] = useState(true)
+    const [currentImageIdx, setCurrentImageIdx] = useState(0)
 
 
     const roundStar = (num) => {
@@ -69,7 +70,19 @@ const BusinessDetail = () => {
         })()
     }, [dispatch, reviews, businessId, setBusinessLoaded])
 
+    const goToPrevious = () => {
+        setIsPreviewImage(false)
+        const isFirstSlide = currentImageIdx === 0
+        const newIndex = isFirstSlide ? business.Images.length - 1 : currentImageIdx - 1
+        setCurrentImageIdx(newIndex)
+    }
 
+    const goToNext = () => {
+        setIsPreviewImage(false)
+        const isLastSlide = currentImageIdx === business.Images.length - 1
+        const newIndex = isLastSlide ? 0 : currentImageIdx + 1
+        setCurrentImageIdx(newIndex)
+    }
 
     if (!businessLoaded) return null
 
@@ -86,10 +99,6 @@ const BusinessDetail = () => {
         )
     }
 
-    // let imagesObj = {}
-    // if (business.Images && business.Images.length > 0) {
-    //     business.Images.forEach((image) => imagesObj['original'] = image.url)
-    // }
     return businessLoaded && business ? (
         <div className="business-detail-page">
             <NavBar />
@@ -97,12 +106,15 @@ const BusinessDetail = () => {
                 <div className="business-image">
                     <img className='detail-image-background' src={business.previewImage} alt='Business Image'
                         onError={e => { e.currentTarget.src = "https://images.squarespace-cdn.com/content/v1/56a2785c69a91af45e06a188/1543513629099-01N4YI9L13AKXEMTDKYX/Restaurant-New-Restaurant-Business.png?format=1500w"; }} />
-                    <img className='detail-image-front' src={business.previewImage} alt='Business Image'
-                        onError={e => { e.currentTarget.src = "https://images.squarespace-cdn.com/content/v1/56a2785c69a91af45e06a188/1543513629099-01N4YI9L13AKXEMTDKYX/Restaurant-New-Restaurant-Business.png?format=1500w"; }} />
-                    {/* {business.Images?.map((image) => (
-                        <img className='detail-image-front' src={image.url} alt='Business Image' />
-                    ))} */}
-                    {/* <ImageGallery items={businessesArr} */}
+                    <img className='detail-image-front' src={isPreviewImage ? business.previewImage : business?.Images[currentImageIdx]?.url} alt='Business Image'
+                        onError={e => { e.currentTarget.src = "https://images.squarespace-cdn.com/content/v1/56a2785c69a91af45e06a188/1543513629099-01N4YI9L13AKXEMTDKYX/Restaurant-New-Restaurant-Business.png?format=1500w"; }} >
+                    </img>
+                    {business.Images.length > 0 && (
+                        <a className="prev-slide" onClick={goToPrevious}>&#10094;</a>
+                    )}
+                    {business.Images.length > 0 && (
+                        <a className="next-slide" onClick={goToNext}>&#10095;</a>
+                    )}
                     <div className="business-detail-name">
                         {business.name}
                     </div>

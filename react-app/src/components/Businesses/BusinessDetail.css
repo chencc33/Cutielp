@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: row;
     background-color: black;
-    /* position: fixed; */
+    position: relative;
     width: 100vw;
     height: 350px;
 }
@@ -27,13 +27,42 @@
 }
 
 .detail-image-front {
-    opacity: 0.5;
+    opacity: 0.7;
     width: 45%;
     height: 350px;
     position: absolute;
     left: 27.5%;
 }
 
+.prev-slide {
+    float: left;
+    position: absolute;
+    left: 28%;
+    top: 50%;
+    z-index: 1000;
+    cursor: pointer;
+    color: aliceblue;
+    font-size: 30px;
+}
+
+.prev-slide:hover {
+    background-color: #2d2e2e44;
+}
+
+.next-slide:hover {
+    background-color: #2d2e2e44;
+}
+
+.next-slide {
+    float: left;
+    position: absolute;
+    right: 28%;
+    top: 50%;
+    z-index: 1000;
+    cursor: pointer;
+    color: aliceblue;
+    font-size: 30px;
+}
 
 .business-detail-name {
     position: absolute;
@@ -49,7 +78,7 @@
 .business-detail-rating {
     position: absolute;
     left: 10%;
-    top: 35%;
+    top: 40%;
     font-family: Comic Sans MS, Comic Sans, cursive;
     color: whitesmoke;
 }
