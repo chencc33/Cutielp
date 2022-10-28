@@ -12,8 +12,6 @@ import './BusinessList.css'
 import ReviewList from "../Reviews/ReviewList";
 
 import { Modal } from "../context/Modal"
-import { getReviewsByBusinessId } from "../../store/review";
-import BusinessForm from "./BusinessForm";
 
 const BusinessDetail = () => {
     const businessId = +useParams().businessId
@@ -23,6 +21,7 @@ const BusinessDetail = () => {
     const reviews = useSelector((state) => state.reviews)
     const user = useSelector((state) => state.session.user)
     const business = businesses[businessId]
+
     let reviewsArr
     if (reviews) reviewsArr = Object.values(reviews)
 
@@ -70,6 +69,8 @@ const BusinessDetail = () => {
         })()
     }, [dispatch, reviews, businessId, setBusinessLoaded])
 
+
+
     if (!businessLoaded) return null
 
     function redirect() {
@@ -89,7 +90,6 @@ const BusinessDetail = () => {
     // if (business.Images && business.Images.length > 0) {
     //     business.Images.forEach((image) => imagesObj['original'] = image.url)
     // }
-
     return businessLoaded && business ? (
         <div className="business-detail-page">
             <NavBar />
@@ -214,6 +214,10 @@ const BusinessDetail = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="map-container">
+                            <iframe className="map-box" src={`https://maps.google.com/maps?q=${business.lat},${business.lng}&hl=es;&output=embed`} height={300} width={350}>
+                            </iframe>
+                        </div>
                     </div>
                     <ReviewList businessId={business.id} />
                     <div className="review-profile">
@@ -227,6 +231,7 @@ const BusinessDetail = () => {
                         </div>
                     </div>
                 </div>
+
                 <div className="review-list-main">
                 </div>
                 {showModal && (
