@@ -39,6 +39,8 @@ class Business(db.Model):
     city = db.Column(db.String(small_str), nullable=False)
     state = db.Column(db.String(small_str), nullable=False)
     zipcode = db.Column(db.String(small_str), nullable=False)
+    lat = db.Column(db.Float)
+    lng = db.Column(db.Float)
     description = db.Column(db.String(long_str), nullable=False)
     price_range = db.Column(db.Integer, nullable=False)
     preview_image = db.Column(db.String(long_str), nullable=False)
@@ -61,6 +63,8 @@ class Business(db.Model):
         "city": self.city,
         "state": self.state,
         "zipcode": self.zipcode,
+        "lat":self.lat,
+        "lng":self.lng,
         "description": self.description,
         "priceRange": self.price_range,
         "previewImage":self.preview_image,
