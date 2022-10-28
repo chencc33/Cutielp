@@ -111,6 +111,8 @@ def create_business():
             city=new_form.data['city'],
             state=new_form.data['state'],
             zipcode=new_form.data['zipcode'],
+            lat=new_form.data['lat'],
+            lng=new_form.data['lng'],
             description=new_form.data['description'],
             price_range=new_form.data['priceRange'],
             category_id=new_form.data['categoryId'],
@@ -143,6 +145,8 @@ def update_business(businessId):
         business.city=data['city']
         business.state=data['state']
         business.zipcode=data['zipcode']
+        business.lat=data['lat']
+        business.lng=data['lng']
         business.description=data['description']
         business.price_range=data['priceRange']
         business.preview_image=data['previewImage']

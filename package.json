@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@react-google-maps/api": "^2.13.1",
     "pg": "^8.8.0",
     "react-image-gallery": "^1.2.11",
     "stars-rating": "^1.1.0"

@@ -13,7 +13,7 @@ const ReviewList = ({ businessId }) => {
     const reviews = useSelector((state) => state.reviews)
     const user = useSelector((state) => state.session.user)
     const reviewsArr = Object.values(reviews)
-    // console.log('*********user', user)
+
 
     const [showEditModal, setShowEditModal] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
