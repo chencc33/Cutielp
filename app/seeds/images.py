@@ -10,9 +10,6 @@ urls = [
     'https://i.pinimg.com/originals/f7/f8/67/f7f867b62fc02a07d9b4f4f77b281b4c.jpg',
     'https://pm1.narvii.com/5897/86bd96ba77edf72434961b233f6856db5c648e58_hq.jpg',
     'https://news.usc.edu/files/2020/11/Pretty-food-perception-web.jpg',
-    'https://img.designswan.com/2016/06/cuteFood/2.jpg',
-    'https://img.designswan.com/2016/06/cuteFood/3.jpg',
-    'https://img.designswan.com/2016/06/cuteFood/11.jpg',
     'https://images.squarespace-cdn.com/content/v1/59b5a647a8b2b050d1e9c97f/1584750003698-5750H7JM87T6IGOZMFHV/83336470_208053170334063_8297231784883126417_n.jpg?format=1000w',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThjxohn_HcgVVOHJNe0khkDD30mbMVEjZY2t-7Y9mn_24PWCZGQzHg4L6NMBtAjpgAq38&usqp=CAU',
     'https://i.pinimg.com/originals/02/31/5e/02315e35622e5c68875fe15cb4ac715c.png',
@@ -41,7 +38,14 @@ urls = [
     'https://d3rctclhuobtt7.cloudfront.net/Pictures/1024x536/0/5/1/233051_colourfuldonuts_856339.jpg',
     'https://i.ytimg.com/vi/SIctv-Txoo0/maxresdefault.jpg',
     'https://i.pinimg.com/originals/53/4a/76/534a761dcf2413b5a193454523edcbe8.png',
-    'https://images.squarespace-cdn.com/content/v1/58d89675cd0f6848b7a69f9c/1631231910247-FZTMUEI9XB64EFGQCNIJ/vivian+pizza+1+-+low+res.png'
+    'https://images.squarespace-cdn.com/content/v1/58d89675cd0f6848b7a69f9c/1631231910247-FZTMUEI9XB64EFGQCNIJ/vivian+pizza+1+-+low+res.png',
+    'https://www.brit.co/media-library/image.png?id=21408159&width=1200&height=600&coordinates=0%2C200%2C0%2C200',
+    'https://img.buzzfeed.com/buzzfeed-static/static/2017-07/28/13/tmp/buzzfeed-prod-fastlane-02/tmp-name-2-27438-1501262813-17_dblbig.jpg?resize=1200:*',
+    'https://thebusybaker.ca/wp-content/uploads/2020/08/easy-homemade-ramen-fb-ig-8-scaled.jpg',
+    'https://lh3.googleusercontent.com/4K163svVtZspcQPpicImTdwX_ciREUE8FmugkK-o_kbQv44O9Me5mwMaQ9gq_Rlv8Hc',
+
+
+
 ]
 def seed_images():
     for idx in range(39):
