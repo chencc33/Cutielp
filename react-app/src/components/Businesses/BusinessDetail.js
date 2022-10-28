@@ -214,10 +214,10 @@ const BusinessDetail = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="map-container">
+                        {/* <div className="map-container">
                             <iframe className="map-box" src={`https://maps.google.com/maps?q=${business.lat},${business.lng}&hl=es;&output=embed`} height={300} width={350}>
                             </iframe>
-                        </div>
+                        </div> */}
                     </div>
                     <ReviewList businessId={business.id} />
                     <div className="review-profile">
