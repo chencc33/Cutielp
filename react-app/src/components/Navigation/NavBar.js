@@ -25,6 +25,7 @@ const NavBar = ({ isSplash }) => {
   }, [])
 
 
+
   const redirect = () => {
     if (!currentUser) history.push('/login')
     else history.push('/businesses/create')
