@@ -41,6 +41,8 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'email': self.email,
+            "city": self.city,
+            "state": self.state,
             'zipcode': self.zipcode,
             'profileImage':self.profile_image
         }
