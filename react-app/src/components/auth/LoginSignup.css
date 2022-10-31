@@ -90,3 +90,17 @@
     height: 33px;
     font-size: 14px;
 }
+
+#profile-form-title {
+    margin-top: 20px;
+}
+
+#profile-form-fields {
+    width: 85%;
+    align-self: center;
+}
+
+#profile-form-button {
+    width: 85%;
+    align-self: center;
+}
