@@ -9,7 +9,6 @@ import ListBusinessPage from './ListBusinessPage';
 import { getBusinesses } from '../../store/business';
 import { Modal } from '../context/Modal';
 import ProfileForm from '../auth/ProfileForm';
-import { getUser } from '../../store/session';
 
 
 const NavBar = ({ isSplash }) => {
@@ -27,7 +26,6 @@ const NavBar = ({ isSplash }) => {
   useEffect(() => {
     dispatch(getBusinesses())
   }, [])
-
 
 
   const redirect = () => {

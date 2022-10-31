@@ -314,7 +314,7 @@ const BusinessForm = () => {
                                 <button className='file-upload-button'
                                     onClick={handleSubmitImage}
                                     disabled={image === null}
-                                >Submit</button>
+                                >Upload</button>
                                 <button className='file-upload-button'
                                     onClick={() => {
                                         setImage(null)
