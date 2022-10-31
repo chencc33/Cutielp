@@ -7,18 +7,22 @@ import { logout } from '../../store/session';
 import SearchBar from './SearchBar';
 import ListBusinessPage from './ListBusinessPage';
 import { getBusinesses } from '../../store/business';
+import { Modal } from '../context/Modal';
+import ProfileForm from '../auth/ProfileForm';
+import { getUser } from '../../store/session';
 
 
 const NavBar = ({ isSplash }) => {
   const history = useHistory()
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.session.user);
-
   const businesses = useSelector(state => state.businesses)
   const businessesArr = Object.values(businesses)
 
   const [searchInput, setSearchInput] = useState("")
   const [searchResults, setSearchResults] = useState([])
+
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     dispatch(getBusinesses())
@@ -71,6 +75,15 @@ const NavBar = ({ isSplash }) => {
                   Hello, {currentUser.firstName}!
                 </div>
                 <div className='dropdown-me'
+                  onClick={() => { setShowModal(true) }}>
+                  <span>
+                    <i className="fa-solid fa-user"
+                      style={{ marginRight: '8px' }}>
+                    </i>
+                  </span>
+                  <span>My Profile</span>
+                </div>
+                <div className='dropdown-me'
                   onClick={() => { history.push('/businesses/current') }}>
                   <span>
                     <i className="fa-solid fa-house"
@@ -93,6 +106,11 @@ const NavBar = ({ isSplash }) => {
           )}
         </div>
       </div>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <ProfileForm currentUser={currentUser} setShowModal={setShowModal} />
+        </Modal>
+      )}
     </div >
   );
 }
